@@ -692,6 +692,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gm: {fileID: 2102780886}
   bulletPrefab: {fileID: 3409548809730240993, guid: 87688e3f39d69ef468f3a6157fe47069, type: 3}
+  clip:
+  - {fileID: 3409548809730240993, guid: 87688e3f39d69ef468f3a6157fe47069, type: 3}
+  - {fileID: 3409548809730240993, guid: 87688e3f39d69ef468f3a6157fe47069, type: 3}
+  - {fileID: 3409548809730240993, guid: 87688e3f39d69ef468f3a6157fe47069, type: 3}
+  - {fileID: 3409548809730240993, guid: 87688e3f39d69ef468f3a6157fe47069, type: 3}
+  - {fileID: 3409548809730240993, guid: 87688e3f39d69ef468f3a6157fe47069, type: 3}
   rb: {fileID: 1200854039}
   rbVelo: {x: 0, y: 0, z: 0}
   grav: 5
@@ -703,7 +709,6 @@ MonoBehaviour:
   jumps: 2
   jumpTemp: 0
   maxCoyoteTime: 0.25
-  attackRadius: 0.5
 --- !u!1 &1245215250
 GameObject:
   m_ObjectHideFlags: 0

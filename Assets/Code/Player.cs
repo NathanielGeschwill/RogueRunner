@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     public GameManager gm; //overlord
     public GameObject bulletPrefab; //bullet prefab to spawn bullets from
+    public List<GameObject> clip;
 
     public Rigidbody rb; //for all your rigidbody needs
     public Vector3 rbVelo;  //for displaying values in editor / debugging
@@ -30,17 +31,26 @@ public class Player : MonoBehaviour
     private float coyoteTimer = 0; //forgiveness countdown
 
     //
-    private float attackTimeBetween = .225f;
+    private float ATK_TIME_BETWEEN = 0.225f;
+    private float ATK_TIME_RELOAD = 1.0f;
     private float attackTimer = 0f;
-    public float attackRadius = .5f;
-
+    private bool isReloading = false;
+    private int clipCounter = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         gm = FindObjectOfType<GameManager>();
+        AddToClip(bulletPrefab);
         gm.airTime = 0;
     }
+
+    void AddToClip(GameObject newAmmo)
+    {
+        clip.Add(newAmmo);
+    }
+
+    
 
     // Update is called once per frame
     void Update()
@@ -84,7 +94,7 @@ public class Player : MonoBehaviour
 
 
         //if player left clicks, fire bullet
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0) && attackTimer <= 0.0f)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitData;
@@ -93,11 +103,31 @@ public class Player : MonoBehaviour
             if (Physics.Raycast(ray, out hitData, 1000, LayerMask.GetMask("PlaneLayer")))
             {
                 mouseLoc = hitData.point;
-                GameObject newBullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                GameObject newBullet = Instantiate(clip[clipCounter], transform.position, Quaternion.identity);
+                clipCounter++;
+                if (clipCounter >= clip.Count)
+                {
+                    clipCounter = 0;
+                    isReloading = true;
+                    attackTimer = ATK_TIME_RELOAD;
+                }
+                else
+                {
+                    attackTimer = ATK_TIME_BETWEEN;
+                }
                 newBullet.GetComponent<Bullet>().FireBullet(mouseLoc);
                 print(mouseLoc);
             }
             
+        }
+        
+        if (attackTimer > 0.0f)
+        {
+            attackTimer -= Time.deltaTime;
+            if (isReloading && attackTimer <= 0.0f)
+            {
+                isReloading = false;
+            }
         }
 
 
