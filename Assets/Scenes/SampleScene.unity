@@ -692,12 +692,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gm: {fileID: 2102780886}
   bulletPrefab: {fileID: 3409548809730240993, guid: 87688e3f39d69ef468f3a6157fe47069, type: 3}
-  clip:
-  - {fileID: 3409548809730240993, guid: 87688e3f39d69ef468f3a6157fe47069, type: 3}
-  - {fileID: 3409548809730240993, guid: 87688e3f39d69ef468f3a6157fe47069, type: 3}
-  - {fileID: 3409548809730240993, guid: 87688e3f39d69ef468f3a6157fe47069, type: 3}
-  - {fileID: 3409548809730240993, guid: 87688e3f39d69ef468f3a6157fe47069, type: 3}
-  - {fileID: 3409548809730240993, guid: 87688e3f39d69ef468f3a6157fe47069, type: 3}
+  clip: []
   rb: {fileID: 1200854039}
   rbVelo: {x: 0, y: 0, z: 0}
   grav: 5
@@ -973,7 +968,7 @@ MonoBehaviour:
   platforms:
   - {fileID: 3467020093605018701, guid: 4b32de3b3e8881845a4d687687e3349c, type: 3}
   - {fileID: 8333434254429824962, guid: 3ddb8d5c681b91f4088506828ef95707, type: 3}
-  - {fileID: 3467020093605018701, guid: 4b32de3b3e8881845a4d687687e3349c, type: 3}
+  - {fileID: 3467020093605018701, guid: 87da32e71d2c6954d991f748121e6e37, type: 3}
   platformsSkyY:
   - 0
   platformSpawnY:

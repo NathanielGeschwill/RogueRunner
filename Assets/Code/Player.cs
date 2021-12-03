@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
         gm.airTime = 0;
     }
 
-    void AddToClip(GameObject newAmmo)
+    public void AddToClip(GameObject newAmmo)
     {
         clip.Add(newAmmo);
     }
@@ -115,6 +115,7 @@ public class Player : MonoBehaviour
                 {
                     attackTimer = ATK_TIME_BETWEEN;
                 }
+                print(clipCounter);
                 newBullet.GetComponent<Bullet>().FireBullet(mouseLoc);
                 print(mouseLoc);
             }

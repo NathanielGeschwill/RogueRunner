@@ -5,6 +5,7 @@ using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
+    private static GameManager instance;
 
     public GameObject player; //da playa (world moves around player, player only moves on y for time being)
     public float worldSpeed = 15; //world speed that changes based on the situation
@@ -24,7 +25,18 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        
+        instance = this;
+    }
+
+    public static GameManager Instance {
+        get {
+            if (instance == null)
+            {
+                instance = new GameManager();
+            }
+
+            return instance;
+        }
     }
 
     private void Update()
