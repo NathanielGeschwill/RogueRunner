@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
 
 
         //if player left clicks, fire bullet
-        if (Input.GetMouseButton(0) && attackTimer <= 0.0f)
+        if (Input.GetMouseButtonDown(0) && attackTimer <= 0.0f)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitData;

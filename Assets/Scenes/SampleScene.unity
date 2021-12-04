@@ -968,7 +968,9 @@ MonoBehaviour:
   platforms:
   - {fileID: 3467020093605018701, guid: 4b32de3b3e8881845a4d687687e3349c, type: 3}
   - {fileID: 8333434254429824962, guid: 3ddb8d5c681b91f4088506828ef95707, type: 3}
+  - {fileID: 3467020093605018701, guid: 4b32de3b3e8881845a4d687687e3349c, type: 3}
   - {fileID: 3467020093605018701, guid: 87da32e71d2c6954d991f748121e6e37, type: 3}
+  - {fileID: 3467020093605018701, guid: c8f65a6db3b551f4aacab9198d1b2f44, type: 3}
   platformsSkyY:
   - 0
   platformSpawnY:
