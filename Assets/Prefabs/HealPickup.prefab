@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5731799009794688591}
   - component: {fileID: -5098269469514897353}
   m_Layer: 0
-  m_Name: BulletPickup
+  m_Name: HealPickup
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1512758393282751882}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &8641701662506907928
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -109,4 +109,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectPrefab: {fileID: 1512758393282751882}
-  colletedItem: Bullet
+  colletedItem: Heal

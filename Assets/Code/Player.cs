@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : IEntity
 {
     public GameManager gm; //overlord
     public GameObject bulletPrefab; //bullet prefab to spawn bullets from
-    public List<GameObject> clip;
+    //public List<GameObject> clip;
+    public Stack<GameObject> clip = new Stack<GameObject>();
 
     public Rigidbody rb; //for all your rigidbody needs
     public Vector3 rbVelo;  //for displaying values in editor / debugging
@@ -35,29 +36,79 @@ public class Player : MonoBehaviour
     private float ATK_TIME_RELOAD = 1.0f;
     private float attackTimer = 0f;
     private bool isReloading = false;
-    private int clipCounter = 0;
+    //private int clipCounter = 0;
+    private int clipSlots = 3;
+
+    private void OnEnable()
+    {
+        ICollectable.OnCollected += ResolvePickup;
+        IEntity.OnHit += LoseHealth;
+        IEntity.OnDeath += ResolveDeath;
+    }
+
+    private void OnDisable()
+    {
+        ICollectable.OnCollected -= ResolvePickup;
+        IEntity.OnHit -= LoseHealth;
+        IEntity.OnDeath -= ResolveDeath;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         gm = FindObjectOfType<GameManager>();
-        AddToClip(bulletPrefab);
+        MaxAmmo(bulletPrefab);
         gm.airTime = 0;
+        health = 3;
+        maxHealth = 3;
+        tagsICanHit = new List<string>{ "Enemy"};
     }
 
-    public void AddToClip(GameObject newAmmo)
+    private bool AddToClip(GameObject newAmmo)
     {
-        clip.Add(newAmmo);
+        if(clip.Count < clipSlots)
+        {
+            //print("adding ammo to clip");
+            clip.Push(newAmmo);
+            return true;
+        }
+        return false;
     }
 
-    
+    private void MaxAmmo(GameObject newAmmo)
+    {
+        for(int i=0; i<clipSlots; i++)
+        {
+            if (!AddToClip(newAmmo))
+            {
+                return;
+            }
+        }
+    }
+
+    private void ResolvePickup(string pickup)
+    {
+        switch (pickup)
+        {
+            case "Bullet":
+                AddToClip(bulletPrefab);
+                break;
+            case "Heal":
+                GainHealth(gameObject, 1);
+                break;
+        }
+    }
+
+    protected override void ResolveDeath(object sender, int senderID)
+    {
+
+    }
 
     // Update is called once per frame
     void Update()
     {
         //Update velocity just for public visual reference in the editor
         rbVelo = rb.velocity;
-
 
         //TESTING tp to top of stage
         if(transform.position.y < -44) //testing
@@ -87,14 +138,10 @@ public class Player : MonoBehaviour
         {
             isHoldingJump = false;
             holdJumpTimer = 0;
-
-            
-
         }
 
-
         //if player left clicks, fire bullet
-        if (Input.GetMouseButtonDown(0) && attackTimer <= 0.0f)
+        if (Input.GetMouseButtonDown(0) && clip.Count > 0 && attackTimer <= 0.0f)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitData;
@@ -103,21 +150,10 @@ public class Player : MonoBehaviour
             if (Physics.Raycast(ray, out hitData, 1000, LayerMask.GetMask("PlaneLayer")))
             {
                 mouseLoc = hitData.point;
-                GameObject newBullet = Instantiate(clip[clipCounter], transform.position, Quaternion.identity);
-                clipCounter++;
-                if (clipCounter >= clip.Count)
-                {
-                    clipCounter = 0;
-                    isReloading = true;
-                    attackTimer = ATK_TIME_RELOAD;
-                }
-                else
-                {
-                    attackTimer = ATK_TIME_BETWEEN;
-                }
-                print(clipCounter);
+                GameObject newBullet = Instantiate(clip.Pop(), transform.position, Quaternion.identity);
+                attackTimer = ATK_TIME_BETWEEN;
                 newBullet.GetComponent<Bullet>().FireBullet(mouseLoc);
-                print(mouseLoc);
+                //print(mouseLoc);
             }
             
         }
@@ -130,10 +166,6 @@ public class Player : MonoBehaviour
                 isReloading = false;
             }
         }
-
-
-        //*/ Update
-
 
     }
 
@@ -203,9 +235,10 @@ public class Player : MonoBehaviour
                 gm.airTime = 0;
 
             }
-            else
+            else if(collision.contacts[0].point.y > transform.position.y)
             {
                 Debug.Log("haha");
+                //go through platform
             }
             
         }
@@ -221,7 +254,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        Debug.Log(isGrounded);
+        //Debug.Log(isGrounded);
         // if you left the platform without jumping, shit out of luck (add Coyote time here?)
         if(isGrounded)
         {
