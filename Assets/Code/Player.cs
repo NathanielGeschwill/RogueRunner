@@ -39,6 +39,14 @@ public class Player : IEntity
     //private int clipCounter = 0;
     private int clipSlots = 3;
 
+    public delegate void Fall();
+    public static event Fall OnFall;
+
+    public delegate void Jump();
+    public static event Jump OnJump;
+
+    bool falling = false;
+
     private void OnEnable()
     {
         ICollectable.OnCollected += ResolvePickup;
@@ -110,6 +118,12 @@ public class Player : IEntity
         //Update velocity just for public visual reference in the editor
         rbVelo = rb.velocity;
 
+        if(rb.velocity.y < 0 && falling == false)
+        {
+            OnFall?.Invoke();
+            falling = true;
+        }
+
         //TESTING tp to top of stage
         if(transform.position.y < -44) //testing
         {
@@ -130,6 +144,8 @@ public class Player : IEntity
                 jumpTemp -= 1;
                 coyoteTime = false;
                 coyoteTimer = 0;
+                falling = false;
+                OnJump?.Invoke();
             }
         }
 
@@ -231,6 +247,7 @@ public class Player : IEntity
             if(collision.contacts[0].point.y < transform.position.y)
             {
                 isGrounded = true;
+                falling = false;
                 jumpTemp = jumps;
                 gm.airTime = 0;
 
@@ -248,7 +265,10 @@ public class Player : IEntity
     {
         if (!isGrounded) //if player is not grounded for whatever reason while on the ground
         {
-            if(rb.velocity.y == 0) { isGrounded = true; }
+            if(rb.velocity.y == 0) { 
+                isGrounded = true;
+                falling = false;
+            }
         }
     }
 
@@ -270,6 +290,8 @@ public class Player : IEntity
         {
             Debug.Log("<color=red> jumppad </color>", this.gameObject);
             jumpPad = true;
+            falling = false;
+            OnJump?.Invoke();
         }
     }
 

@@ -652,8 +652,9 @@ GameObject:
   - component: {fileID: 1453802241}
   - component: {fileID: 1453802240}
   - component: {fileID: 1453802239}
+  - component: {fileID: 1453802243}
   m_Layer: 0
-  m_Name: weee
+  m_Name: Lava
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -667,7 +668,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1453802238}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -691,7 +692,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fa79673986109b84b9d5b7520f1de94e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -729,12 +730,24 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1453802238}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.7052345, y: -4.489563, z: 3.544838}
-  m_LocalScale: {x: 24.680481, y: 1, z: 13.849}
+  m_LocalPosition: {x: 5.7052345, y: -44, z: 3.544838}
+  m_LocalScale: {x: 154.57138, y: 1, z: 13.849}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1453802243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453802238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838c3d99aad8d914a84cd45c5d34c9ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2071301825
 GameObject:
   m_ObjectHideFlags: 0
@@ -875,7 +888,7 @@ MonoBehaviour:
   - {fileID: 3467020093605018701, guid: 87da32e71d2c6954d991f748121e6e37, type: 3}
   - {fileID: 3467020093605018701, guid: c8f65a6db3b551f4aacab9198d1b2f44, type: 3}
   - {fileID: 3467020093605018701, guid: 215dcd1864f34e84ea99ea90e397ff73, type: 3}
-  - {fileID: 3467020093605018701, guid: 215dcd1864f34e84ea99ea90e397ff73, type: 3}
+  - {fileID: 3467020093605018701, guid: 4f7d9ce1247ab804999b1a599ac2a287, type: 3}
   - {fileID: 3467020093605018701, guid: 215dcd1864f34e84ea99ea90e397ff73, type: 3}
   - {fileID: 3467020093605018701, guid: 87da32e71d2c6954d991f748121e6e37, type: 3}
   - {fileID: 3467020093605018701, guid: 87da32e71d2c6954d991f748121e6e37, type: 3}

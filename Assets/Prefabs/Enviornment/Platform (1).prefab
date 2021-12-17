@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 569020606359959211}
   - component: {fileID: 569020606359959208}
   - component: {fileID: 539479735297712351}
+  - component: {fileID: -4413544233172735930}
   m_Layer: 0
   m_Name: Platform (1)
   m_TagString: Platform
@@ -109,4 +110,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gm: {fileID: 0}
-  worldSpeed: 8
+--- !u!114 &-4413544233172735930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569020606359959209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6dceccb2ae5fc4ca2f95679aca5497, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -5,11 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class RestartScene : MonoBehaviour
 {
-    
-    // Start is called before the first frame update
-    void Start()
+
+    private void OnEnable()
     {
         IEntity.OnDeath += Reload;
+        KillPlayerTrigger.OnKillPlayer += Reload;
+    }
+
+    private void Reload()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void Reload(object sender, int senderID)

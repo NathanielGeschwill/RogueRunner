@@ -77,7 +77,7 @@ public class IEntity : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        print("TRIGGERED");
+        //print("TRIGGERED");
         foreach(string s in tagsICanHit)
         {
             if (other.gameObject.CompareTag(s) && damage > 0)
