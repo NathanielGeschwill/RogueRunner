@@ -18,10 +18,9 @@ public class GameManager : MonoBehaviour
 
 
     public GameObject[] platforms;
-    public float[] platformsSkyY; 
+    public float[] platformsSkyY;
     public float[] platformSpawnY;
     public float[] platformsHellY;
-
 
     private void Start()
     {
@@ -42,8 +41,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         //return worldspeed to the target world speed
-        float x = Mathf.Lerp(worldSpeed, targetWorldSpeed, .004f);
-        
+        float x = Mathf.Lerp(worldSpeed, targetWorldSpeed, Time.deltaTime);
         
         worldSpeed = x;
 
@@ -62,8 +60,6 @@ public class GameManager : MonoBehaviour
     {
         if (!stopped)
         {
-
-        
             if (multi)
             {
                 worldSpeed *= val;
@@ -85,12 +81,10 @@ public class GameManager : MonoBehaviour
         GameObject.Destroy(g);
     }
 
-
-    [ContextMenu(  "WorldSpeedZero()" )]
+    [ContextMenu( "WorldSpeedZero()" )]
     void WorldSpeedZero()
     {
         targetWorldSpeed = 0;
         worldSpeed = 0;
     }
-    
 }
