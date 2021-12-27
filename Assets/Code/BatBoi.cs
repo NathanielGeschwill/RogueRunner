@@ -6,6 +6,7 @@ public class BatBoi : IEntity
 {
     private GameObject player;
     private Rigidbody rb;
+    private Animator animator;//
     public float forceMultiplier;
     private float dashTimer;
     private const float DASH_TIMER = 2.0f;
@@ -21,6 +22,11 @@ public class BatBoi : IEntity
         dashTimer = DASH_TIMER;
         tagsICanHit = new List<string> { "Player" };
         damage = 1;
+
+        animator = GetComponent<Animator>();// This code is on the Prefab, the aimator that needs to be accessed is on the rig. Prefab may need to be rearranged to make this work?
+        animator.SetBool("isAttacking", false);//
+        animator.SetBool("Dash", false);//
+
     }
 
     private void Update()
@@ -36,6 +42,7 @@ public class BatBoi : IEntity
             dir = dir.normalized;
             rb.velocity = dir * forceMultiplier;
             dashTimer = DASH_TIMER;
+            animator.SetBool("Dash", true); //
             isAttacking = false;
         }
     }
@@ -50,6 +57,7 @@ public class BatBoi : IEntity
             if (dir.x < 0)
             {
                 isAttacking = true;
+                animator.SetBool("isAttacking", true);//
                 alreadyAttacked = true;
                 rb.velocity = Vector3.zero;
             }
