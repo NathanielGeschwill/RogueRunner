@@ -292,6 +292,7 @@ public class Player : IEntity
             jumpPad = true;
             falling = false;
             OnJump?.Invoke();
+            
         }
     }
 
