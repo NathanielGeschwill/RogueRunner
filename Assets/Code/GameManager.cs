@@ -8,6 +8,12 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
 
     public GameObject player; //da playa (world moves around player, player only moves on y for time being)
+
+    //UI Objects to toggle on/off
+    public GameObject pauseUI;
+    public GameObject gameUI;
+    public GameObject loseUI;
+
     public float worldSpeed = 15; //world speed that changes based on the situation
     public float targetWorldSpeed = 15; // world speed that is always returned to
     public bool playerSpeeding = false;
@@ -21,6 +27,8 @@ public class GameManager : MonoBehaviour
     public float[] platformsSkyY;
     public float[] platformSpawnY;
     public float[] platformsHellY;
+
+    public bool gamePaused = false;
 
     private void Start()
     {
@@ -86,5 +94,21 @@ public class GameManager : MonoBehaviour
     {
         targetWorldSpeed = 0;
         worldSpeed = 0;
+    }
+
+    public void Unpause()
+    {
+        Time.timeScale = 1f;
+        gamePaused = false;
+        gameUI.SetActive(true);
+        pauseUI.SetActive(false);
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0f;
+        gamePaused = true;
+        gameUI.SetActive(false);
+        pauseUI.SetActive(true);
     }
 }

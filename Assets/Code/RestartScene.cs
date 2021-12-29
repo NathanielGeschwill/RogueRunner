@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,20 +9,29 @@ public class RestartScene : MonoBehaviour
 
     private void OnEnable()
     {
-        IEntity.OnDeath += Reload;
-        KillPlayerTrigger.OnKillPlayer += Reload;
+        IEntity.OnDeath += ShowLoseUI;
+        KillPlayerTrigger.OnKillPlayer += ShowLoseUI;
     }
 
-    private void Reload()
+    public void Reload()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    private void Reload(object sender, int senderID)
+    private void ShowLoseUI()
+    {
+        Time.timeScale = 0f;
+        GameManager.Instance.gamePaused = true;
+        GameManager.Instance.loseUI.SetActive(true);
+        GameManager.Instance.gameUI.SetActive(false);
+    }
+
+    private void ShowLoseUI(object sender, int senderID)
     {
         if (((GameObject)sender).CompareTag("Player"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            ShowLoseUI();
         }
     }
 }

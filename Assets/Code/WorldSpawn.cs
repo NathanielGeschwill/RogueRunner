@@ -7,6 +7,8 @@ public class WorldSpawn : MonoBehaviour
     public GameManager gm;
     public Queue<GameObject> queuePlatforms;
 
+    private int spawnScalar = 300;
+
     private int y;
     private int k;
 
@@ -29,7 +31,7 @@ public class WorldSpawn : MonoBehaviour
     void Update()
     {
         float i = Random.Range(0, 100);
-        i += Mathf.Round(gm.speedDiff*2);
+        i += Mathf.Round(gm.speedDiff*spawnScalar*Time.deltaTime);
         
         if (i > 99)
         {

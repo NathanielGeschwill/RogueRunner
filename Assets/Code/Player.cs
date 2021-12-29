@@ -6,6 +6,7 @@ public class Player : IEntity
 {
     public GameManager gm; //overlord
     public GameObject bulletPrefab; //bullet prefab to spawn bullets from
+
     //public List<GameObject> clip;
     public Stack<GameObject> clip = new Stack<GameObject>();
 
@@ -157,7 +158,7 @@ public class Player : IEntity
         }
 
         //if player left clicks, fire bullet
-        if (Input.GetMouseButtonDown(0) && clip.Count > 0 && attackTimer <= 0.0f)
+        if (Input.GetMouseButtonDown(0) && clip.Count > 0 && attackTimer <= 0.0f && !GameManager.Instance.gamePaused)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitData;
@@ -183,6 +184,17 @@ public class Player : IEntity
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (GameManager.Instance.gamePaused && GameManager.Instance.pauseUI.activeInHierarchy)
+            {
+                GameManager.Instance.Unpause();
+            }
+            else if(!GameManager.Instance.gamePaused)
+            {
+                GameManager.Instance.Pause();
+            }
+        }
     }
 
     private void FixedUpdate()

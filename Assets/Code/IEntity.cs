@@ -40,23 +40,23 @@ public class IEntity : MonoBehaviour
     {
         if(senderID == gameObject.GetInstanceID())
         {
-            print("DESTORYING " + senderID);
+            //print("DESTORYING " + senderID);
             Destroy(gameObject);
         }
     }
 
     protected virtual void LoseHealth(object hitObject, int amount)
     {
-        print(((GameObject)hitObject).name);
-        print(gameObject.name);
-        print("COMPAING " + ((GameObject)hitObject).GetInstanceID() + " AND " + gameObject.GetInstanceID());
+        //print(((GameObject)hitObject).name);
+        //print(gameObject.name);
+        //print("COMPAING " + ((GameObject)hitObject).GetInstanceID() + " AND " + gameObject.GetInstanceID());
         if (((GameObject)hitObject).GetInstanceID() == gameObject.GetInstanceID())
         {
-            print("FOUND MATCH");
+            //print("FOUND MATCH");
             health -= amount;
             if (health <= 0)
             {
-                print("INVOKING DEATH");
+                //print("INVOKING DEATH");
                 OnDeath?.Invoke(gameObject, gameObject.GetInstanceID());
             }
         }
@@ -82,7 +82,7 @@ public class IEntity : MonoBehaviour
         {
             if (other.gameObject.CompareTag(s) && damage > 0)
             {
-                print("GOING INVOKE");
+                //print("GOING INVOKE");
                 OnHit?.Invoke(other.gameObject, damage);
                 break;
             }
