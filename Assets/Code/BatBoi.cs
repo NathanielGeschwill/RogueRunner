@@ -18,7 +18,7 @@ public class BatBoi : IEntity
     {
         player = GameManager.Instance.player;
         rb = GetComponent<Rigidbody>();
-        rb.velocity = new Vector3(-GameManager.Instance.worldSpeed,0,0);
+        rb.velocity = new Vector3(-GameManager.Instance.worldSpeed,0,0); //NEGATIVE WorldSpeed
         dashTimer = DASH_TIMER;
         tagsICanHit = new List<string> { "Player" };
         damage = 1;
@@ -26,6 +26,7 @@ public class BatBoi : IEntity
         animator = GetComponent<Animator>();// This code is on the Prefab, the aimator that needs to be accessed is on the rig. Prefab may need to be rearranged to make this work?
         animator.SetBool("isAttacking", false);//
         animator.SetBool("Dash", false);//
+        Debug.Log(animator);
 
     }
 
