@@ -39,16 +39,18 @@ public class WorldScroll : MonoBehaviour {
 
         if(transform.position.x <= -80)
         {
+            //print("die of x");
             gm.DestorySelf(this.gameObject); //queue up
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if(other.gameObject.CompareTag("Platform"))
         {
-            
+            //print("die of trig");
             gm.DestorySelf(other.gameObject); // queue up
+            //other.gameObject.transform.position = GameManager.Instance.ws.GetNewLocation();
             
         }
     }

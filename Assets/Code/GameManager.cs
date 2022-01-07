@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject player; //da playa (world moves around player, player only moves on y for time being)
 
+    public WorldSpawn ws;
+    
     //UI Objects to toggle on/off
     public GameObject pauseUI;
     public GameObject gameUI;

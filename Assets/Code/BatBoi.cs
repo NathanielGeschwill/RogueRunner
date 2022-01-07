@@ -26,7 +26,7 @@ public class BatBoi : IEntity
         animator = GetComponent<Animator>();// This code is on the Prefab, the aimator that needs to be accessed is on the rig. Prefab may need to be rearranged to make this work?
         animator.SetBool("isAttacking", false);//
         animator.SetBool("Dash", false);//
-        Debug.Log(animator);
+        //Debug.Log(animator);
 
     }
 

@@ -54,6 +54,7 @@ public class IEntity : MonoBehaviour
         {
             //print("FOUND MATCH");
             health -= amount;
+
             if (health <= 0)
             {
                 //print("INVOKING DEATH");
@@ -62,12 +63,14 @@ public class IEntity : MonoBehaviour
         }
     }
 
-    protected void GainHealth(object sender, int amount)
+    protected virtual bool GainHealth(object sender, int amount)
     {
         if(health + 1 <= maxHealth)
         {
             health += amount;
+            return true;
         }
+        return false;
     }
 
     protected void InvokeHit(GameObject g, int damage)

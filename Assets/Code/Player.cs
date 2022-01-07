@@ -46,6 +46,12 @@ public class Player : IEntity
     public delegate void Jump();
     public static event Jump OnJump;
 
+    public delegate void IncreaseUI(string name);
+    public static event IncreaseUI OnIncreaseUI;
+
+    public delegate void DecreaseUI(string name);
+    public static event DecreaseUI OnDecreaseUI;
+
     bool falling = false;
 
     private void OnEnable()
@@ -71,6 +77,10 @@ public class Player : IEntity
         health = 3;
         maxHealth = 3;
         tagsICanHit = new List<string>{ "Enemy"};
+        for(int i = 0; i<health; i++)
+        {
+            OnIncreaseUI?.Invoke("Heart");
+        }
     }
 
     private bool AddToClip(GameObject newAmmo)
@@ -79,6 +89,7 @@ public class Player : IEntity
         {
             //print("adding ammo to clip");
             clip.Push(newAmmo);
+            OnIncreaseUI?.Invoke("Bullet");
             return true;
         }
         return false;
@@ -106,6 +117,26 @@ public class Player : IEntity
                 GainHealth(gameObject, 1);
                 break;
         }
+    }
+
+    protected override void LoseHealth(object hitObject, int amount)
+    {
+        if (((GameObject)hitObject).GetInstanceID() == gameObject.GetInstanceID())
+        {
+            OnDecreaseUI?.Invoke("Heart");
+            base.LoseHealth(hitObject, amount);
+        }
+            
+    }
+
+    protected override bool GainHealth(object sender, int amount)
+    {
+        if(health + 1 <= maxHealth)
+        {
+            OnIncreaseUI?.Invoke("Heart");
+            return base.GainHealth(sender, amount);
+        }
+        return false;
     }
 
     protected override void ResolveDeath(object sender, int senderID)
@@ -172,7 +203,8 @@ public class Player : IEntity
                 newBullet.GetComponent<Bullet>().FireBullet(mouseLoc);
                 //print(mouseLoc);
             }
-            
+
+            OnDecreaseUI?.Invoke("Bullet");
         }
         
         if (attackTimer > 0.0f)

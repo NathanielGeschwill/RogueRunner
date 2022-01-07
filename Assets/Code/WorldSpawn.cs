@@ -25,6 +25,7 @@ public class WorldSpawn : MonoBehaviour
         gm = FindObjectOfType<GameManager>();
         spawnPlatform(0);
         queuePlatforms = new Queue<GameObject>();
+        GameManager.Instance.ws = this;
     }
 
     // Update is called once per frame
@@ -42,12 +43,16 @@ public class WorldSpawn : MonoBehaviour
 
     public void spawnPlatform(float lel)
     {
-
-        
-
         y = Random.Range(0, gm.platformSpawnY.Length);
         k = Random.Range(0, gm.platforms.Length);
         var ass = GameObject.Instantiate(gm.platforms[k], new Vector3(100, gm.platformSpawnY[y], 0f), transform.rotation);
         ass.transform.parent = gameObject.transform;
+    }
+
+    public Vector3 GetNewLocation()
+    {
+        y = Random.Range(0, gm.platformSpawnY.Length);
+        k = Random.Range(0, gm.platforms.Length);
+        return new Vector3(100, gm.platformSpawnY[y], 0f);
     }
 }
