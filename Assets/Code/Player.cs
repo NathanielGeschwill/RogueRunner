@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MoreMountains.Feedbacks;
+using UnityEngine.Events;
 
 public class Player : IEntity
 {
     public GameManager gm; //overlord
+    public GameObject root;
     public GameObject bulletPrefab; //bullet prefab to spawn bullets from
 
     //public List<GameObject> clip;
@@ -12,6 +15,7 @@ public class Player : IEntity
 
     public Rigidbody rb; //for all your rigidbody needs
     public Vector3 rbVelo;  //for displaying values in editor / debugging
+    public ParticleSystem part;
 
     public float grav = 20;
     public float jumpVelocity = 20; //how much veritcal velocity is given the player when they jump
@@ -45,6 +49,8 @@ public class Player : IEntity
 
     public delegate void Jump();
     public static event Jump OnJump;
+    //public static UnityEvent OnJump;
+
 
     public delegate void IncreaseUI(string name);
     public static event IncreaseUI OnIncreaseUI;
@@ -178,6 +184,7 @@ public class Player : IEntity
                 coyoteTimer = 0;
                 falling = false;
                 OnJump?.Invoke();
+                GameManager.Instance.fbm.PlayFeedback("JumppadFeedback", part, transform, root);
             }
         }
 

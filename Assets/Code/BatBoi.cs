@@ -23,7 +23,7 @@ public class BatBoi : IEntity
         tagsICanHit = new List<string> { "Player" };
         damage = 1;
 
-        animator = GetComponent<Animator>();// This code is on the Prefab, the aimator that needs to be accessed is on the rig. Prefab may need to be rearranged to make this work?
+        animator = GetComponentInChildren<Animator>();// This code is on the Prefab, the aimator that needs to be accessed is on the rig. Prefab may need to be rearranged to make this work?
         animator.SetBool("isAttacking", false);//
         animator.SetBool("Dash", false);//
         //Debug.Log(animator);

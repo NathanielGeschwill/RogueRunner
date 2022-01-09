@@ -58,7 +58,6 @@ GameObject:
   - component: {fileID: 6626128342189955654}
   - component: {fileID: 8602610620565547553}
   - component: {fileID: 5928031220403672112}
-  - component: {fileID: 7088684904534395155}
   m_Layer: 0
   m_Name: BatBoi
   m_TagString: Enemy
@@ -173,25 +172,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!95 &7088684904534395155
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8248668864747108898}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5a4e2afe1e3685d42a5ff70b2946f681, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &3949813245034453656
 PrefabInstance:
   m_ObjectHideFlags: 0

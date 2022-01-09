@@ -248,9 +248,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7088684904534395155, guid: b2e8ce6ece613254497f42b4cb8128b6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8248668864747108898, guid: b2e8ce6ece613254497f42b4cb8128b6, type: 3}
       propertyPath: m_Name
       value: BatBoi
+      objectReference: {fileID: 0}
+    - target: {fileID: 8352772110099518007, guid: b2e8ce6ece613254497f42b4cb8128b6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2e8ce6ece613254497f42b4cb8128b6, type: 3}

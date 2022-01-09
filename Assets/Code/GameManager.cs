@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
 
     public GameObject player; //da playa (world moves around player, player only moves on y for time being)
+    public FeedbackManaganger fbm;
 
     public WorldSpawn ws;
     
