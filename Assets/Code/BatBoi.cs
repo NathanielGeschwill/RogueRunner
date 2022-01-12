@@ -43,6 +43,7 @@ public class BatBoi : IEntity
             dir = dir.normalized;
             rb.velocity = dir * forceMultiplier;
             dashTimer = DASH_TIMER;
+            //transform.LookAt(player.transform);
             animator.SetBool("Dash", true); //
             isAttacking = false;
         }

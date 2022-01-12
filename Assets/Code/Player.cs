@@ -7,7 +7,6 @@ using UnityEngine.Events;
 public class Player : IEntity
 {
     public GameManager gm; //overlord
-    public GameObject root;
     public GameObject bulletPrefab; //bullet prefab to spawn bullets from
 
     //public List<GameObject> clip;
@@ -15,7 +14,10 @@ public class Player : IEntity
 
     public Rigidbody rb; //for all your rigidbody needs
     public Vector3 rbVelo;  //for displaying values in editor / debugging
-    public ParticleSystem part;
+
+    //For Feedbacks / communicating with FeedbackManager 
+    public GameObject root;
+    public ParticleSystem jumpPart;
 
     public float grav = 20;
     public float jumpVelocity = 20; //how much veritcal velocity is given the player when they jump
@@ -184,7 +186,7 @@ public class Player : IEntity
                 coyoteTimer = 0;
                 falling = false;
                 OnJump?.Invoke();
-                GameManager.Instance.fbm.PlayFeedback("JumppadFeedback", part, transform, root);
+                GameManager.Instance.fbm.PlayFeedback("JumpFeedback", jumpPart, transform, root);
             }
         }
 
