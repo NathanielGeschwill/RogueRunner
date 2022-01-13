@@ -17,7 +17,7 @@ public class Player : IEntity
 
     //For Feedbacks / communicating with FeedbackManager 
     public GameObject root;
-    public ParticleSystem jumpPart;
+    public ParticleSystem jumpPart, landingPart, airjumpPart;
 
     public float grav = 20;
     public float jumpVelocity = 20; //how much veritcal velocity is given the player when they jump
@@ -186,7 +186,15 @@ public class Player : IEntity
                 coyoteTimer = 0;
                 falling = false;
                 OnJump?.Invoke();
-                GameManager.Instance.fbm.PlayFeedback("JumpFeedback", jumpPart, transform, root);
+                
+                if(!isGrounded)
+                {
+                    GameManager.Instance.fbm.PlayFeedback("JumpFeedback", airjumpPart, root.GetComponent<Transform>(), root);
+                }
+                else
+                {
+                    GameManager.Instance.fbm.PlayFeedback("JumpFeedback", jumpPart, root.GetComponent<Transform>(), root);
+                }
             }
         }
 
@@ -300,6 +308,7 @@ public class Player : IEntity
             if(collision.contacts[0].point.y < transform.position.y)
             {
                 isGrounded = true;
+                GameManager.Instance.fbm.PlayFeedback("LandingFeedback", landingPart, root.GetComponent<Transform>(), root);
                 falling = false;
                 jumpTemp = jumps;
                 gm.airTime = 0;

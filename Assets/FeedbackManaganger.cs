@@ -62,10 +62,12 @@ public class FeedbackManaganger : MonoBehaviour
             {
                 switch (name)
                 {
-
+                    
                     default:
                         ((MMFeedbackParticles)f.Feedbacks[0]).BoundParticleSystem = part;
-                        ((MMFeedbackScale)f.Feedbacks[1]).AnimateScaleTarget = t;
+                        ((MMFeedbackScale)f.Feedbacks[1]).AnimateScaleTarget = t;   // root.GetComponent<Transform>(); // Root is target
+                        ((MMFeedbackScale)f.Feedbacks[1]).RemapCurveZero = t.transform.localScale.z;
+                        ((MMFeedbackScale)f.Feedbacks[1]).RemapCurveOne = t.transform.localScale.z*1.2f;
                         ((MMFeedbackRotation)f.Feedbacks[2]).AnimateRotationTarget = t;
                         ((MMFeedbackPosition)f.Feedbacks[3]).AnimatePositionTarget = root;
                         Debug.Log(t.gameObject);
