@@ -17,7 +17,7 @@ public class Player : IEntity
 
     //For Feedbacks / communicating with FeedbackManager 
     public GameObject root;
-    public ParticleSystem jumpPart, landingPart, airjumpPart;
+    public ParticleSystem jumpPart, landingPart, airjumpPart, damagePart;
 
     public float grav = 20;
     public float jumpVelocity = 20; //how much veritcal velocity is given the player when they jump
@@ -133,6 +133,7 @@ public class Player : IEntity
         {
             OnDecreaseUI?.Invoke("Heart");
             base.LoseHealth(hitObject, amount);
+            GameManager.Instance.fbm.PlayFeedback("DamageFeedback", damagePart, root.GetComponent<Transform>(), root);
         }
             
     }
@@ -251,7 +252,7 @@ public class Player : IEntity
         //if player touches a jumppad (may double for bouncing off enemy heads in the future)
         if (jumpPad) //onTriggerEnter(tag=="Jumppad")
         {
-            gm.worldSpeedChange(true, 3);
+            gm.worldSpeedChange(true, 3); //Jumppad feels like player is being thrown foward.
             rb.velocity = new Vector3(0, jumpVelocity*3f, 0); //Note this is NOT using isHoldingJump, so there is no decay on this jump. This may need special animation
             jumpPad = false;
             isGrounded = false;
@@ -351,6 +352,7 @@ public class Player : IEntity
         if(other.gameObject.CompareTag("Jumppad"))
         {
             Debug.Log("<color=red> jumppad </color>", this.gameObject);
+            GameManager.Instance.fbm.PlayFeedback("JumpFeedback", jumpPart, root.GetComponent<Transform>(), root);
             jumpPad = true;
             falling = false;
             OnJump?.Invoke();

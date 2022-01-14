@@ -49,8 +49,8 @@ public class WorldScroll : MonoBehaviour {
         if(other.gameObject.CompareTag("Platform"))
         {
             //print("die of trig");
-            gm.DestorySelf(other.gameObject); // queue up
-            //other.gameObject.transform.position = GameManager.Instance.ws.GetNewLocation();
+            //gm.DestorySelf(other.gameObject); // queue up
+            other.gameObject.transform.position = GameManager.Instance.ws.GetNewLocation();
             
         }
     }

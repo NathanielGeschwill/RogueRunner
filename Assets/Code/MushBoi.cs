@@ -13,7 +13,7 @@ public class MushBoi : IEntity
         tagsICanHit = new List<string> { "Player" };
         damage = 1;
 
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         animator.SetBool("Falling", false);
         animator.SetBool("Death", false);
     }

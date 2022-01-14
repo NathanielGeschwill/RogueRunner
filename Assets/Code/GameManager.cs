@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public FeedbackManaganger fbm;
 
     public WorldSpawn ws;
+
+    public bool TESTING_ZEROSPEED;
     
     //UI Objects to toggle on/off
     public GameObject pauseUI;
@@ -51,6 +53,12 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (TESTING_ZEROSPEED)
+        {
+            worldSpeed = 0;
+            return;
+        }
+
         //return worldspeed to the target world speed
         float x = Mathf.Lerp(worldSpeed, targetWorldSpeed, Time.deltaTime);
         
