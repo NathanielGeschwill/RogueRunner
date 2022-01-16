@@ -155,6 +155,11 @@ public class Player : IEntity
             OnFall?.Invoke();
             falling = true;
         }
+        if(falling && rb.velocity.y > 0.1f)
+        {
+            OnJump?.Invoke();
+            falling = false;
+        }
 
         //TESTING tp to top of stage
         if(transform.position.y < -44) //testing
