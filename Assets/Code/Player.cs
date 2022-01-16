@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MoreMountains.Feedbacks;
+using UnityEngine.Events;
 
 public class Player : IEntity
 {
@@ -12,6 +14,10 @@ public class Player : IEntity
 
     public Rigidbody rb; //for all your rigidbody needs
     public Vector3 rbVelo;  //for displaying values in editor / debugging
+
+    //For Feedbacks / communicating with FeedbackManager 
+    public GameObject root;
+    public ParticleSystem jumpPart, landingPart, airjumpPart, damagePart;
 
     public float grav = 20;
     public float jumpVelocity = 20; //how much veritcal velocity is given the player when they jump
@@ -45,6 +51,8 @@ public class Player : IEntity
 
     public delegate void Jump();
     public static event Jump OnJump;
+    //public static UnityEvent OnJump;
+
 
     public delegate void IncreaseUI(string name);
     public static event IncreaseUI OnIncreaseUI;
@@ -125,6 +133,7 @@ public class Player : IEntity
         {
             OnDecreaseUI?.Invoke("Heart");
             base.LoseHealth(hitObject, amount);
+            GameManager.Instance.fbm.PlayFeedback("DamageFeedback", damagePart, root.GetComponent<Transform>(), root);
         }
             
     }
@@ -183,6 +192,15 @@ public class Player : IEntity
                 coyoteTimer = 0;
                 falling = false;
                 OnJump?.Invoke();
+                
+                if(!isGrounded)
+                {
+                    GameManager.Instance.fbm.PlayFeedback("JumpFeedback", airjumpPart, root.GetComponent<Transform>(), root);
+                }
+                else
+                {
+                    GameManager.Instance.fbm.PlayFeedback("JumpFeedback", jumpPart, root.GetComponent<Transform>(), root);
+                }
             }
         }
 
@@ -239,7 +257,7 @@ public class Player : IEntity
         //if player touches a jumppad (may double for bouncing off enemy heads in the future)
         if (jumpPad) //onTriggerEnter(tag=="Jumppad")
         {
-            gm.worldSpeedChange(true, 3);
+            gm.worldSpeedChange(true, 3); //Jumppad feels like player is being thrown foward.
             rb.velocity = new Vector3(0, jumpVelocity*3f, 0); //Note this is NOT using isHoldingJump, so there is no decay on this jump. This may need special animation
             jumpPad = false;
             isGrounded = false;
@@ -296,6 +314,7 @@ public class Player : IEntity
             if(collision.contacts[0].point.y < transform.position.y)
             {
                 isGrounded = true;
+                GameManager.Instance.fbm.PlayFeedback("LandingFeedback", landingPart, root.GetComponent<Transform>(), root);
                 falling = false;
                 jumpTemp = jumps;
                 gm.airTime = 0;
@@ -338,6 +357,7 @@ public class Player : IEntity
         if(other.gameObject.CompareTag("Jumppad"))
         {
             Debug.Log("<color=red> jumppad </color>", this.gameObject);
+            GameManager.Instance.fbm.PlayFeedback("JumpFeedback", jumpPart, root.GetComponent<Transform>(), root);
             jumpPad = true;
             falling = false;
             OnJump?.Invoke();
