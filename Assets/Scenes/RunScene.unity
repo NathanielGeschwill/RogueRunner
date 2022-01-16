@@ -41640,7 +41640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 102b20d6a5e9b8c4ab72589565eb4c28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 2102780886}
+  canSpawn: 1
 --- !u!4 &1245215252
 Transform:
   m_ObjectHideFlags: 0
@@ -74587,7 +74587,7 @@ MonoBehaviour:
   player: {fileID: 1200854033}
   fbm: {fileID: 1592850731}
   ws: {fileID: 0}
-  TESTING_ZEROSPEED: 1
+  TESTING_ZEROSPEED: 0
   pauseUI: {fileID: 387663791}
   gameUI: {fileID: 669731389}
   loseUI: {fileID: 339408640}

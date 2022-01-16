@@ -53,7 +53,7 @@ public class BatBoi : IEntity
     {
         if (other.gameObject.tag == "Player" && !isAttacking && !alreadyAttacked)
         {
-            transform.parent = null;
+            transform.parent = other.gameObject.transform;
             Vector3 dir = player.transform.position - transform.position;
             dir = dir.normalized;
             if (dir.x < 0)
