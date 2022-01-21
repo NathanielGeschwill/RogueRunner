@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
     //all changes to worldspeed use this function
     public void worldSpeedChange(bool multi, float val)
     {
+        print(worldSpeed);
         if (!stopped)
         {
             if (multi)

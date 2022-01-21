@@ -34,12 +34,12 @@ public class ImageCounterUI : MonoBehaviour
         {
             if(images.Count >= counterAmount + 1)
             {
-                print("increase active");
+                //print("increase active");
                 images[counterAmount].SetActive(true);
             }
             else
             {
-                print("increase new");
+                //print("increase new");
                 GameObject newObj = Instantiate(imageGO, gameObject.transform);
                 newObj.GetComponent<RectTransform>().anchoredPosition =
                     images[counterAmount - 1].GetComponent<RectTransform>().anchoredPosition - new Vector2(0f, 100f);

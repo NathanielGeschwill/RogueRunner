@@ -41640,6 +41640,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 102b20d6a5e9b8c4ab72589565eb4c28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hpsos:
+  - {fileID: 11400000, guid: 5fb0c7a40db80a64fbb4e1c98c6e3d34, type: 2}
   canSpawn: 1
 --- !u!4 &1245215252
 Transform:

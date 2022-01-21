@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class WorldSpawn : MonoBehaviour
 {
-    //public GameManager gm;
-    public Queue<GameObject> queuePlatforms;
+    public HorizontalPlatformSO[] hpsos;
+    private List<HorizontalPlatformSpawner> hps = new List<HorizontalPlatformSpawner>();
 
     private float spawnScalar =20f;
 
@@ -28,11 +28,12 @@ public class WorldSpawn : MonoBehaviour
     //*/
     void Start()
     {
-        //gm = FindObjectOfType<GameManager>();
-        //SpawnPlatform(0);
-        //queuePlatforms = new Queue<GameObject>();
-        //GameManager.Instance.ws = this;
-        StartCoroutine(SpawnChunk());
+        
+        foreach(HorizontalPlatformSO h in hpsos)
+        {
+            hps.Add(gameObject.AddComponent<HorizontalPlatformSpawner>());
+            hps[hps.Count - 1].SetWorldSpawn(this, h);
+        }
     }
 
     // Update is called once per frame

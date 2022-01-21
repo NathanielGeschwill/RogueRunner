@@ -70,7 +70,7 @@ public class FeedbackManaganger : MonoBehaviour
                         ((MMFeedbackScale)f.Feedbacks[1]).RemapCurveOne = t.transform.localScale.z*1.2f;
                         ((MMFeedbackRotation)f.Feedbacks[2]).AnimateRotationTarget = t;
                         ((MMFeedbackPosition)f.Feedbacks[3]).AnimatePositionTarget = root;
-                        Debug.Log(t.gameObject);
+                        //Debug.Log(t.gameObject);
                         break;
                 }
 
