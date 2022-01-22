@@ -17,6 +17,7 @@ public class Player : IEntity
 
     //For Feedbacks / communicating with FeedbackManager 
     public GameObject root;
+    public Vector3 rootScale;
     public ParticleSystem jumpPart, landingPart, airjumpPart, damagePart;
 
     public float grav = 20;
@@ -80,6 +81,8 @@ public class Player : IEntity
     void Start()
     {
         gm = FindObjectOfType<GameManager>();
+        rootScale = root.transform.localScale;
+
         MaxAmmo(bulletPrefab);
         gm.airTime = 0;
         health = 3;
@@ -133,7 +136,7 @@ public class Player : IEntity
         {
             OnDecreaseUI?.Invoke("Heart");
             base.LoseHealth(hitObject, amount);
-            GameManager.Instance.fbm.PlayFeedback("DamageFeedback", damagePart, root.GetComponent<Transform>(), root);
+            GameManager.Instance.fbm.PlayFeedback("DamageFeedback", damagePart, rootScale, root);
         }
             
     }
@@ -195,11 +198,11 @@ public class Player : IEntity
                 
                 if(!isGrounded)
                 {
-                    GameManager.Instance.fbm.PlayFeedback("JumpFeedback", airjumpPart, root.GetComponent<Transform>(), root);
+                    GameManager.Instance.fbm.PlayFeedback("JumpFeedback", airjumpPart, rootScale, root);
                 }
                 else
                 {
-                    GameManager.Instance.fbm.PlayFeedback("JumpFeedback", jumpPart, root.GetComponent<Transform>(), root);
+                    GameManager.Instance.fbm.PlayFeedback("JumpFeedback", jumpPart, rootScale, root);
                 }
             }
         }
@@ -314,7 +317,7 @@ public class Player : IEntity
             if(collision.contacts[0].point.y < transform.position.y)
             {
                 isGrounded = true;
-                GameManager.Instance.fbm.PlayFeedback("LandingFeedback", landingPart, root.GetComponent<Transform>(), root);
+                GameManager.Instance.fbm.PlayFeedback("LandingFeedback", landingPart, rootScale, root);
                 falling = false;
                 jumpTemp = jumps;
                 gm.airTime = 0;
@@ -357,7 +360,7 @@ public class Player : IEntity
         if(other.gameObject.CompareTag("Jumppad"))
         {
             Debug.Log("<color=red> jumppad </color>", this.gameObject);
-            GameManager.Instance.fbm.PlayFeedback("JumpFeedback", jumpPart, root.GetComponent<Transform>(), root);
+            GameManager.Instance.fbm.PlayFeedback("JumpFeedback", jumpPart, rootScale, root);
             jumpPad = true;
             falling = false;
             OnJump?.Invoke();

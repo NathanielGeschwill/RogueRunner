@@ -36687,6 +36687,7 @@ MonoBehaviour:
   rb: {fileID: 1200854039}
   rbVelo: {x: 0, y: 0, z: 0}
   root: {fileID: 755080783}
+  rootScale: {x: 0, y: 0, z: 0}
   jumpPart: {fileID: 1342641595}
   landingPart: {fileID: 1782184430}
   airjumpPart: {fileID: 1092841423}
