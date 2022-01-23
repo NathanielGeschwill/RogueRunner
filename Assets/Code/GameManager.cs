@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
 
     public bool gamePaused = false;
 
+    public float distanceTraveled = 0.0f;
+
     private void Start()
     {
         instance = this;
@@ -53,6 +55,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        distanceTraveled += worldSpeed * Time.deltaTime;
+
         if (TESTING_ZEROSPEED)
         {
             worldSpeed = 0;

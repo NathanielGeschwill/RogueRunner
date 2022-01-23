@@ -10,40 +10,44 @@ public class HorizontalPlatformSpawner : MonoBehaviour
     private float worldScaleConst = 15.0f;
     private float worldScaleMod = 10.0f;
     private float timer = 1000;
-    private float elapsedTime;
+    private float nextDistanceToSpawn;
+    private float distanceTraveled;
+    private bool readyToSpawn = false;
 
     public void SetWorldSpawn(WorldSpawn ws, HorizontalPlatformSO hpso)
     {
         this.ws = ws;
         this.hpso = hpso;
-        timer = hpso.timeBetweenPlatforms * worldScaleConst / GameManager.Instance.worldSpeed;
-        elapsedTime = 0.0f;
+        //timer = hpso.timeBetweenPlatforms * worldScaleConst / GameManager.Instance.worldSpeed;
+        nextDistanceToSpawn = GameManager.Instance.distanceTraveled + hpso.distanceBetweenPlats;
+        readyToSpawn = true;
     }
 
     private void Update()
     {
-        print("Time Between" + hpso.timeBetweenPlatforms * worldScaleConst / GameManager.Instance.worldSpeed);
-        if(elapsedTime >= hpso.timeBetweenPlatforms * worldScaleConst / GameManager.Instance.worldSpeed)
+        if(readyToSpawn && nextDistanceToSpawn <= GameManager.Instance.distanceTraveled)
         {
-            RollChanceToSpawn();
-            elapsedTime = 0.0f;
+            if (RollChanceToSpawn())
+            {
+                nextDistanceToSpawn = GameManager.Instance.distanceTraveled + hpso.distanceBetweenPlats;
+            }
+            else
+            {
+                nextDistanceToSpawn = GameManager.Instance.distanceTraveled + hpso.distanceBetweenPlats / 2;
+            }
+            
         }
-        else
-        {
-            elapsedTime += Time.deltaTime;
-        }
-        
     }
 
-    void RollChanceToSpawn()
+    bool RollChanceToSpawn()
     {
-        
         float chance = Random.Range(0.0f, 1.0f);
-        if (chance < hpso.chanceToSpawn)
+        if (chance <= hpso.chanceToSpawn)
         {
             SpawnPlatform();
+            return true;
         }
-            
+        return false;
     }
 
     public void SpawnPlatform()

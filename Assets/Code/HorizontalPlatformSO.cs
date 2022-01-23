@@ -6,7 +6,7 @@ using UnityEngine;
 public class HorizontalPlatformSO : ScriptableObject
 {
     public float yLevel;
-    public float timeBetweenPlatforms;
+    public float distanceBetweenPlats;
     public float chanceToSpawn;
     public GameObject[] potentialPlatforms;
 }

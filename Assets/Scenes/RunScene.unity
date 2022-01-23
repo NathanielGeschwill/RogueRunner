@@ -41651,6 +41651,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpsos:
   - {fileID: 11400000, guid: 5fb0c7a40db80a64fbb4e1c98c6e3d34, type: 2}
+  - {fileID: 11400000, guid: 8242d68f361f3ca48b0f99739c7fa1af, type: 2}
+  - {fileID: 11400000, guid: 1db20a0a81657e04fa037c5cd72daeff, type: 2}
+  - {fileID: 11400000, guid: 8b52f705dbd562e4a822d731af230e21, type: 2}
+  - {fileID: 11400000, guid: 3491adce6ad3fc6469bf2416989b811e, type: 2}
+  - {fileID: 11400000, guid: f1af44ec30656fd4fbfc69689d3583fc, type: 2}
+  - {fileID: 11400000, guid: 2b3a794b628cb184a969523820e33347, type: 2}
+  - {fileID: 11400000, guid: 17ddccb52ac793d43ab3f066baaa3bec, type: 2}
+  - {fileID: 11400000, guid: 217bca17fa0e194448869b5c54c215aa, type: 2}
   canSpawn: 1
 --- !u!4 &1245215252
 Transform:
@@ -74642,6 +74650,7 @@ MonoBehaviour:
   - -85
   - -85
   gamePaused: 0
+  distanceTraveled: 0
 --- !u!4 &2102780887
 Transform:
   m_ObjectHideFlags: 0
