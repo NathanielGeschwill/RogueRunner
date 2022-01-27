@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Level 2
   m_EditorClassIdentifier: 
   yLevel: -15
-  distanceBetweenPlats: 20
-  chanceToSpawn: 0.5
+  distanceBetweenPlats: 25
+  chanceToSpawn: 0.45
   potentialPlatforms:
   - {fileID: 3467020093605018701, guid: 4b32de3b3e8881845a4d687687e3349c, type: 3}
   - {fileID: 8333434254429824962, guid: 3ddb8d5c681b91f4088506828ef95707, type: 3}

@@ -1,11 +1,44 @@
 fileFormatVersion: 2
-guid: 5490223309108e84b8cce03004e73c47
+guid: 65e7b4f52d13e454cbfb6ca8e9f4af60
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: 6599214315619726264
     second: Player_Run
+  - first:
+      74: -242854621573454879
+    second: player_JumpLoop.001
+  - first:
+      74: -536804351342890698
+    second: p_run
+  - first:
+      74: 3147452281254144970
+    second: p_jumpGrounded
+  - first:
+      74: 2565646837593360106
+    second: p_freeFall
+  - first:
+      74: 5740382905547485332
+    second: p_freeFallLoop
+  - first:
+      74: 710465825297874758
+    second: p_shoot
+  - first:
+      74: -205094880948684998
+    second: p_hurtAir
+  - first:
+      74: 1030704195876345412
+    second: p_hurt
+  - first:
+      74: -257923821918789753
+    second: p_die
+  - first:
+      74: -4995026126464985351
+    second: p_dead
+  - first:
+      74: -4562314217680990093
+    second: p_tPose
   externalObjects: {}
   materials:
     materialImportMode: 2
