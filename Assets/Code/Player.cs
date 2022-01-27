@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MoreMountains.Feedbacks;
+using UnityEngine.UI;
 using UnityEngine.Events;
 
 public class Player : IEntity
@@ -19,6 +20,8 @@ public class Player : IEntity
     public GameObject root;
     public Vector3 rootScale;
     public ParticleSystem jumpPart, landingPart, airjumpPart, damagePart;
+
+    private Animator animator;
 
     public float grav = 20;
     public float jumpVelocity = 20; //how much veritcal velocity is given the player when they jump
@@ -39,9 +42,11 @@ public class Player : IEntity
     public float maxCoyoteTime = .225f; //if you take longer than this i won't forgive you
     private float coyoteTimer = 0; //forgiveness countdown
 
-    //
+    List<GameObject> currentCol;
+
+    
     private float ATK_TIME_BETWEEN = 0.225f;
-    private float ATK_TIME_RELOAD = 1.0f;
+    //private float ATK_TIME_RELOAD = 1.0f;
     private float attackTimer = 0f;
     private bool isReloading = false;
     //private int clipCounter = 0;
@@ -49,6 +54,7 @@ public class Player : IEntity
 
     public delegate void Fall();
     public static event Fall OnFall;
+    bool falling = false;
 
     public delegate void Jump();
     public static event Jump OnJump;
@@ -61,7 +67,7 @@ public class Player : IEntity
     public delegate void DecreaseUI(string name);
     public static event DecreaseUI OnDecreaseUI;
 
-    bool falling = false;
+    public Text text;
 
     private void OnEnable()
     {
@@ -81,7 +87,11 @@ public class Player : IEntity
     void Start()
     {
         gm = FindObjectOfType<GameManager>();
+        animator = GetComponentInChildren<Animator>();
+        animator.SetBool("grounded", false);
+
         rootScale = root.transform.localScale;
+        currentCol = new List<GameObject>();
 
         MaxAmmo(bulletPrefab);
         gm.airTime = 0;
@@ -136,6 +146,7 @@ public class Player : IEntity
         {
             OnDecreaseUI?.Invoke("Heart");
             base.LoseHealth(hitObject, amount);
+            animator.SetTrigger("hurt");
             GameManager.Instance.fbm.PlayFeedback("DamageFeedback", damagePart, rootScale, root);
         }
             
@@ -184,6 +195,7 @@ public class Player : IEntity
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                
                 //if player jumps, no longer grounded, immideately add y velocity, and holdingjump is true until key up is registered or max time reached
                 isGrounded = false;
                 rb.velocity = new Vector3(0, jumpVelocity, 0);
@@ -198,10 +210,12 @@ public class Player : IEntity
                 
                 if(!isGrounded)
                 {
+                    animator.SetTrigger("jump");
                     GameManager.Instance.fbm.PlayFeedback("JumpFeedback", airjumpPart, rootScale, root);
                 }
                 else
                 {
+                    animator.SetTrigger("jump");
                     GameManager.Instance.fbm.PlayFeedback("JumpFeedback", jumpPart, rootScale, root);
                 }
             }
@@ -210,6 +224,7 @@ public class Player : IEntity
         //if Player lets go of the Jump key
         if (Input.GetKeyUp(KeyCode.Space))
         {
+            
             isHoldingJump = false;
             holdJumpTimer = 0;
         }
@@ -253,6 +268,9 @@ public class Player : IEntity
                 GameManager.Instance.Pause();
             }
         }
+
+        text.text = isGrounded.ToString();
+
     }
 
     private void FixedUpdate()
@@ -266,11 +284,14 @@ public class Player : IEntity
             isGrounded = false;
         }
 
+
         if (!isGrounded)
         {
+            currentCol.Clear();
             gm.airTime += Time.fixedDeltaTime;
             if (coyoteTime)
             {
+                
                 coyoteTimer += Time.fixedDeltaTime;
 
                 if(coyoteTimer >= maxCoyoteTime)
@@ -281,6 +302,7 @@ public class Player : IEntity
                     //Debug.Log("shit outta luck"); 
                 }
             }
+
 
             if (isHoldingJump)
             {
@@ -311,13 +333,21 @@ public class Player : IEntity
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Platform"))
+        //*/for testing
+        
+        //foreach(GameObject gObj in currentCol) { print(gObj.name); }
+        //print(currentCol.Count + " enter");
+        //*/
+
+        if (collision.gameObject.CompareTag("Platform"))
         {
+            currentCol.Add(collision.gameObject);
             //Check if the platform player is colliding with is beneath them
-            if(collision.contacts[0].point.y < transform.position.y)
+            if (collision.contacts[0].point.y < transform.position.y)
             {
                 isGrounded = true;
-                GameManager.Instance.fbm.PlayFeedback("LandingFeedback", landingPart, rootScale, root);
+                animator.SetBool("grounded", true);
+                if (currentCol.Count < 2) { GameManager.Instance.fbm.PlayFeedback("LandingFeedback", landingPart, rootScale, root); animator.SetTrigger("land"); }
                 falling = false;
                 jumpTemp = jumps;
                 gm.airTime = 0;
@@ -325,7 +355,7 @@ public class Player : IEntity
             }
             else if(collision.contacts[0].point.y > transform.position.y)
             {
-                Debug.Log("haha");
+                //Debug.Log("haha");
                 //go through platform
             }
             
@@ -345,23 +375,34 @@ public class Player : IEntity
 
     private void OnCollisionExit(Collision collision)
     {
-        //Debug.Log(isGrounded);
+        //*/Testing
+        currentCol.Remove(collision.gameObject);
+        //foreach(GameObject gObj in currentCol) { print(gObj.name); }
+        //print(currentCol.Count + " exit");
+        //*/
+
         // if you left the platform without jumping, shit out of luck (add Coyote time here?)
-        if(isGrounded)
+        if (isGrounded)
         {
             isGrounded = false;
+            //animator.SetBool("grounded", false);
             coyoteTime = true;
             
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+#pragma warning disable CS0114 // Member hides inherited member; missing override keyword
+    public void OnTriggerEnter(Collider other)
+#pragma warning restore CS0114 // Member hides inherited member; missing override keyword
     {
+        //base.OnTriggerEnter();
         if(other.gameObject.CompareTag("Jumppad"))
         {
             Debug.Log("<color=red> jumppad </color>", this.gameObject);
             GameManager.Instance.fbm.PlayFeedback("JumpFeedback", jumpPart, rootScale, root);
             jumpPad = true;
+            animator.SetTrigger("jumpPad");
+            animator.SetBool("grounded", false);
             falling = false;
             OnJump?.Invoke();
             

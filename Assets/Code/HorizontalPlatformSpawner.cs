@@ -8,7 +8,7 @@ public class HorizontalPlatformSpawner : MonoBehaviour
     private WorldSpawn ws;
     public bool canSpawn = true;
     private float worldScaleConst = 15.0f;
-    private float worldScaleMod = 10.0f;
+    //private float worldScaleMod = 10.0f;
     private float timer = 1000;
     private float nextDistanceToSpawn;
     private float distanceTraveled;
@@ -52,7 +52,7 @@ public class HorizontalPlatformSpawner : MonoBehaviour
 
     public void SpawnPlatform()
     {
-        print("Spawn Plat");
+        //print("Spawn Plat");
         var ass = GameObject.Instantiate(hpso.potentialPlatforms[Random.Range(0, hpso.potentialPlatforms.Length)], new Vector3(100, hpso.yLevel, 0f), ws.transform.rotation);
         ass.transform.parent = ws.gameObject.transform;
     }

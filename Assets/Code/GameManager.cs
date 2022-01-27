@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public GameObject loseUI;
 
     public float worldSpeed = 15; //world speed that changes based on the situation
-    public float targetWorldSpeed = 15; // world speed that is always returned to
+    public float targetWorldSpeed = 15; /*/ world speed that is always returned to*/
     public bool playerSpeeding = false;
     public bool stopped = false;
 
@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
     //all changes to worldspeed use this function
     public void worldSpeedChange(bool multi, float val)
     {
-        print(worldSpeed);
+        //print(worldSpeed);
         if (!stopped)
         {
             if (multi)
