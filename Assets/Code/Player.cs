@@ -30,6 +30,7 @@ public class Player : IEntity
     
     public bool isGrounded = false; //on the ground?
     private bool isHoldingJump = false; //holding jump button?
+    private bool isHoldingJumpforAnim = false;
     public float maxHoldJumptime = .325f; //as long as you're allow to hold jump button
     private float holdJumpTimer = 0f; //countdown for jump hold
     private float maxFallSpeed = -44; //for vert velo clamp
@@ -173,12 +174,14 @@ public class Player : IEntity
         //Update velocity just for public visual reference in the editor
         rbVelo = rb.velocity;
 
-        if(rb.velocity.y < 0 && falling == false)
+        if(rb.velocity.y < -0.1f && falling == false)
         {
             OnFall?.Invoke();
             falling = true;
+            animator.SetBool("grounded", false);
+            animator.SetTrigger("falling");
         }
-        if(falling && rb.velocity.y > 0.1f)
+        if(falling && rb.velocity.y >= 0f)
         {
             OnJump?.Invoke();
             falling = false;
@@ -195,11 +198,24 @@ public class Player : IEntity
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+
+                if(jumpTemp == jumps)
+                {
+                    animator.SetTrigger("jump");
+                    GameManager.Instance.fbm.PlayFeedback("JumpFeedback", jumpPart, rootScale, root);
+                }
+                else
+                {
+                    animator.SetTrigger("airJump");
+                    GameManager.Instance.fbm.PlayFeedback("JumpFeedback", airjumpPart, rootScale, root);
+                }
+
                 
                 //if player jumps, no longer grounded, immideately add y velocity, and holdingjump is true until key up is registered or max time reached
                 isGrounded = false;
                 rb.velocity = new Vector3(0, jumpVelocity, 0);
                 isHoldingJump = true;
+                isHoldingJumpforAnim = true;
 
                 //number of jumps left is decreased, and we're not entering Coyote time
                 jumpTemp -= 1;
@@ -208,15 +224,16 @@ public class Player : IEntity
                 falling = false;
                 OnJump?.Invoke();
                 
+
+                
+
                 if(!isGrounded)
                 {
-                    animator.SetTrigger("jump");
-                    GameManager.Instance.fbm.PlayFeedback("JumpFeedback", airjumpPart, rootScale, root);
+                    
                 }
                 else
                 {
-                    animator.SetTrigger("jump");
-                    GameManager.Instance.fbm.PlayFeedback("JumpFeedback", jumpPart, rootScale, root);
+                   
                 }
             }
         }
@@ -224,7 +241,7 @@ public class Player : IEntity
         //if Player lets go of the Jump key
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            
+            isHoldingJumpforAnim = false;
             isHoldingJump = false;
             holdJumpTimer = 0;
         }

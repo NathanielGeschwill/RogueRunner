@@ -158,8 +158,8 @@ ModelImporter:
       name: p_jumpGrounded
       takeName: p_jumpGrounded
       internalID: 0
-      firstFrame: 0
-      lastFrame: 25
+      firstFrame: 2.1
+      lastFrame: 6.3
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
