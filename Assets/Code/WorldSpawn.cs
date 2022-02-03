@@ -6,6 +6,9 @@ public class WorldSpawn : MonoBehaviour
 {
     public HorizontalPlatformSO[] hpsos;
     private List<HorizontalPlatformSpawner> hps = new List<HorizontalPlatformSpawner>();
+    public Material[] materials;
+    private float hellLevel = 0.0f;
+    private float skyLevel = 60.0f;
 
     private float spawnScalar =20f;
 
@@ -32,7 +35,20 @@ public class WorldSpawn : MonoBehaviour
         foreach(HorizontalPlatformSO h in hpsos)
         {
             hps.Add(gameObject.AddComponent<HorizontalPlatformSpawner>());
-            hps[hps.Count - 1].SetWorldSpawn(this, h);
+
+            if(h.yLevel >= skyLevel)
+            {
+                hps[hps.Count - 1].SetWorldSpawn(this, h, materials[2]);
+            }
+            else if(h.yLevel <= hellLevel)
+            {
+                hps[hps.Count - 1].SetWorldSpawn(this, h, materials[0]);
+            }
+            else
+            {
+                hps[hps.Count - 1].SetWorldSpawn(this, h, materials[1]);
+            }
+            
         }
     }
 

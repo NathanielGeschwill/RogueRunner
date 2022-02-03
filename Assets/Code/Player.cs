@@ -420,6 +420,7 @@ public class Player : IEntity
             jumpPad = true;
             animator.SetTrigger("jumpPad");
             animator.SetBool("grounded", false);
+            other.gameObject.GetComponent<Animator>().Play("Jumppad");
             falling = false;
             OnJump?.Invoke();
             

@@ -41749,6 +41749,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2b3a794b628cb184a969523820e33347, type: 2}
   - {fileID: 11400000, guid: 17ddccb52ac793d43ab3f066baaa3bec, type: 2}
   - {fileID: 11400000, guid: 217bca17fa0e194448869b5c54c215aa, type: 2}
+  materials:
+  - {fileID: 2100000, guid: c59e50a8d88b51a46b4e320b4a8aef8f, type: 2}
+  - {fileID: 2100000, guid: e01b1af9b2bca70468370c9ce68c6982, type: 2}
+  - {fileID: 2100000, guid: d3a315b37a3e36a4484b27420cb61b28, type: 2}
   canSpawn: 1
 --- !u!4 &1245215252
 Transform:

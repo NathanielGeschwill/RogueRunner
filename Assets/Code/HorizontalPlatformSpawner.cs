@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class HorizontalPlatformSpawner : MonoBehaviour
 {
@@ -13,14 +14,16 @@ public class HorizontalPlatformSpawner : MonoBehaviour
     private float nextDistanceToSpawn;
     private float distanceTraveled;
     private bool readyToSpawn = false;
+    private Material material;
 
-    public void SetWorldSpawn(WorldSpawn ws, HorizontalPlatformSO hpso)
+    public void SetWorldSpawn(WorldSpawn ws, HorizontalPlatformSO hpso, Material material)
     {
         this.ws = ws;
         this.hpso = hpso;
         //timer = hpso.timeBetweenPlatforms * worldScaleConst / GameManager.Instance.worldSpeed;
         nextDistanceToSpawn = GameManager.Instance.distanceTraveled + hpso.distanceBetweenPlats;
         readyToSpawn = true;
+        this.material = material;
     }
 
     private void Update()
@@ -53,7 +56,8 @@ public class HorizontalPlatformSpawner : MonoBehaviour
     public void SpawnPlatform()
     {
         //print("Spawn Plat");
-        var ass = GameObject.Instantiate(hpso.potentialPlatforms[Random.Range(0, hpso.potentialPlatforms.Length)], new Vector3(100, hpso.yLevel, 0f), ws.transform.rotation);
+        GameObject ass = GameObject.Instantiate(hpso.potentialPlatforms[Random.Range(0, hpso.potentialPlatforms.Length)], new Vector3(100, hpso.yLevel, 0f), ws.transform.rotation);
+        ass.GetComponentsInChildren<MeshRenderer>().FirstOrDefault(r => r.tag == "PlatformMat").material = material;
         ass.transform.parent = ws.gameObject.transform;
     }
 }
