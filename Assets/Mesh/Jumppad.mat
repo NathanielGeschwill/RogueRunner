@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Lava
+  m_Name: Jumppad
   m_Shader: {fileID: 4800000, guid: c6531fd48e589fd42bc3f42d6d9501be, type: 3}
-  m_ShaderKeywords: _SHADOWMIXMODE_MULTIPLY _SHARPRIMLIGHT_ON
+  m_ShaderKeywords: _NORMALMAP _SHADOWMIXMODE_MULTIPLY _SHARPRIMLIGHT_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -19,12 +19,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_662eb38086f14f2d82ffd2cb8736ade7:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: c0936ce990ae02448ac357c5e5a267f9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -48,7 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 9281574d30ffbd24c9e1b32e48650db2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -83,32 +79,19 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_baca5be381a4477cb7390caf5d9fd12e: 0.005
-    - _Amount: 0.00009
-    - _Bending: 0
+    - _Amount: 0.00002
+    - _Bending: 1
     - _BumpScale: 1
     - _Contrast: 0
     - _Cutoff: 0.5
     - _Desaturation: 0
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _EmissionForce: 1.38
+    - _EmissionForce: 0
     - _Framerate: 5
     - _GlossMapScale: 1
-    - _Glossiness: 0.5
+    - _Glossiness: 0
     - _GlossyReflections: 1
     - _HideRimUnderShadow: 0
     - _Metallic: 0
@@ -117,7 +100,7 @@ Material:
     - _OutlineAlpha: 0
     - _OutlineWidth: 0.1
     - _Parallax: 0.02
-    - _RampOffset: 0
+    - _RampOffset: 0.904
     - _RimAmount: 0.7
     - _RimPower: 0.6547081
     - _SecondaryTextureSize: 1
@@ -125,18 +108,18 @@ Material:
     - _SecondaryTextureStrength: 0
     - _ShadowBlur: 1
     - _ShadowMixMode: 0
-    - _ShadowSize: 0.485
-    - _ShadowStrength: 0.045
+    - _ShadowSize: 0.863
+    - _ShadowStrength: 0.461
     - _SharpRimLight: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularFalloff: 1
     - _SpecularForceUnderShadow: 0
     - _SpecularHighlights: 1
     - _SpecularPower: 1
-    - _SpecularSize: 0.385
+    - _SpecularSize: 0.4
     - _SrcBlend: 1
     - _StepAmount: 0
-    - _StepWidth: 0.083
+    - _StepWidth: 0.59
     - _UVSec: 0
     - _UseRampTexture: 0
     - _UseRimLight: 0
@@ -150,13 +133,13 @@ Material:
     - _VertexOffsetZ: 0.5
     - _ZWrite: 1
     - __dirty: 1
-    - _zFix: 0
+    - _zFix: 1
     m_Colors:
-    - _Color: {r: 1, g: 0.13333356, b: 0, a: 1}
-    - _EmissionColor: {r: 0.7264151, g: 0, b: 0, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _LightColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0.5451996, g: 1, b: 0, a: 1}
-    - _RampDark: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 0}
+    - _RampDark: {r: 0.676743, g: 0.7264151, b: 0.43516377, a: 0}
     - _RampLight: {r: 1, g: 1, b: 1, a: 0}
     - _RimColor: {r: 0, g: 0.7342432, b: 1, a: 1}
     - _ShadowColor: {r: 1, g: 0, b: 0.115766, a: 1}

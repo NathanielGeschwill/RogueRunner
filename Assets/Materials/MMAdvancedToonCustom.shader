@@ -1,4 +1,4 @@
-Shader "MoreMountains/MMAdvancedToon"
+Shader "Custom/MMAdvancedToonCustom"
 {
 	Properties
 	{
@@ -7,6 +7,7 @@ Shader "MoreMountains/MMAdvancedToon"
         _Color("Color", Color) = (1,1,1) 
         _zFix("Z Fix", float) = 0.0
         _Amount("Amount", float) = .00009
+		_Bending("Bool Bend", float) = 0.0
 		//
 
 		_Cutoff( "Mask Clip Value", Float ) = 0.5
@@ -109,6 +110,7 @@ Shader "MoreMountains/MMAdvancedToon"
 			#define WorldReflectionVector(data,normal) reflect (data.worldRefl, half3(dot(data.internalSurfaceTtoW0,normal), dot(data.internalSurfaceTtoW1,normal), dot(data.internalSurfaceTtoW2,normal)))
 			#define WorldNormalVector(data,normal) half3(dot(data.internalSurfaceTtoW0,normal), dot(data.internalSurfaceTtoW1,normal), dot(data.internalSurfaceTtoW2,normal))
 		#endif
+
 		struct Input
 		{
 			float2 uv_texcoord;
@@ -116,6 +118,10 @@ Shader "MoreMountains/MMAdvancedToon"
 			float3 worldPos;
 			float4 vertexColor : COLOR;
 			float3 worldNormal;
+
+			float4 position : SV_POSITION;  
+            float2 uv : TEXCOORD0;
+
 			INTERNAL_DATA
 		};
 
@@ -129,54 +135,70 @@ Shader "MoreMountains/MMAdvancedToon"
 			half Occlusion;
 			half Alpha;
 			Input SurfInput;
+
+			float4 position : SV_POSITION;  
+            float2 uv : TEXCOORD0;
+
 			UnityGIInput GIData;
 		};
 
-		uniform float _VertexOffsetMagnitude;
-		uniform sampler2D _VertexOffsetNoiseTexture;
-		uniform float _Framerate;
-		uniform float _VertexOffsetFrequency;
-		uniform float _VertexOffsetX;
-		uniform float _VertexOffsetY;
-		uniform float _VertexOffsetZ;
-		uniform sampler2D _EmissionTexture;
-		uniform float4 _EmissionTexture_ST;
-		uniform float4 _EmissionColor;
-		uniform float _EmissionForce;
-		uniform float4 _RampDark;
-		uniform float4 _RampLight;
-		uniform sampler2D _Normal;
-		uniform float4 _Normal_ST;
-		uniform float _StepWidth;
-		uniform float _StepAmount;
-		uniform float _RampOffset;
-		uniform sampler2D _RampTexture;
-		uniform sampler2D _MainTex;
-		uniform float4 _MainTex_ST;
-		uniform float4 _Tint;
-		uniform sampler2D _SecondaryTexture;
-		uniform float _SecondaryTextureSize;
-		uniform float _SecondaryTextureSpeedFactor;
-		uniform float _SecondaryTextureStrength;
-		uniform float _SpecularPower;
-		uniform float _SpecularSize;
-		uniform float _SpecularFalloff;
-		uniform float4 _ShadowColor;
-		uniform float _ShadowStrength;
-		uniform float4 _LightColor;
-		uniform float _ShadowSize;
-		uniform float _ShadowBlur;
-		uniform float _SpecularForceUnderShadow;
-		uniform float4 _SpecularColor;
-		uniform float _RimAmount;
-		uniform float _RimPower;
-		uniform float4 _RimColor;
-		uniform float _Desaturation;
-		uniform float _Contrast;
-		uniform float _OutlineWidth;
-		uniform float4 _OutlineColor;
-		uniform float _OutlineAlpha;
-		uniform float _Cutoff = 0.5;
+		//CUST
+		fixed4 _VertexOffset;
+        fixed4 _Color;
+        uniform float4 _worldpos;
+        uniform float1 _Amount;
+        uniform float4 camera_location;
+        uniform float4 _ver;
+        uniform float1 _zFix;
+		uniform float1 _Bending;
+ 		//CUST
+		
+			uniform float _VertexOffsetMagnitude;
+			uniform sampler2D _VertexOffsetNoiseTexture;
+			uniform float _Framerate;
+			uniform float _VertexOffsetFrequency;
+			uniform float _VertexOffsetX;
+			uniform float _VertexOffsetY;
+			uniform float _VertexOffsetZ;
+			uniform sampler2D _EmissionTexture;
+			uniform float4 _EmissionTexture_ST;
+			uniform float4 _EmissionColor;
+			uniform float _EmissionForce;
+			uniform float4 _RampDark;
+			uniform float4 _RampLight;
+			uniform sampler2D _Normal;
+			uniform float4 _Normal_ST;
+			uniform float _StepWidth;
+			uniform float _StepAmount;
+			uniform float _RampOffset;
+			uniform sampler2D _RampTexture;
+			uniform sampler2D _MainTex;
+			uniform float4 _MainTex_ST;
+			uniform float4 _Tint;
+			uniform sampler2D _SecondaryTexture;
+			uniform float _SecondaryTextureSize;
+			uniform float _SecondaryTextureSpeedFactor;
+			uniform float _SecondaryTextureStrength;
+			uniform float _SpecularPower;
+			uniform float _SpecularSize;
+			uniform float _SpecularFalloff;
+			uniform float4 _ShadowColor;
+			uniform float _ShadowStrength;
+			uniform float4 _LightColor;
+			uniform float _ShadowSize;
+			uniform float _ShadowBlur;
+			uniform float _SpecularForceUnderShadow;
+			uniform float4 _SpecularColor;
+			uniform float _RimAmount;
+			uniform float _RimPower;
+			uniform float4 _RimColor;
+			uniform float _Desaturation;
+			uniform float _Contrast;
+			uniform float _OutlineWidth;
+			uniform float4 _OutlineColor;
+			uniform float _OutlineAlpha;
+			uniform float _Cutoff = 0.5;
+		
 
 		void vertexDataFunc( inout appdata_full v, out Input o )
 		{
@@ -204,6 +226,26 @@ Shader "MoreMountains/MMAdvancedToon"
 			float3x3 tangentToWorld = CreateTangentToWorldPerVertex( ase_worldNormal, ase_worldTangent, v.tangent.w );
 			float3 tangentNormal33 = normal83;
 			float3 modWorldNormal33 = normalize( (tangentToWorld[0] * tangentNormal33.x + tangentToWorld[1] * tangentNormal33.y + tangentToWorld[2] * tangentNormal33.z) );
+			
+			//CUST
+			camera_location = float4(_WorldSpaceCameraPos.x, _WorldSpaceCameraPos.y, _WorldSpaceCameraPos.z, 1);
+            _worldpos = (mul(unity_ObjectToWorld, v.vertex));
+
+            float dist = distance(camera_location, _worldpos);
+            _ver = (1 * _Amount)*(pow(dist, 2));			
+			
+			if(_zFix==1 && _Bending == 1)
+            {
+                v.vertex = float4(v.vertex.x - _ver.x, v.vertex.y, v.vertex.z, 1);
+            }
+            else if (_Bending == 1)
+            {
+                v.vertex = float4(v.vertex.x, v.vertex.y + _ver.y, v.vertex.z, 1);
+            }
+
+			o.position = UnityObjectToClipPos(v.vertex);
+			//o.uv = v.uv;
+			//CUST
 			o.vertexToFrag80 = modWorldNormal33;
 		}
 
@@ -336,6 +378,27 @@ Shader "MoreMountains/MMAdvancedToon"
 			float4 lightCol68 = postToneMapping439;
 			c.rgb = lightCol68.rgb;
 			c.a = 1;
+
+			//CUST
+				//			camera_location = float4(_WorldSpaceCameraPos.x, _WorldSpaceCameraPos.y, _WorldSpaceCameraPos.z, 1);
+				//            _worldpos = (mul(unity_ObjectToWorld, s.vertex));
+				//
+				//            float dist = distance(camera_location, _worldpos);
+				//            _ver = (1 * _Amount)*(pow(dist, 2));			
+							
+				//			if(_zFix==1)
+				//            {
+				//               s.vertex = float4(s.vertex.x - _ver.x, s.vertex.y, s.vertex.z, 1);
+				//            }
+				//            else
+				//            {
+				//                s.vertex = float4(s.vertex.x, s.vertex.y + _ver.y, s.vertex.z, 1);
+				//            }
+
+				//			c.position = UnityObjectToClipPos(v.vertex);
+			///CUST
+
+
 			return c;
 		}
 

@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: platform
-  m_Shader: {fileID: 4800000, guid: 82c42a0b06f4f684db1ee2c535fb985c, type: 3}
+  m_Shader: {fileID: 4800000, guid: c6531fd48e589fd42bc3f42d6d9501be, type: 3}
   m_ShaderKeywords: _NORMALMAP _SHADOWMIXMODE_MULTIPLY _SHARPRIMLIGHT_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,6 +19,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_662eb38086f14f2d82ffd2cb8736ade7:
+        m_Texture: {fileID: 2800000, guid: 9ece45f4f688e20428301951d50b672d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: 6b6ad03f7328e1a429ba8497841fa352, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -67,6 +71,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_a33205fdcc7c44f5b4341d29433d6199_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 9ece45f4f688e20428301951d50b672d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SecondaryTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -79,7 +87,22 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_baca5be381a4477cb7390caf5d9fd12e: 0.0021
+    - _Amount: 0.00009
+    - _Bending: 1
     - _BumpScale: 1
     - _Contrast: 0
     - _Cutoff: 0.5
@@ -98,7 +121,7 @@ Material:
     - _OutlineAlpha: 0
     - _OutlineWidth: 0.1
     - _Parallax: 0.02
-    - _RampOffset: 0.5
+    - _RampOffset: 0.4
     - _RimAmount: 0.7
     - _RimPower: 0.6547081
     - _SecondaryTextureSize: 1
@@ -116,8 +139,8 @@ Material:
     - _SpecularPower: 1
     - _SpecularSize: 0.4
     - _SrcBlend: 1
-    - _StepAmount: 2
-    - _StepWidth: 0.25
+    - _StepAmount: 7
+    - _StepWidth: 0.083
     - _UVSec: 0
     - _UseRampTexture: 0
     - _UseRimLight: 0
@@ -131,7 +154,9 @@ Material:
     - _VertexOffsetZ: 0.5
     - _ZWrite: 1
     - __dirty: 1
+    - _zFix: 0
     m_Colors:
+    - _Amount: {r: 0.021, g: 0, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _LightColor: {r: 1, g: 1, b: 1, a: 1}
@@ -142,4 +167,6 @@ Material:
     - _ShadowColor: {r: 1, g: 0, b: 0.115766, a: 1}
     - _SpecularColor: {r: 2, g: 2, b: 2, a: 1}
     - _Tint: {r: 1, g: 1, b: 1, a: 1}
+    - _VertexOffset: {r: 0, g: 0, b: 0, a: 1}
+    - _ver: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
