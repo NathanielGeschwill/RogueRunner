@@ -7,6 +7,8 @@ public class WorldScroll : MonoBehaviour {
 
     public GameManager gm;
     private float worldSpeed;
+    [SerializeField]
+    private float paralax = 1;
         
 
     // Start is called before the first frame update
@@ -28,11 +30,9 @@ public class WorldScroll : MonoBehaviour {
 
     void FixedUpdate()
     {
-        //if (spawned) { spawned = false; }
-
         Vector3 pos = transform.position;
-
-        pos.x -= worldSpeed * Time.deltaTime;
+        
+        pos.x -= (worldSpeed * (1/paralax))* Time.deltaTime;
 
         transform.position = pos;
 

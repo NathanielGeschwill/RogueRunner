@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: m_JumpPad
-  m_Shader: {fileID: 4800000, guid: 2eb949f991423d84da9d342b30d50826, type: 3}
-  m_ShaderKeywords: _SHADOWMIXMODE_MULTIPLY _SHARPRIMLIGHT_ON
+  m_Name: Mushroom_Rig
+  m_Shader: {fileID: 4800000, guid: c6531fd48e589fd42bc3f42d6d9501be, type: 3}
+  m_ShaderKeywords: _NORMALMAP _SHADOWMIXMODE_MULTIPLY _SHARPRIMLIGHT_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 5f67657f0f0e25341bba3f5abad1c2de, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -44,7 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: e27c0a8007418cb47bb6f3fc2dc761b8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -80,7 +80,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Amount: 0.000002
+    - _Amount: 0.00009
     - _Bending: 1
     - _BumpScale: 1
     - _Contrast: 0
@@ -91,7 +91,7 @@ Material:
     - _EmissionForce: 0
     - _Framerate: 5
     - _GlossMapScale: 1
-    - _Glossiness: 0.5
+    - _Glossiness: 0
     - _GlossyReflections: 1
     - _HideRimUnderShadow: 0
     - _Metallic: 0
@@ -100,16 +100,16 @@ Material:
     - _OutlineAlpha: 0
     - _OutlineWidth: 0.1
     - _Parallax: 0.02
-    - _RampOffset: 0.699
+    - _RampOffset: 0.685
     - _RimAmount: 0.7
     - _RimPower: 0.6547081
     - _SecondaryTextureSize: 1
     - _SecondaryTextureSpeedFactor: 0
     - _SecondaryTextureStrength: 0
-    - _ShadowBlur: 0.649
+    - _ShadowBlur: 0.941
     - _ShadowMixMode: 0
-    - _ShadowSize: 0.924
-    - _ShadowStrength: 0.325
+    - _ShadowSize: 0.483
+    - _ShadowStrength: 0
     - _SharpRimLight: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularFalloff: 1
@@ -118,8 +118,8 @@ Material:
     - _SpecularPower: 1
     - _SpecularSize: 0.4
     - _SrcBlend: 1
-    - _StepAmount: 10
-    - _StepWidth: 0.123
+    - _StepAmount: 16
+    - _StepWidth: 0.05
     - _UVSec: 0
     - _UseRampTexture: 0
     - _UseRimLight: 0
@@ -135,15 +135,14 @@ Material:
     - __dirty: 1
     - _zFix: 0
     m_Colors:
-    - _Color: {r: 0.5155656, g: 0.8584906, b: 0.51428443, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _LightColor: {r: 0.6799679, g: 1, b: 0.5424528, a: 1}
+    - _LightColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0.5451996, g: 1, b: 0, a: 1}
-    - _RampDark: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 0}
+    - _RampDark: {r: 0.5566038, g: 0.4279548, b: 0.4279548, a: 0}
     - _RampLight: {r: 1, g: 1, b: 1, a: 0}
     - _RimColor: {r: 0, g: 0.7342432, b: 1, a: 1}
-    - _ShadowColor: {r: 0.4878304, g: 0.31648272, b: 0.5283019, a: 1}
+    - _ShadowColor: {r: 1, g: 0, b: 0.115766, a: 1}
     - _SpecularColor: {r: 2, g: 2, b: 2, a: 1}
     - _Tint: {r: 1, g: 1, b: 1, a: 1}
-    - _VertexOffset: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
