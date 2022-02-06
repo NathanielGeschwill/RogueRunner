@@ -13,6 +13,7 @@ public class BatBoi : IEntity
     private bool isAttacking = false;
     private bool alreadyAttacked = false;
     private float distToPlayerX = 3.0f;
+    private Vector3 vectorFromPlayer;
 
     private void OnEnable()
     {
@@ -45,6 +46,8 @@ public class BatBoi : IEntity
         if (isAttacking && dashTimer > 0)
         {
             dashTimer -= Time.deltaTime;
+            //rb.velocity = new Vector3(0, player.GetComponent<Player>().rb.velocity.y, 0);
+            rb.MovePosition(Vector3.Lerp(transform.position, player.transform.position+vectorFromPlayer, .5f/(player.transform.position - transform.position).magnitude * 2));
         }
 
         if (isAttacking && dashTimer <= 0)
@@ -65,6 +68,7 @@ public class BatBoi : IEntity
         {
             transform.parent = other.gameObject.transform;
             Vector3 dir = player.transform.position - transform.position;
+            vectorFromPlayer = transform.position - player.transform.position;
             dir = dir.normalized;
             if (dir.x < 0)
             {
@@ -83,6 +87,16 @@ public class BatBoi : IEntity
                 InvokeHit(other.gameObject, damage);
             }
             
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player" && isAttacking)
+        {
+            transform.parent = null;
+            isAttacking = false;
+            rb.velocity = new Vector3(-GameManager.Instance.worldSpeed, 0, 0);
         }
     }
 }

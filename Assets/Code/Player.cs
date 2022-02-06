@@ -302,7 +302,7 @@ public class Player : IEntity
             jumpPad = false;
             isGrounded = false;
             OnJump?.Invoke();
-            OnJumppad?.Invoke();
+            //OnJumppad?.Invoke();
         }
 
 
