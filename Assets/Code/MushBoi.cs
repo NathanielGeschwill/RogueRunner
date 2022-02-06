@@ -46,9 +46,7 @@ public class MushBoi : IEntity
 
         if (rb.velocity.y <= -.5 && !falling)
         {
-            animator.SetBool("Falling", true);
-            rb.velocity = new Vector3(0, rb.velocity.y, 0);
-            falling = true;
+           
         }
        
         //transform.localPosition += Vector3.right * -1 * speed * Time.deltaTime;
@@ -61,9 +59,19 @@ public class MushBoi : IEntity
         if(collision.gameObject.layer == 11 || collision.gameObject.CompareTag("Platform"))
         {
             animator.SetBool("Falling", false);
-            rb.velocity = rb.velocity = Vector3.left * speed;
+            rb.velocity = Vector3.left * speed;
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             falling = false;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.layer == 11 || collision.gameObject.CompareTag("Platform"))
+        {
+            animator.SetBool("Falling", true);
+            rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            falling = true;
         }
     }
 

@@ -55,7 +55,7 @@ public class Player : IEntity
 
     public delegate void Fall();
     public static event Fall OnFall;
-    bool falling = false;
+    bool falling = true;
 
     public delegate void Jump();
     public static event Jump OnJump;
@@ -176,28 +176,16 @@ public class Player : IEntity
         //Update velocity just for public visual reference in the editor
         rbVelo = rb.velocity;
 
-        if(rb.velocity.y < -0.1f && falling == false)
-        {
-            OnFall?.Invoke();
-            falling = true;
-            animator.SetBool("grounded", false);
-            animator.SetTrigger("falling");
-        }
-        if(falling && rb.velocity.y >= 0f)
-        {
-            OnJump?.Invoke();
-            falling = false;
-        }
-
         //TESTING tp to top of stage
-        if(transform.position.y < -44) //testing
+        if (transform.position.y < -44) //testing
         {
-            transform.position = new Vector3(0, 100, 0);
+            transform.position = new Vector3(0, 120, 0);
         }
 
         //If the player is grounded, has remaining jumps, or is currently in CoyoteTime
         if (isGrounded || jumpTemp >= 1 || coyoteTime)
         {
+            //JUMP KEY
             if (Input.GetKeyDown(KeyCode.Space))
             {
 
@@ -223,20 +211,9 @@ public class Player : IEntity
                 jumpTemp -= 1;
                 coyoteTime = false;
                 coyoteTimer = 0;
-                falling = false;
+                //falling = false;
                 OnJump?.Invoke();
                 
-
-                
-
-                if(!isGrounded)
-                {
-                    
-                }
-                else
-                {
-                   
-                }
             }
         }
 
@@ -288,13 +265,21 @@ public class Player : IEntity
             }
         }
 
-        text.text = isGrounded.ToString();
-
+        text.text =  " col: " + currentCol.Count + " ";
+        if (!isHoldingJump) { animator.SetBool("isHoldingJump", false); }
+        else { animator.SetBool("isHoldingJump", true); }
     }
 
     private void FixedUpdate()
     {
-        //if player touches a jumppad (may double for bouncing off enemy heads in the future)
+        if(rb.velocity.y < .1 && !isGrounded)
+        {
+            //OnFall?.Invoke();
+            //falling = true;
+            //animator.SetBool("grounded", false);
+            Debug.Log("velo < .1");
+            animator.SetTrigger("falling");
+        }
         if (jumpPad) //onTriggerEnter(tag=="Jumppad")
         {
             gm.worldSpeedChange(true, 3); //Jumppad feels like player is being thrown foward.
@@ -304,46 +289,43 @@ public class Player : IEntity
             OnJump?.Invoke();
             //OnJumppad?.Invoke();
         }
-
-
-        if (!isGrounded)
+        if (!isGrounded) //IF NOT GROUNDED
         {
             currentCol.Clear();
             gm.airTime += Time.fixedDeltaTime;
             if (coyoteTime)
             {
-                
                 coyoteTimer += Time.fixedDeltaTime;
-
                 if(coyoteTimer >= maxCoyoteTime)
                 {
                     coyoteTime = false;
                     coyoteTimer = 0;
                     jumpTemp--; //had chance to jump, decrease number of jumps accordingly
-                    //Debug.Log("shit outta luck"); 
                 }
             }
-
-
-            if (isHoldingJump)
+            if (isHoldingJump) //VARIABLE JUMP continue to add force
             {
                 rb.AddForce(new Vector3(0, jumpVelocity*3f + grav, 0));
                 holdJumpTimer += Time.fixedDeltaTime;
-
                 if (holdJumpTimer >= maxHoldJumptime)
                 {
                     isHoldingJump = false;
                     holdJumpTimer = 0;
                 }
             }
-        }
+        } 
+        
+        
+
         //GRAVITY
         rb.velocity += Vector3.up * Physics.gravity.y * (grav) * Time.deltaTime;
 
         //ADDITIONAL GRAVITY
         if(rb.velocity.y < 0)
         {
-            rb.velocity += Vector3.up * Physics.gravity.y * (fallMulti - 1) * Time.deltaTime; }
+            rb.velocity += Vector3.up * Physics.gravity.y * (fallMulti - 1) * Time.deltaTime;
+            OnFall?.Invoke();
+        }
 
         //Cap Fall Speed  (USE CLAMP?)
         if(rb.velocity.y < maxFallSpeed)
@@ -356,43 +338,47 @@ public class Player : IEntity
     private void OnCollisionEnter(Collision collision)
     {
         //*/for testing
-        
+
         //foreach(GameObject gObj in currentCol) { print(gObj.name); }
         //print(currentCol.Count + " enter");
         //*/
-
-        if (collision.gameObject.CompareTag("Platform"))
+        Debug.Log(collision.gameObject.name + " " + collision.gameObject.layer.ToString());
+        if (collision.gameObject.CompareTag("Platform") || collision.gameObject.layer == 11)
         {
-            currentCol.Add(collision.gameObject);
+            currentCol.Add(collision.gameObject); 
+            animator.SetBool("grounded", true);
+            if (currentCol.Count < 2) {
+                GameManager.Instance.fbm.PlayFeedback("LandingFeedback", landingPart, rootScale, root); 
+                //animator.SetTrigger("land");
+                animator.Play("p_land_001");
+            }
+           
+            //falling = false; 
+            isGrounded = true;
+            jumpTemp = jumps;
+            gm.airTime = 0;
+            
             //Check if the platform player is colliding with is beneath them
             if (collision.contacts[0].point.y < transform.position.y)
             {
-                isGrounded = true;
-                animator.SetBool("grounded", true);
-                if (currentCol.Count < 2) { GameManager.Instance.fbm.PlayFeedback("LandingFeedback", landingPart, rootScale, root); animator.SetTrigger("land"); }
-                falling = false;
-                jumpTemp = jumps;
-                gm.airTime = 0;
-
             }
-            else if(collision.contacts[0].point.y > transform.position.y)
+            else if (collision.contacts[0].point.y > transform.position.y)
             {
                 //Debug.Log("haha");
                 //go through platform
             }
-            
+
         }
     }
 
     private void OnCollisionStay(Collision collision)
     {
-        if (!isGrounded) //if player is not grounded for whatever reason while on the ground
+        /*if ((collision.gameObject.CompareTag("Platform") || collision.gameObject.layer == 11)) //if player is not grounded for whatever reason while on the ground
         {
-            if(rb.velocity.y == 0) { 
-                isGrounded = true;
-                falling = false;
-            }
-        }
+            Debug.Log("this is happening");
+            isGrounded = true;
+            
+        }//*/
     }
 
     private void OnCollisionExit(Collision collision)
@@ -402,14 +388,17 @@ public class Player : IEntity
         //foreach(GameObject gObj in currentCol) { print(gObj.name); }
         //print(currentCol.Count + " exit");
         //*/
-
+        Debug.Log(currentCol.Count);
         // if you left the platform without jumping, shit out of luck (add Coyote time here?)
-        if (isGrounded)
+        if (isGrounded && (currentCol.Count < 1))
         {
             isGrounded = false;
-            //animator.SetBool("grounded", false);
+            animator.SetBool("grounded", false);
             coyoteTime = true;
-            
+
+            //OnFall?.Invoke();
+            //falling = true;
+            //animator.SetBool("grounded", false);
         }
     }
 
@@ -424,7 +413,7 @@ public class Player : IEntity
             jumpPad = true;
             animator.SetTrigger("jumpPad");
             animator.SetBool("grounded", false);
-            falling = false;
+            //falling = false;
         }
     }
 
