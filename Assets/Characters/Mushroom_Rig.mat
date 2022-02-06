@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bat_Rig
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Name: Mushroom_Rig
+  m_Shader: {fileID: 4800000, guid: c6531fd48e589fd42bc3f42d6d9501be, type: 3}
   m_ShaderKeywords: _NORMALMAP _SHADOWMIXMODE_MULTIPLY _SHARPRIMLIGHT_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,16 +19,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_662eb38086f14f2d82ffd2cb8736ade7:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 06509c2737104164fa92a6dc09a343f6, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 9a936945bf980dc4bb0ae67a55ee5bee, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5f67657f0f0e25341bba3f5abad1c2de, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -52,7 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 06509c2737104164fa92a6dc09a343f6, type: 3}
+        m_Texture: {fileID: 2800000, guid: e27c0a8007418cb47bb6f3fc2dc761b8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -79,10 +71,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SpecGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _VertexOffsetNoiseTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -91,36 +79,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_baca5be381a4477cb7390caf5d9fd12e: 0.0005
-    - _AlphaClip: 0
     - _Amount: 0.00009
     - _Bending: 1
-    - _Blend: 0
     - _BumpScale: 1
-    - _ClearCoatMask: 0
-    - _ClearCoatSmoothness: 0
     - _Contrast: 0
-    - _Cull: 2
     - _Cutoff: 0.5
     - _Desaturation: 0
-    - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EmissionForce: 0
-    - _EnvironmentReflections: 1
     - _Framerate: 5
     - _GlossMapScale: 1
     - _Glossiness: 0
@@ -132,20 +100,17 @@ Material:
     - _OutlineAlpha: 0
     - _OutlineWidth: 0.1
     - _Parallax: 0.02
-    - _QueueOffset: 0
-    - _RampOffset: 0.44
-    - _ReceiveShadows: 1
+    - _RampOffset: 0.685
     - _RimAmount: 0.7
     - _RimPower: 0.6547081
     - _SecondaryTextureSize: 1
     - _SecondaryTextureSpeedFactor: 0
     - _SecondaryTextureStrength: 0
-    - _ShadowBlur: 1
+    - _ShadowBlur: 0.941
     - _ShadowMixMode: 0
-    - _ShadowSize: 0.5
-    - _ShadowStrength: 1
+    - _ShadowSize: 0.483
+    - _ShadowStrength: 0
     - _SharpRimLight: 1
-    - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularFalloff: 1
     - _SpecularForceUnderShadow: 0
@@ -153,9 +118,8 @@ Material:
     - _SpecularPower: 1
     - _SpecularSize: 0.4
     - _SrcBlend: 1
-    - _StepAmount: 3
+    - _StepAmount: 16
     - _StepWidth: 0.05
-    - _Surface: 0
     - _UVSec: 0
     - _UseRampTexture: 0
     - _UseRimLight: 0
@@ -167,35 +131,18 @@ Material:
     - _VertexOffsetX: 0.5
     - _VertexOffsetY: 0.5
     - _VertexOffsetZ: 0.5
-    - _WorkflowMode: 1
     - _ZWrite: 1
     - __dirty: 1
     - _zFix: 0
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _LightColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0.5451996, g: 1, b: 0, a: 1}
-    - _RampDark: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 0}
+    - _RampDark: {r: 0.5566038, g: 0.4279548, b: 0.4279548, a: 0}
     - _RampLight: {r: 1, g: 1, b: 1, a: 0}
     - _RimColor: {r: 0, g: 0.7342432, b: 1, a: 1}
     - _ShadowColor: {r: 1, g: 0, b: 0.115766, a: 1}
-    - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _SpecularColor: {r: 2, g: 2, b: 2, a: 1}
     - _Tint: {r: 1, g: 1, b: 1, a: 1}
-    - _VertexOffset: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &928727428911779100
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 4
