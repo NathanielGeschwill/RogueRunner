@@ -40,19 +40,31 @@ public class MushBoi : IEntity
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(rb.velocity.y < -24) { rb.velocity = new Vector3(rb.velocity.x, -24, rb.velocity.z); }
+        else if (falling) { rb.velocity += Vector3.up * Physics.gravity.y * (7) * Time.deltaTime; }
+
+
         if (rb.velocity.y <= -.5 && !falling)
         {
             animator.SetBool("Falling", true);
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
             falling = true;
         }
-        else if (rb.velocity.y > -.1 && falling)
-        {
-            animator.SetBool("Falling", false);
-            rb.velocity = rb.velocity = Vector3.left * speed;
-            falling = true;
-        }
+       
         //transform.localPosition += Vector3.right * -1 * speed * Time.deltaTime;
         //transform.localPosition += Vector3.up * -1 * 5 * Time.deltaTime;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Collidiing " + collision.gameObject.name);
+        if(collision.gameObject.layer == 11 || collision.gameObject.CompareTag("Platform"))
+        {
+            animator.SetBool("Falling", false);
+            rb.velocity = rb.velocity = Vector3.left * speed;
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            falling = false;
+        }
+    }
+
 }

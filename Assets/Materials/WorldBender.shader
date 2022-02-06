@@ -8,6 +8,7 @@ Shader "Custom/WorldBender"
         _Color("Color", Color) = (1,1,1)
         _VertexOffset("Vertex Offset", Float) = (0,0,0)
         _zFix("Z Fix", float) = 0.0
+        _zNeg("Z Negative", float) = 0.0
         _Amount("Amount", float) = .00009
 
     }
@@ -43,6 +44,7 @@ Shader "Custom/WorldBender"
             uniform float4 camera_location;
             uniform float4 _ver;
             uniform float1 _zFix;
+            uniform float1 _zNeg;
             
             
             sampler2D _MainTex;
@@ -60,6 +62,10 @@ Shader "Custom/WorldBender"
             if(_zFix==1)
             {
                 IN.vertex = float4(IN.vertex.x - _ver.x, IN.vertex.y, IN.vertex.z, 1);
+            }
+            else if(_zNeg == 1) 
+            {
+                IN.vertex = float4(IN.vertex.x , IN.vertex.y, IN.vertex.z + _ver.z, 1);
             }
             else
             {

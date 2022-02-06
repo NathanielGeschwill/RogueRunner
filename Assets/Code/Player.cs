@@ -348,7 +348,8 @@ public class Player : IEntity
         //Cap Fall Speed  (USE CLAMP?)
         if(rb.velocity.y < maxFallSpeed)
         {
-            rb.velocity = new Vector3(rb.velocity.x, maxFallSpeed, rb.velocity.z); }//*/
+            rb.velocity = new Vector3(rb.velocity.x, maxFallSpeed, rb.velocity.z); 
+        }//*/
 
     }
 
@@ -412,22 +413,18 @@ public class Player : IEntity
         }
     }
 
-#pragma warning disable CS0114 // Member hides inherited member; missing override keyword
+
     public void OnTriggerEnter(Collider other)
-#pragma warning restore CS0114 // Member hides inherited member; missing override keyword
     {
-        //base.OnTriggerEnter();
         if(other.gameObject.CompareTag("Jumppad"))
         {
-            Debug.Log("<color=red> jumppad </color>", this.gameObject);
+            other.gameObject.GetComponent<BoxCollider>().enabled = false;
+            //Debug.Log("<color=red> jumppad </color>", this.gameObject);
             GameManager.Instance.fbm.PlayFeedback("JumpFeedback", jumpPart, rootScale, root);
             jumpPad = true;
             animator.SetTrigger("jumpPad");
             animator.SetBool("grounded", false);
-            //other.gameObject.GetComponent<Animator>().Play("Jumppad");
             falling = false;
-            OnJump?.Invoke();
-            
         }
     }
 
