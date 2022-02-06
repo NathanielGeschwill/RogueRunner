@@ -59,6 +59,8 @@ public class Player : IEntity
 
     public delegate void Jump();
     public static event Jump OnJump;
+    public delegate void Jumppad();
+    public static event Jumppad OnJumppad;
     //public static UnityEvent OnJump;
 
 
@@ -299,6 +301,8 @@ public class Player : IEntity
             rb.velocity = new Vector3(0, jumpVelocity*3f, 0); //Note this is NOT using isHoldingJump, so there is no decay on this jump. This may need special animation
             jumpPad = false;
             isGrounded = false;
+            OnJump?.Invoke();
+            OnJumppad?.Invoke();
         }
 
 
@@ -420,7 +424,7 @@ public class Player : IEntity
             jumpPad = true;
             animator.SetTrigger("jumpPad");
             animator.SetBool("grounded", false);
-            other.gameObject.GetComponent<Animator>().Play("Jumppad");
+            //other.gameObject.GetComponent<Animator>().Play("Jumppad");
             falling = false;
             OnJump?.Invoke();
             

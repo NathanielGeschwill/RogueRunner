@@ -38,11 +38,17 @@ public class IEntity : MonoBehaviour
 
     protected virtual void ResolveDeath(object sender, int senderID)
     {
+        print("RESOLVING");
         if(senderID == gameObject.GetInstanceID())
         {
-            //print("DESTORYING " + senderID);
+            print("DESTORYING " + senderID);
             Destroy(gameObject);
         }
+    }
+
+    protected void KillMe()
+    {
+        Destroy(gameObject);
     }
 
     protected virtual void LoseHealth(object hitObject, int amount)

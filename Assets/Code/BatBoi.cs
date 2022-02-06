@@ -14,6 +14,16 @@ public class BatBoi : IEntity
     private bool alreadyAttacked = false;
     private float distToPlayerX = 3.0f;
 
+    private void OnEnable()
+    {
+        Player.OnJumppad += KillMe;
+    }
+
+    private void OnDisable()
+    {
+        Player.OnJumppad -= KillMe;
+    }
+
     void Start()
     {
         player = GameManager.Instance.player;
