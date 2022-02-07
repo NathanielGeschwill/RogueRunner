@@ -97,8 +97,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_baca5be381a4477cb7390caf5d9fd12e: 0.005
-    - _Amount: 0.00009
-    - _Bending: 0
+    - _Amount: 0.000007
+    - _Bending: 1
     - _BumpScale: 1
     - _Contrast: 0
     - _Cutoff: 0.5
