@@ -275,9 +275,6 @@ public class Player : IEntity
         if(rb.velocity.y < .1 && !isGrounded)
         {
             //OnFall?.Invoke();
-            //falling = true;
-            //animator.SetBool("grounded", false);
-            Debug.Log("velo < .1");
             animator.SetTrigger("falling");
         }
         if (jumpPad) //onTriggerEnter(tag=="Jumppad")
@@ -337,12 +334,7 @@ public class Player : IEntity
 
     private void OnCollisionEnter(Collision collision)
     {
-        //*/for testing
-
-        //foreach(GameObject gObj in currentCol) { print(gObj.name); }
-        //print(currentCol.Count + " enter");
-        //*/
-        Debug.Log(collision.gameObject.name + " " + collision.gameObject.layer.ToString());
+        //Debug.Log(collision.gameObject.name + " " + collision.gameObject.layer.ToString());
         if (collision.gameObject.CompareTag("Platform") || collision.gameObject.layer == 11)
         {
             currentCol.Add(collision.gameObject); 
@@ -357,7 +349,8 @@ public class Player : IEntity
             isGrounded = true;
             jumpTemp = jumps;
             gm.airTime = 0;
-            
+
+            #region headbonk
             //Check if the platform player is colliding with is beneath them
             if (collision.contacts[0].point.y < transform.position.y)
             {
@@ -367,29 +360,19 @@ public class Player : IEntity
                 //Debug.Log("haha");
                 //go through platform
             }
-
+            #endregion
         }
     }
 
     private void OnCollisionStay(Collision collision)
     {
-        /*if ((collision.gameObject.CompareTag("Platform") || collision.gameObject.layer == 11)) //if player is not grounded for whatever reason while on the ground
-        {
-            Debug.Log("this is happening");
-            isGrounded = true;
-            
-        }//*/
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        //*/Testing
         currentCol.Remove(collision.gameObject);
-        //foreach(GameObject gObj in currentCol) { print(gObj.name); }
-        //print(currentCol.Count + " exit");
-        //*/
-        Debug.Log(currentCol.Count);
-        // if you left the platform without jumping, shit out of luck (add Coyote time here?)
+
+        // if you left the platform without jumping
         if (isGrounded && (currentCol.Count < 1))
         {
             isGrounded = false;
@@ -413,7 +396,6 @@ public class Player : IEntity
             jumpPad = true;
             animator.SetTrigger("jumpPad");
             animator.SetBool("grounded", false);
-            //falling = false;
         }
     }
 
