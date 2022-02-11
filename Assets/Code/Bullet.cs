@@ -24,4 +24,15 @@ public class Bullet : IEntity
         dir = dir.normalized;
         rb.velocity = dir * speed;
     }
+
+    override protected void OnTriggerEnter(Collider other)
+    {
+        print("BULLETHIT");
+        base.OnTriggerEnter(other);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        print("BULLETCOLLIDE");
+    }
 }

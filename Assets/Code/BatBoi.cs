@@ -15,14 +15,16 @@ public class BatBoi : IEntity
     private float distToPlayerX = 3.0f;
     private Vector3 vectorFromPlayer;
 
-    private void OnEnable()
+    override protected void OnEnable()
     {
         Player.OnJumppad += KillMe;
+        base.OnEnable();
     }
 
-    private void OnDisable()
+    override protected void OnDisable()
     {
         Player.OnJumppad -= KillMe;
+        base.OnDisable();
     }
 
     void Start()

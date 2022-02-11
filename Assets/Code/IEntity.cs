@@ -24,13 +24,13 @@ public class IEntity : MonoBehaviour
         //ID = gameObject.name + Time.time;
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         IEntity.OnHit += LoseHealth;
         IEntity.OnDeath += ResolveDeath;
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         IEntity.OnHit -= LoseHealth;
         IEntity.OnDeath -= ResolveDeath;
@@ -58,7 +58,7 @@ public class IEntity : MonoBehaviour
         //print("COMPAING " + ((GameObject)hitObject).GetInstanceID() + " AND " + gameObject.GetInstanceID());
         if (((GameObject)hitObject).GetInstanceID() == gameObject.GetInstanceID())
         {
-            //print("FOUND MATCH");
+            print("FOUND MATCH" + gameObject.name);
             health -= amount;
 
             if (health <= 0)
@@ -86,15 +86,24 @@ public class IEntity : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        //print("TRIGGERED");
+        print("TRIGGERED");
         foreach(string s in tagsICanHit)
         {
             if (other.gameObject.CompareTag(s) && damage > 0)
             {
-                //print("GOING INVOKE");
+                print("GOING INVOKE " + other.gameObject);
                 OnHit?.Invoke(other.gameObject, damage);
                 break;
             }
+            else
+            {
+                print("didn't find");
+            }
         }
+    }
+
+    protected void FireOnHit(GameObject gameObj)
+    {
+        OnHit?.Invoke(gameObj, damage);
     }
 }

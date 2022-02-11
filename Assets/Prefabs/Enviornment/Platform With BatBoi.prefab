@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gm: {fileID: 0}
+  paralax: 1
 --- !u!1 &6109251939335348118
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,6 +303,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4311890570194702220, guid: b2e8ce6ece613254497f42b4cb8128b6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928031220403672112, guid: b2e8ce6ece613254497f42b4cb8128b6, type: 3}
+      propertyPath: m_Size.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928031220403672112, guid: b2e8ce6ece613254497f42b4cb8128b6, type: 3}
+      propertyPath: m_Size.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928031220403672112, guid: b2e8ce6ece613254497f42b4cb8128b6, type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928031220403672112, guid: b2e8ce6ece613254497f42b4cb8128b6, type: 3}
+      propertyPath: m_Center.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7088684904534395155, guid: b2e8ce6ece613254497f42b4cb8128b6, type: 3}
