@@ -5,7 +5,7 @@ using UnityEngine;
 public class Attack : MonoBehaviour
 {
 
-    private bool pcFriendly = true;
+    //private bool pcFriendly = true;
 
     // Start is called before the first frame update
     void Start()

@@ -112,6 +112,18 @@ public class GameManager : MonoBehaviour
         worldSpeed = 0;
     }
 
+    public bool playerTooFast(){
+        if(worldSpeed > targetWorldSpeed * 1.45f)
+        { 
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
+    }
+
     public void Unpause()
     {
         Time.timeScale = 1f;

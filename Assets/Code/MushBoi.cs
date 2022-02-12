@@ -85,7 +85,7 @@ public class MushBoi : IEntity
             }
             else
             {
-                print("didn't find");
+                //print("didn't find");
             }
         }
     }

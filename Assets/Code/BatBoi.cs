@@ -12,8 +12,11 @@ public class BatBoi : IEntity
     private const float DASH_TIMER = 2.0f;
     private bool isAttacking = false;
     private bool alreadyAttacked = false;
-    private float distToPlayerX = 3.0f;
+    //private float distToPlayerX = 3.0f;
     private Vector3 vectorFromPlayer;
+
+    private bool lockOn = false;
+    private float lockOnTimer;
 
     override protected void OnEnable()
     {
@@ -45,11 +48,14 @@ public class BatBoi : IEntity
 
     private void Update()
     {
+        if(lockOn){ lockOnTimer += Time.fixedDeltaTime;}
+
         if (isAttacking && dashTimer > 0)
         {
             dashTimer -= Time.deltaTime;
             //rb.velocity = new Vector3(0, player.GetComponent<Player>().rb.velocity.y, 0);
             rb.MovePosition(Vector3.Lerp(transform.position, player.transform.position+vectorFromPlayer, .5f/(player.transform.position - transform.position).magnitude * 2));
+            //rb.MovePosition(Vector3.Lerp(transform.position, player.transform.position+vectorFromPlayer, (lockOnTimer * .075f) / (player.transform.position - transform.position).magnitude * 2));
         }
 
         if (isAttacking && dashTimer <= 0)
@@ -68,6 +74,7 @@ public class BatBoi : IEntity
     {
         if (other.gameObject.tag == "Player" && !isAttacking && !alreadyAttacked)
         {
+            lockOn = true;
             transform.parent = other.gameObject.transform;
             Vector3 dir = player.transform.position - transform.position;
             vectorFromPlayer = transform.position - player.transform.position;
@@ -96,9 +103,11 @@ public class BatBoi : IEntity
     {
         if (other.gameObject.tag == "Player" && isAttacking)
         {
+            lockOn = false;
+            lockOnTimer = 0.0f; 
             transform.parent = null;
             isAttacking = false;
-            rb.velocity = new Vector3(-GameManager.Instance.worldSpeed, 0, 0);
+            rb.velocity = new Vector3(-GameManager.Instance.worldSpeed * .5f, 0, 0);
         }
     }
 }

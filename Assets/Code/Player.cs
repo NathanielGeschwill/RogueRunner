@@ -30,7 +30,7 @@ public class Player : IEntity
     
     public bool isGrounded = false; //on the ground?
     private bool isHoldingJump = false; //holding jump button?
-    private bool isHoldingJumpforAnim = false;
+    //private bool isHoldingJumpforAnim = false;
     public float maxHoldJumptime = .325f; //as long as you're allow to hold jump button
     private float holdJumpTimer = 0f; //countdown for jump hold
     private float maxFallSpeed = -44; //for vert velo clamp
@@ -55,7 +55,7 @@ public class Player : IEntity
 
     public delegate void Fall();
     public static event Fall OnFall;
-    bool falling = true;
+    
 
     public delegate void Jump();
     public static event Jump OnJump;
@@ -145,7 +145,7 @@ public class Player : IEntity
 
     protected override void LoseHealth(object hitObject, int amount)
     {
-        if (((GameObject)hitObject).GetInstanceID() == gameObject.GetInstanceID())
+        if (((GameObject)hitObject).GetInstanceID() == gameObject.GetInstanceID() && !GameManager.Instance.playerTooFast())
         {
             OnDecreaseUI?.Invoke("Heart");
             base.LoseHealth(hitObject, amount);
@@ -205,7 +205,7 @@ public class Player : IEntity
                 isGrounded = false;
                 rb.velocity = new Vector3(0, jumpVelocity, 0);
                 isHoldingJump = true;
-                isHoldingJumpforAnim = true;
+                //isHoldingJumpforAnim = true;
 
                 //number of jumps left is decreased, and we're not entering Coyote time
                 jumpTemp -= 1;
@@ -220,7 +220,7 @@ public class Player : IEntity
         //if Player lets go of the Jump key
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            isHoldingJumpforAnim = false;
+            //isHoldingJumpforAnim = false;
             isHoldingJump = false;
             holdJumpTimer = 0;
         }
@@ -265,7 +265,9 @@ public class Player : IEntity
             }
         }
 
-        text.text =  " col: " + currentCol.Count + " ";
+        //text.text =  " Dist: " + GameManager.Instance.distanceTraveled.ToString("F1") + " wspd: " + GameManager.Instance.worldSpeed.ToString("F1") + " toofast: " + GameManager.Instance.playerTooFast();
+        text.text = " wspd: " + GameManager.Instance.worldSpeed.ToString("F1") + " Target: "+ GameManager.Instance.targetWorldSpeed.ToString("F1")  + " toofast: " + GameManager.Instance.playerTooFast();
+     
         if (!isHoldingJump) { animator.SetBool("isHoldingJump", false); }
         else { animator.SetBool("isHoldingJump", true); }
     }
