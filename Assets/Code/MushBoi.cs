@@ -42,6 +42,7 @@ public class MushBoi : IEntity
     {
         if(rb.velocity.y < -24) { rb.velocity = new Vector3(rb.velocity.x, -24, rb.velocity.z); }
         else if (falling) { rb.velocity += Vector3.up * Physics.gravity.y * (7) * Time.deltaTime; }
+        else { rb.velocity = Vector3.left * speed; }
 
 
         if (rb.velocity.y <= -.5 && !falling)
@@ -53,8 +54,15 @@ public class MushBoi : IEntity
         //transform.localPosition += Vector3.up * -1 * 5 * Time.deltaTime;
     }
 
+    protected override void OnTriggerEnter(Collider other)
+    {
+        print("wow");
+        base.OnTriggerEnter(other);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
+        print("wowc");
         Debug.Log("Collidiing " + collision.gameObject.name);
         if(collision.gameObject.layer == 11 || collision.gameObject.CompareTag("Platform"))
         {
@@ -62,6 +70,23 @@ public class MushBoi : IEntity
             rb.velocity = Vector3.left * speed;
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             falling = false;
+        }
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            LoseHealth(gameObject, 1);
+        }
+        foreach (string s in tagsICanHit)
+        {
+            if (collision.gameObject.CompareTag(s) && damage > 0)
+            {
+                print("GOING INVOKE " + collision.gameObject);
+                FireOnHit(collision.gameObject);
+                break;
+            }
+            else
+            {
+                print("didn't find");
+            }
         }
     }
 
