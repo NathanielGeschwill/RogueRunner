@@ -54,8 +54,14 @@ public class BatBoi : IEntity
         {
             dashTimer -= Time.deltaTime;
             //rb.velocity = new Vector3(0, player.GetComponent<Player>().rb.velocity.y, 0);
-            rb.MovePosition(Vector3.Lerp(transform.position, player.transform.position+vectorFromPlayer, .5f/(player.transform.position - transform.position).magnitude * 2));
-            //rb.MovePosition(Vector3.Lerp(transform.position, player.transform.position+vectorFromPlayer, (lockOnTimer * .075f) / (player.transform.position - transform.position).magnitude * 2));
+
+            //Further bat is from you, the faster the locked on Animation plays
+            if(Vector3.Distance(transform.position, player.transform.position+vectorFromPlayer) > 2.1f)
+            {animator.SetFloat("DashDist", Vector3.Distance(transform.position, player.transform.position+vectorFromPlayer));}
+            else{ animator.SetFloat("DashDist", 1);}
+            
+            rb.MovePosition(Vector3.Lerp(transform.position, player.transform.position+vectorFromPlayer, (.25f)/(player.transform.position - transform.position).magnitude * 2));
+            //rb.MovePosition(Vector3.Lerp(transform.position, player.transform.position+vectorFromPlayer, ((lockOnTimer + .01f)* .15f) / (player.transform.position - transform.position).magnitude * 2));
         }
 
         if (isAttacking && dashTimer <= 0)
@@ -107,7 +113,7 @@ public class BatBoi : IEntity
             lockOnTimer = 0.0f; 
             transform.parent = null;
             isAttacking = false;
-            rb.velocity = new Vector3(-GameManager.Instance.worldSpeed * .5f, 0, 0);
+            rb.velocity = new Vector3(-GameManager.Instance.worldSpeed * .8f, 0, 0);
         }
     }
 }
