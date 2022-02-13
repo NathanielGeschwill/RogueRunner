@@ -8,8 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: m_Mountain
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 4800000, guid: 2eb949f991423d84da9d342b30d50826, type: 3}
+  m_ShaderKeywords: _SHADOWMIXMODE_MULTIPLY _SHARPRIMLIGHT_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -39,12 +39,20 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MainTex:
+    - _EmissionTexture:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: fa02a7482b6c60143a650602a7623085, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 2800000, guid: 0be5afc968bf35d4586b6b56f80302cb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -55,24 +63,87 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _RampTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SecondaryTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _VertexOffsetNoiseTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _Amount: 0.0000032
+    - _Bending: 1
     - _BumpScale: 1
+    - _Contrast: 0
     - _Cutoff: 0.5
+    - _Desaturation: 0
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _EmissionForce: 0
+    - _Framerate: 5
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _HideRimUnderShadow: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _OutlineAlpha: 0
+    - _OutlineWidth: 0.1
     - _Parallax: 0.02
+    - _RampOffset: 0.5
+    - _RimAmount: 0.7
+    - _RimPower: 0.6547081
+    - _SecondaryTextureSize: 1
+    - _SecondaryTextureSpeedFactor: 0
+    - _SecondaryTextureStrength: 0
+    - _ShadowBlur: 1
+    - _ShadowMixMode: 0
+    - _ShadowSize: 0.5
+    - _ShadowStrength: 1
+    - _SharpRimLight: 1
     - _SmoothnessTextureChannel: 0
+    - _SpecularFalloff: 1
+    - _SpecularForceUnderShadow: 0
     - _SpecularHighlights: 1
+    - _SpecularPower: 1
+    - _SpecularSize: 0.4
     - _SrcBlend: 1
+    - _StepAmount: 2
+    - _StepWidth: 0.25
     - _UVSec: 0
+    - _UseRampTexture: 0
+    - _UseRimLight: 0
+    - _UseSpecular: 0
+    - _UseVertexColors: 0
+    - _UseVertexOffset: 0
+    - _VertexOffsetFrequency: 2
+    - _VertexOffsetMagnitude: 0.05
+    - _VertexOffsetX: 0.5
+    - _VertexOffsetY: 0.5
+    - _VertexOffsetZ: 0.5
     - _ZWrite: 1
+    - __dirty: 1
+    - _zFix: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _LightColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OutlineColor: {r: 0.5451996, g: 1, b: 0, a: 1}
+    - _RampDark: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 0}
+    - _RampLight: {r: 1, g: 1, b: 1, a: 0}
+    - _RimColor: {r: 0, g: 0.7342432, b: 1, a: 1}
+    - _ShadowColor: {r: 1, g: 0, b: 0.115766, a: 1}
+    - _SpecularColor: {r: 2, g: 2, b: 2, a: 1}
+    - _Tint: {r: 1, g: 1, b: 1, a: 1}
+    - _VertexOffset: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

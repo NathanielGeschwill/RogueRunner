@@ -23,7 +23,7 @@ TagManager:
   - MushLayer
   - PlayerLayer
   - EnemyPlatformLayer
-  - 
+  - Bullet
   - 
   - 
   - 

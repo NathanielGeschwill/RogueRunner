@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8368871152780040740}
   - component: {fileID: 8439250584218033628}
   - component: {fileID: 9170411311503762717}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -193,6 +193,10 @@ PrefabInstance:
     - target: {fileID: 7773474587921257777, guid: 18c26a1a3f1584f4291f53cfb3124e1b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7812149475489447589, guid: 18c26a1a3f1584f4291f53cfb3124e1b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18c26a1a3f1584f4291f53cfb3124e1b, type: 3}

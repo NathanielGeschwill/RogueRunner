@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gm: {fileID: 0}
   paralax: 1
+  tp: 0
 --- !u!1 &5148294805863768982
 GameObject:
   m_ObjectHideFlags: 0

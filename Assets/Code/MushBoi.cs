@@ -47,9 +47,9 @@ public class MushBoi : IEntity
 
         if (rb.velocity.y <= -.5 && !falling)
         {
-           
+
         }
-       
+
         //transform.localPosition += Vector3.right * -1 * speed * Time.deltaTime;
         //transform.localPosition += Vector3.up * -1 * 5 * Time.deltaTime;
     }
@@ -57,11 +57,22 @@ public class MushBoi : IEntity
     protected override void OnTriggerEnter(Collider other)
     {
         print("wow");
-        base.OnTriggerEnter(other);
+        //base.OnTriggerEnter(other);
+        print(other.gameObject.name.ToString());
+        if (other.gameObject.CompareTag("Bullet"))
+        {
+            print("This is a bullet");
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            print("bullet type shit");
+
+            LoseHealth(gameObject, 1);
+        }
         //print("wowc");
         //Debug.Log("Collidiing " + collision.gameObject.name);
         if(collision.gameObject.layer == 11 || collision.gameObject.CompareTag("Platform"))
@@ -71,10 +82,7 @@ public class MushBoi : IEntity
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
             falling = false;
         }
-        if (collision.gameObject.CompareTag("Bullet"))
-        {
-            LoseHealth(gameObject, 1);
-        }
+        
         foreach (string s in tagsICanHit)
         {
             if (collision.gameObject.CompareTag(s) && damage > 0)

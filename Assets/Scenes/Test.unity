@@ -316,7 +316,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1110590623766333980, guid: 87688e3f39d69ef468f3a6157fe47069, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.278
+      value: 2.93
       objectReference: {fileID: 0}
     - target: {fileID: 1110590623766333980, guid: 87688e3f39d69ef468f3a6157fe47069, type: 3}
       propertyPath: m_LocalPosition.z
@@ -354,6 +354,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bullet
       objectReference: {fileID: 0}
+    - target: {fileID: 3409548809730240993, guid: 87688e3f39d69ef468f3a6157fe47069, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8368871152780040740, guid: 87688e3f39d69ef468f3a6157fe47069, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8368871152780040740, guid: 87688e3f39d69ef468f3a6157fe47069, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9170411311503762717, guid: 87688e3f39d69ef468f3a6157fe47069, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87688e3f39d69ef468f3a6157fe47069, type: 3}
 --- !u!1001 &1490198185
@@ -366,6 +382,10 @@ PrefabInstance:
     - target: {fileID: 3467020093605018701, guid: 4e6b68db68a3d9d4cab493aef0390c7a, type: 3}
       propertyPath: m_Name
       value: Platform With MushBoi
+      objectReference: {fileID: 0}
+    - target: {fileID: 3794200602623963490, guid: 4e6b68db68a3d9d4cab493aef0390c7a, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5377993726090653856, guid: 4e6b68db68a3d9d4cab493aef0390c7a, type: 3}
       propertyPath: m_RootOrder
@@ -413,3 +433,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e6b68db68a3d9d4cab493aef0390c7a, type: 3}
+--- !u!1 &1792235625 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3409548809730240993, guid: 87688e3f39d69ef468f3a6157fe47069, type: 3}
+  m_PrefabInstance: {fileID: 916418813}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1792235632
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792235625}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
