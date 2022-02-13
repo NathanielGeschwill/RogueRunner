@@ -49,7 +49,7 @@ public class CameraScript : MonoBehaviour
 
 
         //Listener for Screenshake Event
-        if (gm.shakeTimer > 0)
+        if (gm.shakeTimer > 0 && !gm.playerDead)
         {
             intensity = gm.intensity;
             cam.gameObject.transform.localPosition += new Vector3(0, Random.RandomRange(-intensity, intensity), Random.RandomRange(-intensity, intensity));

@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public float targetWorldSpeed = 15; /*/ world speed that is always returned to*/
     public bool playerSpeeding = false;
     public bool stopped = false;
+    public bool playerDead = false;
 
     public float speedDiff; //used in calculations for camera offset
     public float airTime; //used in camera offset + achievements?highscore?

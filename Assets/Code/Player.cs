@@ -167,7 +167,8 @@ public class Player : IEntity
 
     protected override void ResolveDeath(object sender, int senderID)
     {
-
+        //print("this happens");
+        gm.playerDead = true;
     }
 
     // Update is called once per frame

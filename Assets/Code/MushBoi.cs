@@ -62,8 +62,8 @@ public class MushBoi : IEntity
 
     private void OnCollisionEnter(Collision collision)
     {
-        print("wowc");
-        Debug.Log("Collidiing " + collision.gameObject.name);
+        //print("wowc");
+        //Debug.Log("Collidiing " + collision.gameObject.name);
         if(collision.gameObject.layer == 11 || collision.gameObject.CompareTag("Platform"))
         {
             animator.SetBool("Falling", false);
