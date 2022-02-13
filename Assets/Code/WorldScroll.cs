@@ -9,6 +9,8 @@ public class WorldScroll : MonoBehaviour {
     private float worldSpeed;
     [SerializeField]
     private float paralax = 1;
+
+    public bool tp = false;
         
 
     // Start is called before the first frame update
@@ -39,8 +41,16 @@ public class WorldScroll : MonoBehaviour {
 
         if(transform.position.x <= -80)
         {
-            //print("die of x");
-            gm.DestorySelf(this.gameObject); //queue up
+            if (tp)
+            {
+                transform.position = new Vector3(958, transform.position.y, transform.position.z);
+            }
+            else
+            {
+                //print("die of x");
+                gm.DestorySelf(this.gameObject); //queue up
+            }
+            
         }
     }
 
