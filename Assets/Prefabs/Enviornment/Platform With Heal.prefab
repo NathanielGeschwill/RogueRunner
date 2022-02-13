@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gm: {fileID: 0}
+  paralax: 1
 --- !u!1 &5220604892781645556
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,7 +271,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3802972557337990775, guid: 12e8b52c7ae46a34caf16893921d96f4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.24
+      value: 2.8
       objectReference: {fileID: 0}
     - target: {fileID: 3802972557337990775, guid: 12e8b52c7ae46a34caf16893921d96f4, type: 3}
       propertyPath: m_LocalPosition.z

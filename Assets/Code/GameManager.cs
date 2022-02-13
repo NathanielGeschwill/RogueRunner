@@ -8,6 +8,10 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
 
     public GameObject player; //da playa (world moves around player, player only moves on y for time being)
+    public GameObject CameraRig;
+    [HideInInspector] public float shakeTimer;
+    [HideInInspector] public float intensity;
+
     public FeedbackManaganger fbm;
 
     public WorldSpawn ws;
@@ -113,8 +117,9 @@ public class GameManager : MonoBehaviour
     }
 
     public bool playerTooFast(){
-        if(worldSpeed > targetWorldSpeed * 1.45f)
+        if(worldSpeed > targetWorldSpeed * 1.43f)
         { 
+            //Wind Sound
             return true;
         }
         else
@@ -122,6 +127,12 @@ public class GameManager : MonoBehaviour
             return false;
         }
         
+    }
+
+    public void gmScreenShake(float duration, float inten)
+    {
+        shakeTimer = duration;
+        intensity = inten;
     }
 
     public void Unpause()

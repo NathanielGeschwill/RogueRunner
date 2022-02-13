@@ -59,9 +59,10 @@ public class BatBoi : IEntity
             if(Vector3.Distance(transform.position, player.transform.position+vectorFromPlayer) > 2.1f)
             {animator.SetFloat("DashDist", Vector3.Distance(transform.position, player.transform.position+vectorFromPlayer));}
             else{ animator.SetFloat("DashDist", 1);}
-            
-            rb.MovePosition(Vector3.Lerp(transform.position, player.transform.position+vectorFromPlayer, (.25f)/(player.transform.position - transform.position).magnitude * 2));
-            //rb.MovePosition(Vector3.Lerp(transform.position, player.transform.position+vectorFromPlayer, ((lockOnTimer + .01f)* .15f) / (player.transform.position - transform.position).magnitude * 2));
+
+            //rb.MovePosition(Vector3.Lerp(transform.position, player.transform.position+vectorFromPlayer, (.25f)/(player.transform.position - transform.position).magnitude * 2));
+            float f = ((lockOnTimer + .01f) * .05f); Mathf.Clamp(f, 0.01f, .15f); 
+            rb.MovePosition(Vector3.Lerp(transform.position, player.transform.position+vectorFromPlayer,  f / (player.transform.position - transform.position).magnitude * 2));
         }
 
         if (isAttacking && dashTimer <= 0)
@@ -109,6 +110,7 @@ public class BatBoi : IEntity
     {
         if (other.gameObject.tag == "Player" && isAttacking)
         {
+            animator.SetFloat("DashDist", 1);
             lockOn = false;
             lockOnTimer = 0.0f; 
             transform.parent = null;

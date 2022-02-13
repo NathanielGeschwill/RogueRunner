@@ -6,13 +6,20 @@ public class CameraScript : MonoBehaviour
 {
     public GameManager gm;
     public GameObject player;
+    public GameObject cam;
     //public Camera gc;
-    
-    public Vector3 offset;
-    public Vector3 shakeOffset;
-    public Vector3 speedandairOffset;
+
+    private Vector3 offset;
+    private Vector3 camOffset;
+    private Vector3 shakeOffset;
+    private float shakeTimer;
+    private float intensity;
+
+    private Vector3 speedandairOffset;
 
     public float smoothSpeed = .125f;
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -21,8 +28,11 @@ public class CameraScript : MonoBehaviour
         //gc = FindObjectOfType<Camera>();
         player = GameObject.FindGameObjectsWithTag("Player")[0];
         offset = transform.position - player.transform.position;
+        camOffset = new Vector3(0, 0, 0);
         shakeOffset = new Vector3(0, 0, 0);
         speedandairOffset = new Vector3(0, 0, 0);
+
+        //gm.gmScreenShake(.95f, 1);
     }
 
     // Update is called once per frame
@@ -36,7 +46,16 @@ public class CameraScript : MonoBehaviour
         //Debug.Log(gm.speedDiff + " " + gm.airTime);
 
         speedandairOffset = new Vector3(-tempSpeed, 0, -tempAir);
-        
+
+
+        //Listener for Screenshake Event
+        if (gm.shakeTimer > 0)
+        {
+            intensity = gm.intensity;
+            cam.gameObject.transform.localPosition += new Vector3(0, Random.RandomRange(-intensity, intensity), Random.RandomRange(-intensity, intensity));
+            gm.shakeTimer -= Time.deltaTime;
+        }
+          
     }
 
 
@@ -47,10 +66,10 @@ public class CameraScript : MonoBehaviour
         //desiredPos = new Vector3( desiredPos.x, desiredPos.y , Mathf.Clamp( desiredPos.z, player.transform.position.z + offset.z, -40 ) );
         Vector3 smoothedPos = Vector3.Lerp(transform.position, desiredPos, smoothSpeed );
 
-        
-        //Debug.Log("Desired " + desiredPos + "    smoothed: " + smoothedPos);
 
+       
         transform.position = smoothedPos;
-
+        cam.gameObject.transform.localPosition = Vector3.Lerp(cam.gameObject.transform.localPosition, camOffset, 2);
     }
+
 }

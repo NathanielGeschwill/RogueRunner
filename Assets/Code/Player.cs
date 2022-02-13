@@ -44,7 +44,6 @@ public class Player : IEntity
     private float coyoteTimer = 0; //forgiveness countdown
 
     List<GameObject> currentCol;
-
     
     private float ATK_TIME_BETWEEN = 0.225f;
     //private float ATK_TIME_RELOAD = 1.0f;
@@ -147,6 +146,7 @@ public class Player : IEntity
     {
         if (((GameObject)hitObject).GetInstanceID() == gameObject.GetInstanceID() && !GameManager.Instance.playerTooFast())
         {
+            GameManager.Instance.gmScreenShake(.2f, .4f);
             OnDecreaseUI?.Invoke("Heart");
             base.LoseHealth(hitObject, amount);
             animator.SetTrigger("hurt");
@@ -265,8 +265,8 @@ public class Player : IEntity
             }
         }
 
-        //text.text =  " Dist: " + GameManager.Instance.distanceTraveled.ToString("F1") + " wspd: " + GameManager.Instance.worldSpeed.ToString("F1") + " toofast: " + GameManager.Instance.playerTooFast();
-        text.text = " wspd: " + GameManager.Instance.worldSpeed.ToString("F1") + " Target: "+ GameManager.Instance.targetWorldSpeed.ToString("F1")  + " toofast: " + GameManager.Instance.playerTooFast();
+        text.text =  " Dist: " + GameManager.Instance.distanceTraveled.ToString("F1") + " wspd: " + GameManager.Instance.worldSpeed.ToString("F1") + " toofast: " + GameManager.Instance.playerTooFast();
+        //text.text = " wspd: " + GameManager.Instance.worldSpeed.ToString("F1") + " Target: "+ GameManager.Instance.targetWorldSpeed.ToString("F1")  + " toofast: " + GameManager.Instance.playerTooFast();
      
         if (!isHoldingJump) { animator.SetBool("isHoldingJump", false); }
         else { animator.SetBool("isHoldingJump", true); }

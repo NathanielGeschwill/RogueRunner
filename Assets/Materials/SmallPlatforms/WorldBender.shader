@@ -61,6 +61,10 @@ Shader "Custom/WorldBender"
                 {
                     IN.vertex = float4(IN.vertex.x - _ver.x, IN.vertex.y, IN.vertex.z, 1);
                 }
+                else if (_zFix == -1 && _Bending == 1)
+                {
+                    IN.vertex = float4(IN.vertex.x, IN.vertex.y, IN.vertex.z - _ver.z, 1);
+                }
                 else if (_Bending == 1)
                 {
                     IN.vertex = float4(IN.vertex.x, IN.vertex.y + _ver.y, IN.vertex.z, 1);
