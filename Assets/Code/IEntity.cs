@@ -19,6 +19,8 @@ public class IEntity : MonoBehaviour
     //protected List<string> tagsThatHitMe;
     protected List<string> tagsICanHit;
 
+    public GameManager.AudioClips deathSound = GameManager.AudioClips.None;
+
     private void Start()
     {
         //ID = gameObject.name + Time.time;
@@ -42,13 +44,14 @@ public class IEntity : MonoBehaviour
         if(senderID == gameObject.GetInstanceID())
         {
             print("DESTORYING " + senderID);
-            Destroy(gameObject);
+            KillMe();
         }
     }
 
     protected void KillMe()
     {
         Destroy(gameObject);
+        GameManager.Instance.PlayAudio(deathSound);
     }
 
     protected virtual void LoseHealth(object hitObject, int amount)

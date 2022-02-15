@@ -18,6 +18,11 @@ public class BatBoi : IEntity
     private bool lockOn = false;
     private float lockOnTimer;
 
+    private float flapSoundTimer = 0f;
+    private float FLAP_SOUND_TIMER = 1f;
+
+    private AudioSource flapSource;
+
     override protected void OnEnable()
     {
         Player.OnJumppad += KillMe;
@@ -43,7 +48,8 @@ public class BatBoi : IEntity
         animator.SetBool("isAttacking", false);//
         animator.SetBool("Dash", false);//
         //Debug.Log(animator);
-
+        deathSound = GameManager.AudioClips.BatDeath;
+        flapSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -74,6 +80,17 @@ public class BatBoi : IEntity
             //transform.LookAt(player.transform);
             animator.SetBool("Dash", true); //
             isAttacking = false;
+            GameManager.Instance.PlayAudio(GameManager.AudioClips.BatDash);
+        }
+
+        if (!isAttacking)
+        {
+            flapSoundTimer += Time.deltaTime;
+            if(flapSoundTimer >= FLAP_SOUND_TIMER)
+            {
+                flapSource.PlayOneShot(GameManager.Instance.audioClips[(int)GameManager.AudioClips.BatFlap]);
+                flapSoundTimer = 0;
+            }
         }
     }
 

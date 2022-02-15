@@ -70,6 +70,8 @@ public class Player : IEntity
     public static event DecreaseUI OnDecreaseUI;
 
     public Text text;
+    private float WALK_SOUND_TIME = .5f;
+    private float walkSoundTimer = 0f;
 
     private void OnEnable()
     {
@@ -135,9 +137,11 @@ public class Player : IEntity
         {
             case "Bullet":
                 AddToClip(bulletPrefab);
+                GameManager.Instance.PlayAudio(GameManager.AudioClips.AmmoUp);
                 break;
             case "Heal":
                 GainHealth(gameObject, 1);
+                GameManager.Instance.PlayAudio(GameManager.AudioClips.HealthUp);
                 break;
         }
     }
@@ -169,6 +173,7 @@ public class Player : IEntity
     {
         //print("this happens");
         gm.playerDead = true;
+        GameManager.Instance.PlayAudio(GameManager.AudioClips.PlayerLava);
     }
 
     // Update is called once per frame
@@ -181,6 +186,16 @@ public class Player : IEntity
         if (transform.position.y < -44) //testing
         {
             transform.position = new Vector3(0, 120, 0);
+        }
+
+        if (isGrounded)
+        {
+            walkSoundTimer += Time.deltaTime;
+            if(walkSoundTimer >= WALK_SOUND_TIME)
+            {
+                GameManager.Instance.PlayAudio(GameManager.AudioClips.PlayerStep);
+                walkSoundTimer = 0;
+            }
         }
 
         //If the player is grounded, has remaining jumps, or is currently in CoyoteTime
@@ -347,7 +362,8 @@ public class Player : IEntity
                 //animator.SetTrigger("land");
                 animator.Play("p_land_001");
             }
-           
+            GameManager.Instance.PlayAudio(GameManager.AudioClips.PlayerLand);
+            walkSoundTimer = 0f;
             //falling = false; 
             isGrounded = true;
             jumpTemp = jumps;
@@ -399,6 +415,7 @@ public class Player : IEntity
             jumpPad = true;
             animator.SetTrigger("jumpPad");
             animator.SetBool("grounded", false);
+            GameManager.Instance.PlayAudio(GameManager.AudioClips.Jumppad);
         }
     }
 

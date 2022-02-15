@@ -8,6 +8,10 @@ public class MushBoi : IEntity
     public bool falling;
     private Animator animator;
     private Rigidbody rb;
+    private float walkSoundTimer = 0f;
+    private float WALK_SOUND_TIMER = .5f;
+    private bool step2;
+    private AudioSource walkSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +25,8 @@ public class MushBoi : IEntity
         rb = GetComponent<Rigidbody>();
         rb.velocity = Vector3.left * speed;
         //print(rb.velocity);
+        deathSound = GameManager.AudioClips.MushDeath;
+        walkSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -35,6 +41,23 @@ public class MushBoi : IEntity
         }*/
 
         //animator.SetBool("Death", false);
+
+        if (!falling)
+        {
+            walkSoundTimer += Time.deltaTime;
+            if(walkSoundTimer >= WALK_SOUND_TIMER)
+            {
+                if (step2)
+                {
+                    walkSource.PlayOneShot(GameManager.Instance.audioClips[(int)GameManager.AudioClips.MushStep2]);
+                }
+                else
+                {
+                    walkSource.PlayOneShot(GameManager.Instance.audioClips[(int)GameManager.AudioClips.MushStep1]);
+                }
+                walkSoundTimer = 0f;
+            }
+        }
     }
 
     // Update is called once per frame
