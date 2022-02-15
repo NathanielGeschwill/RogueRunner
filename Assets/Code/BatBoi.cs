@@ -57,7 +57,7 @@ public class BatBoi : IEntity
 
             //Further bat is from you, the faster the locked on Animation plays
             if(Vector3.Distance(transform.position, player.transform.position+vectorFromPlayer) > 2.1f)
-            {animator.SetFloat("DashDist", Vector3.Distance(transform.position, player.transform.position+vectorFromPlayer));}
+            {animator.SetFloat("DashDist", Mathf.Clamp(Vector3.Distance(transform.position, player.transform.position + vectorFromPlayer), 1, 3.6f));}
             else{ animator.SetFloat("DashDist", 1);}
 
             rb.MovePosition(Vector3.Lerp(transform.position, player.transform.position+vectorFromPlayer, (.25f)/(player.transform.position - transform.position).magnitude * 2));
