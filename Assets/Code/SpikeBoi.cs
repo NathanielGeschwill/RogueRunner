@@ -18,8 +18,9 @@ public class SpikeBoi : IEntity
         if (other.gameObject.CompareTag("Player"))
         {
             GetComponentInChildren<Animator>().Play("SpikeAttack");
+            GameManager.Instance.PlayAudio(GameManager.AudioClips.SpikeTrap);
         }
-        
+
         base.OnTriggerEnter(other);
     }
 }

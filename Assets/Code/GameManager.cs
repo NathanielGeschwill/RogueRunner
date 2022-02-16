@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public WorldSpawn ws;
 
     public bool TESTING_ZEROSPEED;
-    
+
     //UI Objects to toggle on/off
     public GameObject pauseUI;
     public GameObject gameUI;
@@ -59,6 +59,9 @@ public class GameManager : MonoBehaviour
         PlayerLand,
         PlayerLava,
         PlayerStep,
+        PlayerHurt,
+        BatFlap1,
+        SpikeTrap,
         None
     }
 
@@ -67,8 +70,10 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
-    public static GameManager Instance {
-        get {
+    public static GameManager Instance
+    {
+        get
+        {
             if (instance == null)
             {
                 instance = new GameManager();
@@ -90,7 +95,7 @@ public class GameManager : MonoBehaviour
 
         //return worldspeed to the target world speed
         float x = Mathf.Lerp(worldSpeed, targetWorldSpeed, Time.deltaTime);
-        
+
         worldSpeed = x;
 
         if (worldSpeed != 0)
@@ -143,6 +148,15 @@ public class GameManager : MonoBehaviour
             case AudioClips.PlayerStep:
                 audiosSources[1].PlayOneShot(audioClips[(int)ac]);
                 break;
+            case AudioClips.PlayerHurt:
+                audiosSources[1].PlayOneShot(audioClips[(int)ac]);
+                break;
+            case AudioClips.BatFlap1:
+                audiosSources[2].PlayOneShot(audioClips[(int)ac]);
+                break;
+            case AudioClips.SpikeTrap:
+                audiosSources[2].PlayOneShot(audioClips[(int)ac]);
+                break;
         }
     }
 
@@ -166,23 +180,24 @@ public class GameManager : MonoBehaviour
     //rip prefab and kids
     public void DestorySelf(GameObject g)
     {
-        foreach(Transform child in transform)
+        foreach (Transform child in transform)
         {
             GameObject.Destroy(child.gameObject);
         }
         GameObject.Destroy(g);
     }
 
-    [ContextMenu( "WorldSpeedZero()" )]
+    [ContextMenu("WorldSpeedZero()")]
     void WorldSpeedZero()
     {
         targetWorldSpeed = 0;
         worldSpeed = 0;
     }
 
-    public bool playerTooFast(){
-        if(worldSpeed > targetWorldSpeed * 1.43f)
-        { 
+    public bool playerTooFast()
+    {
+        if (worldSpeed > targetWorldSpeed * 1.43f)
+        {
             //Wind Sound
             return true;
         }
@@ -190,7 +205,7 @@ public class GameManager : MonoBehaviour
         {
             return false;
         }
-        
+
     }
 
     public void gmScreenShake(float duration, float inten)
@@ -214,4 +229,5 @@ public class GameManager : MonoBehaviour
         gameUI.SetActive(false);
         pauseUI.SetActive(true);
     }
+
 }

@@ -44,6 +44,7 @@ public class MushBoi : IEntity
 
         if (!falling)
         {
+            /*
             walkSoundTimer += Time.deltaTime;
             if(walkSoundTimer >= WALK_SOUND_TIMER)
             {
@@ -56,7 +57,7 @@ public class MushBoi : IEntity
                     walkSource.PlayOneShot(GameManager.Instance.audioClips[(int)GameManager.AudioClips.MushStep1]);
                 }
                 walkSoundTimer = 0f;
-            }
+            }*/
         }
     }
 

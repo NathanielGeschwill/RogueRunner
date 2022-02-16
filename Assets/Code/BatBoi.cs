@@ -84,13 +84,13 @@ public class BatBoi : IEntity
         }
 
         if (!isAttacking)
-        {
+        {/*
             flapSoundTimer += Time.deltaTime;
             if(flapSoundTimer >= FLAP_SOUND_TIMER)
             {
                 flapSource.PlayOneShot(GameManager.Instance.audioClips[(int)GameManager.AudioClips.BatFlap]);
                 flapSoundTimer = 0;
-            }
+            }*/
         }
     }
 

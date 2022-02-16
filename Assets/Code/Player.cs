@@ -154,6 +154,7 @@ public class Player : IEntity
             OnDecreaseUI?.Invoke("Heart");
             base.LoseHealth(hitObject, amount);
             animator.SetTrigger("hurt");
+            GameManager.Instance.PlayAudio(GameManager.AudioClips.PlayerHurt);
             GameManager.Instance.fbm.PlayFeedback("DamageFeedback", damagePart, rootScale, root);
         }
             
@@ -188,15 +189,6 @@ public class Player : IEntity
             transform.position = new Vector3(0, 120, 0);
         }
 
-        if (isGrounded)
-        {
-            walkSoundTimer += Time.deltaTime;
-            if(walkSoundTimer >= WALK_SOUND_TIME)
-            {
-                GameManager.Instance.PlayAudio(GameManager.AudioClips.PlayerStep);
-                walkSoundTimer = 0;
-            }
-        }
 
         //If the player is grounded, has remaining jumps, or is currently in CoyoteTime
         if (isGrounded || jumpTemp >= 1 || coyoteTime)
