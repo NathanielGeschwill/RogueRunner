@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public Text distanceText, loseText, highscoreText;
+
     private static GameManager instance;
 
     public GameObject player; //da playa (world moves around player, player only moves on y for time being)
@@ -70,6 +73,21 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
+    public void SetLoseText()
+    {
+        print("SETLOSETEXT");
+        if(PlayerPrefs.GetFloat("Highscore", 0f) < Mathf.Round(distanceTraveled * 100f) / 100f)
+        {
+            loseText.text = "HIGHSCORE!\n\nYou ran: " + Mathf.Round(distanceTraveled * 100f) / 100f;
+            PlayerPrefs.SetFloat("Highscore", Mathf.Round(distanceTraveled * 100f) / 100f);
+        }
+        else
+        {
+            loseText.text = "You ran: " + Mathf.Round(distanceTraveled * 100f) / 100f;
+        }
+        highscoreText.text = "Highscore: " + PlayerPrefs.GetFloat("Highscore");
+    }
+
     public static GameManager Instance
     {
         get
@@ -86,6 +104,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         distanceTraveled += worldSpeed * Time.deltaTime;
+        distanceText.text = "Distance: " + Mathf.Round(distanceTraveled * 100f) / 100f;
 
         if (TESTING_ZEROSPEED)
         {

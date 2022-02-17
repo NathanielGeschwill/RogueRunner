@@ -31,7 +31,11 @@ public class RestartScene : MonoBehaviour
     {
         if (((GameObject)sender).CompareTag("Player"))
         {
+            GameManager.Instance.SetLoseText();
+            print("Before lose UI");
             ShowLoseUI();
+            print("after show lose UI");
+            
         }
     }
 }
