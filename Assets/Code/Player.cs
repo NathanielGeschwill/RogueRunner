@@ -174,7 +174,7 @@ public class Player : IEntity
     {
         //print("this happens");
         gm.playerDead = true;
-        GameManager.Instance.PlayAudio(GameManager.AudioClips.PlayerLava);
+        //GameManager.Instance.PlayAudio(GameManager.AudioClips.PlayerLava);
     }
 
     // Update is called once per frame
@@ -350,11 +350,12 @@ public class Player : IEntity
             currentCol.Add(collision.gameObject); 
             animator.SetBool("grounded", true);
             if (currentCol.Count < 2) {
-                GameManager.Instance.fbm.PlayFeedback("LandingFeedback", landingPart, rootScale, root); 
+                GameManager.Instance.fbm.PlayFeedback("LandingFeedback", landingPart, rootScale, root);
                 //animator.SetTrigger("land");
                 animator.Play("p_land_001");
+                GameManager.Instance.PlayAudio(GameManager.AudioClips.PlayerLand);
             }
-            GameManager.Instance.PlayAudio(GameManager.AudioClips.PlayerLand);
+            //GameManager.Instance.PlayAudio(GameManager.AudioClips.PlayerLand);
             walkSoundTimer = 0f;
             //falling = false; 
             isGrounded = true;

@@ -12,6 +12,7 @@ public class KillPlayerTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            GameManager.Instance.PlayAudio(GameManager.AudioClips.PlayerLava);
             OnKillPlayer?.Invoke();
         }
     }
