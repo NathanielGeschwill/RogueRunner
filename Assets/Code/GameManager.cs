@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public float intensity;
 
     public FeedbackManaganger fbm;
+    public ParticleSystem speedLines;
 
     public WorldSpawn ws;
 
@@ -125,6 +126,22 @@ public class GameManager : MonoBehaviour
         {
             speedDiff = 0;
         }
+
+        if (playerTooFast())
+        {
+            audiosSources[3].volume += .2f;//Mathf.Lerp(0, 1, .25f);
+            audiosSources[0].volume -= .005f;//Mathf.Lerp(.25f, 0, .25f);
+            speedLines.gameObject.SetActive(true);
+            speedLines.emissionRate = speedDiff*10;
+
+        }
+        else
+        {   
+            if(audiosSources[0].volume != .25f) {audiosSources[0].volume += .01f; }
+            if(audiosSources[3].volume != 0f) { audiosSources[3].volume -= .2f; }
+            speedLines.gameObject.SetActive(false);
+        }
+
     }
 
     public void PlayAudio(AudioClips ac)
@@ -217,7 +234,7 @@ public class GameManager : MonoBehaviour
     {
         if (worldSpeed > targetWorldSpeed * 1.43f)
         {
-            //Wind Sound
+            
             return true;
         }
         else
