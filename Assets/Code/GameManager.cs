@@ -123,15 +123,18 @@ public class GameManager : MonoBehaviour
         float x = worldSpeed;
         if (playerGrounded)
         {
-            x = Mathf.Lerp(worldSpeed, targetSpeedandDist, Time.deltaTime * 4);
+            x = Mathf.Lerp(worldSpeed, targetSpeedandDist, (Time.deltaTime + (speedDiff / 4000)) * 4);
         }
         else
         {
-            x = Mathf.Lerp(worldSpeed, targetSpeedandDist, Time.deltaTime );
+            x = Mathf.Lerp(worldSpeed, targetSpeedandDist, (Time.deltaTime + (speedDiff / 4000)));
+            //print("time " + Time.deltaTime + " speed diff " + speedDiff/2000 + " = " + (Time.deltaTime + (speedDiff / 2000)));
         }
 
         worldSpeed = x;
         Mathf.Clamp(worldSpeed, 0, 124);
+
+        
 
         if (worldSpeed != 0)
         {

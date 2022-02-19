@@ -47,6 +47,8 @@ public class Player : IEntity
 
     private float playerHurtTimer = .255f;
     private float playerHurtTime = 0;
+    private float playerJumppadTimer = .3f;
+    private float playerJumppadTime = 0;
 
     private float ATK_TIME_BETWEEN = 0.225f;
     //private float ATK_TIME_RELOAD = 1.0f;
@@ -293,9 +295,11 @@ public class Player : IEntity
 
         GameManager.Instance.playerGrounded = isGrounded;
         playerHurtTime -= Time.fixedDeltaTime;
-    }
+        playerJumppadTime -= Time.fixedDeltaTime;
 
-    private void FixedUpdate()
+}
+
+private void FixedUpdate()
     {
         if(rb.velocity.y < .1 && !isGrounded)
         {
@@ -432,7 +436,9 @@ public class Player : IEntity
         jumpPad = true;
         animator.SetTrigger("jumpPad");
         animator.SetBool("grounded", false);
+        if (playerJumppadTime > 0 && mul == true) { mul = false; x *= x; print(x); }
         gm.worldSpeedChange(mul, x);
+        playerJumppadTime = playerJumppadTimer;
     }
 
     void Attack()
