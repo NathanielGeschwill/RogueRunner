@@ -15,11 +15,15 @@ public class BatBoi : IEntity
     //private float distToPlayerX = 3.0f;
     private Vector3 vectorFromPlayer;
 
+    public ParticleSystem deathpart;
+    public GameObject root;
+    private Vector3 rootScale;
+
     private bool lockOn = false;
     private float lockOnTimer;
 
-    private float flapSoundTimer = 0f;
-    private float FLAP_SOUND_TIMER = 1f;
+    //private float flapSoundTimer = 0f;
+    //private float FLAP_SOUND_TIMER = 1f;
 
     private AudioSource flapSource;
 
@@ -43,6 +47,7 @@ public class BatBoi : IEntity
         dashTimer = DASH_TIMER;
         tagsICanHit = new List<string> { "Player" };
         damage = 1;
+        rootScale = root.transform.localScale;
 
         animator = GetComponentInChildren<Animator>();// This code is on the Prefab, the aimator that needs to be accessed is on the rig. Prefab may need to be rearranged to make this work?
         animator.SetBool("isAttacking", false);//
@@ -67,7 +72,7 @@ public class BatBoi : IEntity
             else{ animator.SetFloat("DashDist", 1);}
 
             rb.MovePosition(Vector3.Lerp(transform.position, player.transform.position+vectorFromPlayer, (.25f)/(player.transform.position - transform.position).magnitude * 2));
-            //float f = ((lockOnTimer + .01f) * .05f); Mathf.Clamp(f, 0.01f, .15f); 
+            //float f = ((lockOnTimer + .01f) * .05f); Mathf.Clamp(f, 0.01f, .25f); 
             //rb.MovePosition(Vector3.Lerp(transform.position, player.transform.position+vectorFromPlayer,  f / (player.transform.position - transform.position).magnitude * 2));
         }
 
@@ -114,13 +119,18 @@ public class BatBoi : IEntity
         else if (other.gameObject.tag == "Player" && alreadyAttacked)
         {
             Vector3 dir = player.transform.position - transform.position;
-            if(dir.magnitude <= 2f)
+            if (dir.magnitude <= 2f)
             {
-                print("Going to hit player");
+                //print("Going to hit player");
                 InvokeHit(other.gameObject, damage);
             }
-            
+
         }
+    }
+
+    public void myDamage()
+    {
+        GameManager.Instance.fbm.PlayFeedback("DamageFeedback", deathpart, rootScale, root);
     }
 
     private void OnTriggerExit(Collider other)

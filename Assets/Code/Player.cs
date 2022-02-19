@@ -44,7 +44,10 @@ public class Player : IEntity
     private float coyoteTimer = 0; //forgiveness countdown
 
     List<GameObject> currentCol;
-    
+
+    private float playerHurtTimer = .255f;
+    private float playerHurtTime = 0;
+
     private float ATK_TIME_BETWEEN = 0.225f;
     //private float ATK_TIME_RELOAD = 1.0f;
     private float attackTimer = 0f;
@@ -70,17 +73,21 @@ public class Player : IEntity
     public static event DecreaseUI OnDecreaseUI;
 
     public Text text;
-    private float WALK_SOUND_TIME = .5f;
-    private float walkSoundTimer = 0f;
+    //private float WALK_SOUND_TIME = .5f;
+    //private float walkSoundTimer = 0f;
 
+#pragma warning disable CS0114 // Member hides inherited member; missing override keyword
     private void OnEnable()
+#pragma warning restore CS0114 // Member hides inherited member; missing override keyword
     {
         ICollectable.OnCollected += ResolvePickup;
         IEntity.OnHit += LoseHealth;
         IEntity.OnDeath += ResolveDeath;
     }
 
+#pragma warning disable CS0114 // Member hides inherited member; missing override keyword
     private void OnDisable()
+#pragma warning restore CS0114 // Member hides inherited member; missing override keyword
     {
         ICollectable.OnCollected -= ResolvePickup;
         IEntity.OnHit -= LoseHealth;
@@ -148,16 +155,20 @@ public class Player : IEntity
 
     protected override void LoseHealth(object hitObject, int amount)
     {
-        if (((GameObject)hitObject).GetInstanceID() == gameObject.GetInstanceID() && !GameManager.Instance.playerTooFast())
+        if(playerHurtTime < 0)
         {
-            GameManager.Instance.gmScreenShake(.2f, .4f);
-            OnDecreaseUI?.Invoke("Heart");
-            base.LoseHealth(hitObject, amount);
-            animator.SetTrigger("hurt");
-            GameManager.Instance.PlayAudio(GameManager.AudioClips.PlayerHurt);
-            GameManager.Instance.fbm.PlayFeedback("DamageFeedback", damagePart, rootScale, root);
+            if (((GameObject)hitObject).GetInstanceID() == gameObject.GetInstanceID() && !GameManager.Instance.playerTooFast())
+            {
+                GameManager.Instance.gmScreenShake(.2f, .4f);
+                OnDecreaseUI?.Invoke("Heart");
+                base.LoseHealth(hitObject, amount);
+                animator.SetTrigger("hurt");
+                GameManager.Instance.PlayAudio(GameManager.AudioClips.PlayerHurt);
+                GameManager.Instance.fbm.PlayFeedback("DamageFeedback", damagePart, rootScale, root);
+                playerHurtTime = playerHurtTimer;
+            }
         }
-            
+
     }
 
     protected override bool GainHealth(object sender, int amount)
@@ -198,7 +209,7 @@ public class Player : IEntity
             if (Input.GetKeyDown(KeyCode.Space))
             {
 
-                if(jumpTemp == jumps)
+                if (jumpTemp == jumps)
                 {
                     animator.SetTrigger("jump");
                     GameManager.Instance.fbm.PlayFeedback("JumpFeedback", jumpPart, rootScale, root);
@@ -209,7 +220,7 @@ public class Player : IEntity
                     GameManager.Instance.fbm.PlayFeedback("JumpFeedback", airjumpPart, rootScale, root);
                 }
 
-                
+
                 //if player jumps, no longer grounded, immideately add y velocity, and holdingjump is true until key up is registered or max time reached
                 isGrounded = false;
                 rb.velocity = new Vector3(0, jumpVelocity, 0);
@@ -222,7 +233,7 @@ public class Player : IEntity
                 coyoteTimer = 0;
                 //falling = false;
                 OnJump?.Invoke();
-                
+
             }
         }
 
@@ -252,7 +263,7 @@ public class Player : IEntity
 
             OnDecreaseUI?.Invoke("Bullet");
         }
-        
+
         if (attackTimer > 0.0f)
         {
             attackTimer -= Time.deltaTime;
@@ -268,17 +279,20 @@ public class Player : IEntity
             {
                 GameManager.Instance.Unpause();
             }
-            else if(!GameManager.Instance.gamePaused)
+            else if (!GameManager.Instance.gamePaused)
             {
                 GameManager.Instance.Pause();
             }
         }
 
         text.text = " Dist: " + GameManager.Instance.distanceTraveled.ToString("F1");// + " wspd: " + GameManager.Instance.worldSpeed.ToString("F1") + " toofast: " + GameManager.Instance.playerTooFast();
-        //text.text = " wspd: " + GameManager.Instance.worldSpeed.ToString("F1") + " Target: "+ GameManager.Instance.targetWorldSpeed.ToString("F1")  + " toofast: " + GameManager.Instance.playerTooFast();
-     
+                                                                                     //text.text = " wspd: " + GameManager.Instance.worldSpeed.ToString("F1") + " Target: "+ GameManager.Instance.targetWorldSpeed.ToString("F1")  + " toofast: " + GameManager.Instance.playerTooFast();
+
         if (!isHoldingJump) { animator.SetBool("isHoldingJump", false); }
         else { animator.SetBool("isHoldingJump", true); }
+
+        GameManager.Instance.playerGrounded = isGrounded;
+        playerHurtTime -= Time.fixedDeltaTime;
     }
 
     private void FixedUpdate()
@@ -290,7 +304,7 @@ public class Player : IEntity
         }
         if (jumpPad) //onTriggerEnter(tag=="Jumppad")
         {
-            gm.worldSpeedChange(true, 3); //Jumppad feels like player is being thrown foward.
+            //gm.worldSpeedChange(true, 3); //Jumppad feels like player is being thrown foward.
             rb.velocity = new Vector3(0, jumpVelocity*3f, 0); //Note this is NOT using isHoldingJump, so there is no decay on this jump. This may need special animation
             jumpPad = false;
             isGrounded = false;
@@ -357,7 +371,7 @@ public class Player : IEntity
                 GameManager.Instance.PlayAudio(GameManager.AudioClips.PlayerLand);
             }
             //GameManager.Instance.PlayAudio(GameManager.AudioClips.PlayerLand);
-            walkSoundTimer = 0f;
+            
             //falling = false; 
             isGrounded = true;
             jumpTemp = jumps;
@@ -399,20 +413,27 @@ public class Player : IEntity
     }
 
 
+#pragma warning disable CS0114 // Member hides inherited member; missing override keyword
     public void OnTriggerEnter(Collider other)
+#pragma warning restore CS0114 // Member hides inherited member; missing override keyword
     {
         if(other.gameObject.CompareTag("Jumppad"))
         {
             other.gameObject.GetComponent<BoxCollider>().enabled = false;
-            //Debug.Log("<color=red> jumppad </color>", this.gameObject);
-            GameManager.Instance.fbm.PlayFeedback("JumpFeedback", jumpPart, rootScale, root);
-            jumpPad = true;
-            animator.SetTrigger("jumpPad");
-            animator.SetBool("grounded", false);
+            JUMPPAD(true, 3);
             GameManager.Instance.PlayAudio(GameManager.AudioClips.Jumppad);
         }
     }
 
+    public void JUMPPAD(bool mul, float x)
+    {
+        //Debug.Log("<color=red> jumppad </color>", this.gameObject);
+        GameManager.Instance.fbm.PlayFeedback("JumpFeedback", jumpPart, rootScale, root);
+        jumpPad = true;
+        animator.SetTrigger("jumpPad");
+        animator.SetBool("grounded", false);
+        gm.worldSpeedChange(mul, x);
+    }
 
     void Attack()
     {

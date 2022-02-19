@@ -29,9 +29,11 @@ public class GameManager : MonoBehaviour
 
     public float worldSpeed = 15; //world speed that changes based on the situation
     public float targetWorldSpeed = 15; /*/ world speed that is always returned to*/
+    public float targetSpeedandDist = 0;
     public bool playerSpeeding = false;
     public bool stopped = false;
     public bool playerDead = false;
+    public bool playerGrounded = false;
 
     public float speedDiff; //used in calculations for camera offset
     public float airTime; //used in camera offset + achievements?highscore?
@@ -45,6 +47,7 @@ public class GameManager : MonoBehaviour
     public bool gamePaused = false;
 
     public float distanceTraveled = 0.0f;
+    public float vol = .25f;
 
     public AudioSource[] audiosSources;
     public AudioClip[] audioClips;
@@ -76,7 +79,7 @@ public class GameManager : MonoBehaviour
 
     public void SetLoseText()
     {
-        print("SETLOSETEXT");
+        //print("SETLOSETEXT");
         if(PlayerPrefs.GetFloat("Highscore", 0f) < Mathf.Round(distanceTraveled * 100f) / 100f)
         {
             loseText.text = "HIGHSCORE!\n\nYou ran: " + Mathf.Round(distanceTraveled * 100f) / 100f;
@@ -107,6 +110,9 @@ public class GameManager : MonoBehaviour
         distanceTraveled += worldSpeed * Time.deltaTime;
         distanceText.text = "Distance: " + Mathf.Round(distanceTraveled * 100f) / 100f;
 
+        targetSpeedandDist = targetWorldSpeed + ((Mathf.Round(distanceTraveled * 100f) / 100f) / 250);
+        Mathf.Clamp(targetSpeedandDist, 0, 48);
+
         if (TESTING_ZEROSPEED)
         {
             worldSpeed = 0;
@@ -114,13 +120,22 @@ public class GameManager : MonoBehaviour
         }
 
         //return worldspeed to the target world speed
-        float x = Mathf.Lerp(worldSpeed, targetWorldSpeed, Time.deltaTime);
+        float x = worldSpeed;
+        if (playerGrounded)
+        {
+            x = Mathf.Lerp(worldSpeed, targetSpeedandDist, Time.deltaTime * 4);
+        }
+        else
+        {
+            x = Mathf.Lerp(worldSpeed, targetSpeedandDist, Time.deltaTime );
+        }
 
         worldSpeed = x;
+        Mathf.Clamp(worldSpeed, 0, 124);
 
         if (worldSpeed != 0)
         {
-            speedDiff = worldSpeed / targetWorldSpeed;
+            speedDiff = worldSpeed / targetSpeedandDist;
         }
         else
         {
@@ -132,14 +147,15 @@ public class GameManager : MonoBehaviour
             audiosSources[3].volume += .2f;//Mathf.Lerp(0, 1, .25f);
             audiosSources[0].volume -= .005f;//Mathf.Lerp(.25f, 0, .25f);
             speedLines.gameObject.SetActive(true);
-            speedLines.emissionRate = speedDiff*10;
+            //speedLines.emission.rateOverTime = speedDiff * 10;
 
         }
         else
-        {   
-            if(audiosSources[0].volume != .25f) {audiosSources[0].volume += .01f; }
-            if(audiosSources[3].volume != 0f) { audiosSources[3].volume -= .2f; }
-            speedLines.gameObject.SetActive(false);
+        {
+
+            if (audiosSources[0].volume < .25f) { audiosSources[0].volume += Time.deltaTime; } //if(audiosSources[0].volume > .25f) { audiosSources[0].volume = 1/4; }
+            if(audiosSources[3].volume != 0f) { audiosSources[3].volume -= 0.2f; }
+            speedLines.gameObject.SetActive(false); //print(audiosSources[0].volume.ToString());
         }
 
     }
@@ -232,7 +248,7 @@ public class GameManager : MonoBehaviour
 
     public bool playerTooFast()
     {
-        if (worldSpeed > targetWorldSpeed * 1.43f)
+        if (worldSpeed > targetSpeedandDist * 1.43f)
         {
             
             return true;

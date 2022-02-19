@@ -8,9 +8,9 @@ public class HorizontalPlatformSpawner : MonoBehaviour
     private HorizontalPlatformSO hpso;
     private WorldSpawn ws;
     public bool canSpawn = true;
-    private float worldScaleConst = 15.0f;
+    //private float worldScaleConst = 15.0f;
     //private float worldScaleMod = 10.0f;
-    private float timer = 1000;
+    //private float timer = 1000;
     private float nextDistanceToSpawn;
     private float distanceTraveled;
     private bool readyToSpawn = false;

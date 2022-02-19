@@ -8,9 +8,10 @@ public class MushBoi : IEntity
     public bool falling;
     private Animator animator;
     private Rigidbody rb;
-    private float walkSoundTimer = 0f;
-    private float WALK_SOUND_TIMER = .5f;
-    private bool step2;
+    public GameObject player;
+    //private float walkSoundTimer = 0f;
+    //private float WALK_SOUND_TIMER = .5f;
+    //private bool step2;
     private AudioSource walkSource;
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,8 @@ public class MushBoi : IEntity
         //print(rb.velocity);
         deathSound = GameManager.AudioClips.MushDeath;
         walkSource = GetComponent<AudioSource>();
+
+        player = GameObject.FindGameObjectsWithTag("Player")[0];
     }
 
     private void Update()
@@ -109,16 +112,32 @@ public class MushBoi : IEntity
         
         foreach (string s in tagsICanHit)
         {
-            if (collision.gameObject.CompareTag(s) && damage > 0)
+            #region headbonk
+            //Check if the platform player is colliding with is beneath them
+            if (collision.contacts[0].point.y < transform.position.y)
             {
-                print("GOING INVOKE " + collision.gameObject);
-                FireOnHit(collision.gameObject);
-                break;
+                if (collision.gameObject.CompareTag(s) && damage > 0)
+                {
+                    //print("GOING INVOKE " + collision.gameObject);
+                    FireOnHit(collision.gameObject);
+                    break;
+                }
+                else
+                {
+                    //print("didn't find");
+                }
             }
-            else
+            else if (collision.contacts[0].point.y > transform.position.y && !GameManager.Instance.playerTooFast())
             {
-                //print("didn't find");
+                //GameObject.FindObjectOfType(Player).JUMPPAD();
+                //player.GetComponent().JUMPPAD();
+                Player jumpscript = (Player)player.GetComponent(typeof(Player));
+                jumpscript.JUMPPAD(false, 24);
+                LoseHealth(gameObject, 1);
+                //print("Player bounce off?");
             }
+            #endregion
+
         }
     }
 

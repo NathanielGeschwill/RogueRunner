@@ -40,7 +40,7 @@ public class IEntity : MonoBehaviour
 
     protected virtual void ResolveDeath(object sender, int senderID)
     {
-        print("RESOLVING");
+        //print("RESOLVING");
         if(senderID == gameObject.GetInstanceID())
         {
             print("DESTORYING " + senderID);
@@ -61,7 +61,7 @@ public class IEntity : MonoBehaviour
         //print("COMPAING " + ((GameObject)hitObject).GetInstanceID() + " AND " + gameObject.GetInstanceID());
         if (((GameObject)hitObject).GetInstanceID() == gameObject.GetInstanceID())
         {
-            print("FOUND MATCH" + gameObject.name);
+            //print("FOUND MATCH" + gameObject.name);
             health -= amount;
 
             if (health <= 0)
@@ -100,7 +100,7 @@ public class IEntity : MonoBehaviour
             }
             else
             {
-                print("didn't find");
+                //print("didn't find");
             }
         }
     }
