@@ -7,6 +7,7 @@ public class FloatingItem : MonoBehaviour
     private Transform FloatingLocal;
     public float freq= 4;
     public float amp = 1.2f;
+    public Vector3 _rotation;
    
     void Start()
     {
@@ -16,6 +17,6 @@ public class FloatingItem : MonoBehaviour
     void FixedUpdate()
     {
         transform.position = FloatingLocal.position + new Vector3(0, Mathf.Sin(Time.time * freq) * Time.deltaTime * amp , 0);
-        //gameObject.transform.rotation = new Vector3()
+        transform.Rotate(_rotation * Time.deltaTime);
     }
 }

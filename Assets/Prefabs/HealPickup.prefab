@@ -174,10 +174,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 508484803469471027, guid: b069a6068809ce442bef8ade79b112d5, type: 3}
+      propertyPath: amp
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 508484803469471027, guid: b069a6068809ce442bef8ade79b112d5, type: 3}
+      propertyPath: freq
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 508484803469471027, guid: b069a6068809ce442bef8ade79b112d5, type: 3}
+      propertyPath: _rotation.z
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 851156061828364055, guid: b069a6068809ce442bef8ade79b112d5, type: 3}
       propertyPath: m_Name
       value: Heart_low
       objectReference: {fileID: 0}
+    - target: {fileID: 1211210591241017026, guid: b069a6068809ce442bef8ade79b112d5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: df09a6e4cdd6f5e41ae8f2cce78d1b2b, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b069a6068809ce442bef8ade79b112d5, type: 3}
 --- !u!4 &4950849140335086068 stripped

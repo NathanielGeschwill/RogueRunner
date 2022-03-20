@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: m_Lava
-  m_Shader: {fileID: 4800000, guid: c6531fd48e589fd42bc3f42d6d9501be, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: bdb5906635944314a9e497e0655fa4be, type: 3}
   m_ShaderKeywords: _SHADOWMIXMODE_MULTIPLY _SHARPRIMLIGHT_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_662eb38086f14f2d82ffd2cb8736ade7:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 752564bf07494c94493b63551512b098, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:

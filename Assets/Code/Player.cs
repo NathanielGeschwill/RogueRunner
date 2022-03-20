@@ -106,7 +106,7 @@ public class Player : IEntity
         rootScale = root.transform.localScale;
         currentCol = new List<GameObject>();
 
-        MaxAmmo(bulletPrefab);
+        //MaxAmmo(bulletPrefab);
         gm.airTime = 0;
         health = 3;
         maxHealth = 3;

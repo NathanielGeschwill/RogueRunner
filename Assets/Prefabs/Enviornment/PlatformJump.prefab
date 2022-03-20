@@ -176,6 +176,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gm: {fileID: 0}
+  paralax: 1
+  tp: 0
 --- !u!1 &8333434254567973790
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,10 +390,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1593899028995127844, guid: affe6ee651d243345a8fafccb4084622, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dd835e7fb59244c47912f3c0baf76a5c, type: 2}
     - target: {fileID: 3913616530263582320, guid: affe6ee651d243345a8fafccb4084622, type: 3}
       propertyPath: m_Name
       value: jumppad_origin
       objectReference: {fileID: 0}
+    - target: {fileID: 4802684336918187770, guid: affe6ee651d243345a8fafccb4084622, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dd835e7fb59244c47912f3c0baf76a5c, type: 2}
     m_RemovedComponents:
     - {fileID: 8660921062057655282, guid: affe6ee651d243345a8fafccb4084622, type: 3}
     - {fileID: 7312202547239669176, guid: affe6ee651d243345a8fafccb4084622, type: 3}

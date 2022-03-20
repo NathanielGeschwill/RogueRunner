@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gm: {fileID: 0}
+  paralax: 1
+  tp: 0
 --- !u!1 &6109251939335348118
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,6 +243,10 @@ PrefabInstance:
     - target: {fileID: 5731799009794688591, guid: 45894437bcdc11a45938e9a0d7d8866b, type: 3}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8641701662506907928, guid: 45894437bcdc11a45938e9a0d7d8866b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45894437bcdc11a45938e9a0d7d8866b, type: 3}

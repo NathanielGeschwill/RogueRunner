@@ -123,6 +123,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1067294812494513851}
     m_Modifications:
+    - target: {fileID: 1776251264302263571, guid: 7cca4bf1019ed854581329bfe7b4b9f0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -3876393240991800485, guid: 5edd014445d6afd4484cf8baf69cb4cb, type: 3}
     - target: {fileID: 2318361998836833335, guid: 7cca4bf1019ed854581329bfe7b4b9f0, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -171,6 +175,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jumppad
       objectReference: {fileID: 0}
+    - target: {fileID: 5485004261158574541, guid: 7cca4bf1019ed854581329bfe7b4b9f0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -3876393240991800485, guid: 5edd014445d6afd4484cf8baf69cb4cb, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cca4bf1019ed854581329bfe7b4b9f0, type: 3}
 --- !u!4 &3356395933651962624 stripped
