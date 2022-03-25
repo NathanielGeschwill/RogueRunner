@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1559288b2f2d6b4aa82cdf928aa9431, type: 3}
   m_Name: Level 4
   m_EditorClassIdentifier: 
-  yLevel: 15
-  distanceBetweenPlats: 35
+  yLevel: 19
+  distanceBetweenPlats: 47.25
   chanceToSpawn: 0.45
   potentialPlatforms:
   - {fileID: 3467020093605018701, guid: 4b32de3b3e8881845a4d687687e3349c, type: 3}
