@@ -96,3 +96,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   freq: 4.5
   amp: 1.5
+  _rotation: {x: 0, y: 0, z: 0}
