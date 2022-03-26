@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &588802013332524057
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: eb50c9ee565f98947a4f8ac46c7c50ba, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eb50c9ee565f98947a4f8ac46c7c50ba, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eb50c9ee565f98947a4f8ac46c7c50ba, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 199.99997
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eb50c9ee565f98947a4f8ac46c7c50ba, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 199.99997
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eb50c9ee565f98947a4f8ac46c7c50ba, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -810.2099
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eb50c9ee565f98947a4f8ac46c7c50ba, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -56.86953
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eb50c9ee565f98947a4f8ac46c7c50ba, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -44.814056
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eb50c9ee565f98947a4f8ac46c7c50ba, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eb50c9ee565f98947a4f8ac46c7c50ba, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eb50c9ee565f98947a4f8ac46c7c50ba, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eb50c9ee565f98947a4f8ac46c7c50ba, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eb50c9ee565f98947a4f8ac46c7c50ba, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eb50c9ee565f98947a4f8ac46c7c50ba, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eb50c9ee565f98947a4f8ac46c7c50ba, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: eb50c9ee565f98947a4f8ac46c7c50ba, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9932b59b37d4f294286e5a3b028c4ea6, type: 2}
+    - target: {fileID: 919132149155446097, guid: eb50c9ee565f98947a4f8ac46c7c50ba, type: 3}
+      propertyPath: m_Name
+      value: Mountain_low (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eb50c9ee565f98947a4f8ac46c7c50ba, type: 3}
+--- !u!1 &354290814403572040 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: eb50c9ee565f98947a4f8ac46c7c50ba, type: 3}
+  m_PrefabInstance: {fileID: 588802013332524057}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1515949692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354290814403572040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0d50b51d0e3e344ca8008b15933ca50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gm: {fileID: 0}
+  paralax: 2
+  tp: 1
