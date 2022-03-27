@@ -15,13 +15,15 @@ public class HorizontalPlatformSpawner : MonoBehaviour
     private float distanceTraveled;
     private bool readyToSpawn = false;
     private Material material;
+    float platLength = 16f;
+    float DEFAULT_PLAT_LENGTH = 16f;
 
     public void SetWorldSpawn(WorldSpawn ws, HorizontalPlatformSO hpso, Material material)
     {
         this.ws = ws;
         this.hpso = hpso;
         //timer = hpso.timeBetweenPlatforms * worldScaleConst / GameManager.Instance.worldSpeed;
-        nextDistanceToSpawn = GameManager.Instance.distanceTraveled + hpso.distanceBetweenPlats;
+        nextDistanceToSpawn = GameManager.Instance.distanceTraveled + hpso.distanceBetweenPlats + platLength - DEFAULT_PLAT_LENGTH;
         readyToSpawn = true;
         this.material = material;
     }
@@ -32,11 +34,11 @@ public class HorizontalPlatformSpawner : MonoBehaviour
         {
             if (RollChanceToSpawn())
             {
-                nextDistanceToSpawn = GameManager.Instance.distanceTraveled + hpso.distanceBetweenPlats;
+                nextDistanceToSpawn = GameManager.Instance.distanceTraveled + hpso.distanceBetweenPlats + platLength - DEFAULT_PLAT_LENGTH;
             }
             else
             {
-                nextDistanceToSpawn = GameManager.Instance.distanceTraveled + hpso.distanceBetweenPlats / 2;
+                nextDistanceToSpawn = GameManager.Instance.distanceTraveled + (hpso.distanceBetweenPlats / 2) + platLength - DEFAULT_PLAT_LENGTH;
             }
             
         }
@@ -58,6 +60,8 @@ public class HorizontalPlatformSpawner : MonoBehaviour
         //print("Spawn Plat");
         GameObject ass = GameObject.Instantiate(hpso.potentialPlatforms[Random.Range(0, hpso.potentialPlatforms.Length)], new Vector3(100, hpso.yLevel, 0f), ws.transform.rotation);
         ass.GetComponentsInChildren<MeshRenderer>().FirstOrDefault(r => r.tag == "PlatformMat").material = material;
+        platLength = ass.GetComponentsInChildren<Transform>().First(r => r.tag == "Platform").GetComponentsInChildren<Transform>().First(r => r.tag == "Platform").localScale.x;
         ass.transform.parent = ws.gameObject.transform;
+        print("NEW PLAT LENGTH " + platLength);
     }
 }

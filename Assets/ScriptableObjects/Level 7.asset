@@ -16,12 +16,8 @@ MonoBehaviour:
   distanceBetweenPlats: 47.25
   chanceToSpawn: 0.4
   potentialPlatforms:
-  - {fileID: 3467020093605018701, guid: 4b32de3b3e8881845a4d687687e3349c, type: 3}
-  - {fileID: 8333434254429824962, guid: 3ddb8d5c681b91f4088506828ef95707, type: 3}
-  - {fileID: 3467020093605018701, guid: 4b32de3b3e8881845a4d687687e3349c, type: 3}
-  - {fileID: 3467020093605018701, guid: 87da32e71d2c6954d991f748121e6e37, type: 3}
   - {fileID: 3467020093605018701, guid: c8f65a6db3b551f4aacab9198d1b2f44, type: 3}
   - {fileID: 3467020093605018701, guid: 215dcd1864f34e84ea99ea90e397ff73, type: 3}
-  - {fileID: 3467020093605018701, guid: 4f7d9ce1247ab804999b1a599ac2a287, type: 3}
-  - {fileID: 3467020093605018701, guid: 215dcd1864f34e84ea99ea90e397ff73, type: 3}
   - {fileID: 3467020093605018701, guid: 87da32e71d2c6954d991f748121e6e37, type: 3}
+  - {fileID: 3467020093605018701, guid: 4f7d9ce1247ab804999b1a599ac2a287, type: 3}
+  - {fileID: 3467020093605018701, guid: 4e6b68db68a3d9d4cab493aef0390c7a, type: 3}
