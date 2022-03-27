@@ -31,7 +31,8 @@ public class RestartScene : MonoBehaviour
     {
         if (((GameObject)sender).CompareTag("Player"))
         {
-            GameManager.Instance.SetLoseText();
+            StartCoroutine(GameManager.Instance.SetLoseText());
+            //GameManager.Instance.SetLoseText();
             //print("Before lose UI");
             ShowLoseUI();
             //print("after show lose UI");

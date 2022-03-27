@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
+using LootLocker.Requests;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public Text distanceText, loseText, highscoreText;
+    public Text distanceText;//, loseText, highscoreText;
 
     private static GameManager instance;
+    public TMP_InputField playerNameField;
 
     public GameObject player; //da playa (world moves around player, player only moves on y for time being)
     public GameObject CameraRig;
@@ -52,6 +55,8 @@ public class GameManager : MonoBehaviour
     public AudioSource[] audiosSources;
     public AudioClip[] audioClips;
 
+    public Leaderboard leaderboard;
+
     public enum AudioClips
     {
         BatDash,
@@ -75,21 +80,78 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         instance = this;
+        StartCoroutine(SetupRoutine());
     }
 
-    public void SetLoseText()
+    IEnumerator LoginRoutine()
     {
+        bool done = false;
+        LootLockerSDKManager.StartGuestSession((response) =>
+        {
+            if (response.success)
+            {
+                Debug.Log("successfully started LootLocker session");
+                PlayerPrefs.SetString("PlayerID", response.player_id.ToString());
+                done = true;
+            }
+            else
+            {
+                Debug.Log("error starting LootLocker session");
+                done = true;
+            }
+            
+        });
+        yield return new WaitWhile(() => done == false);
+    }
+
+    IEnumerator SetupRoutine()
+    {
+        yield return LoginRoutine();
+        //yield return leaderboard.FetchTopHighscoreRoutine();
+    }
+
+    public IEnumerator SetLoseText()
+    {
+        yield return leaderboard.SubmitScoreRoutine((int)(Mathf.Round(distanceTraveled * 100f) / 100f));
+        yield return leaderboard.FetchTopHighscoreRoutine();
+
+
         //print("SETLOSETEXT");
-        if(PlayerPrefs.GetFloat("Highscore", 0f) < Mathf.Round(distanceTraveled * 100f) / 100f)
+        //if(PlayerPrefs.GetFloat("Highscore", 0f) < Mathf.Round(distanceTraveled * 100f) / 100f)
+        //{
+        //    loseText.text = "HIGHSCORE!\n\nYou ran: " + Mathf.Round(distanceTraveled * 100f) / 100f;
+        //    PlayerPrefs.SetFloat("Highscore", Mathf.Round(distanceTraveled * 100f) / 100f);
+        //}
+        //else
+        //{
+        //    loseText.text = "You ran: " + Mathf.Round(distanceTraveled * 100f) / 100f;
+        //}
+        //highscoreText.text = "Highscore: " + PlayerPrefs.GetFloat("Highscore");
+    }
+
+    public void SetPlayerName()
+    {
+        StartCoroutine(SetPlayerNameRoutine());
+    }
+
+    IEnumerator SetPlayerNameRoutine()
+    {
+        bool done = false;
+        LootLockerSDKManager.SetPlayerName(playerNameField.text, (response) =>
         {
-            loseText.text = "HIGHSCORE!\n\nYou ran: " + Mathf.Round(distanceTraveled * 100f) / 100f;
-            PlayerPrefs.SetFloat("Highscore", Mathf.Round(distanceTraveled * 100f) / 100f);
-        }
-        else
-        {
-            loseText.text = "You ran: " + Mathf.Round(distanceTraveled * 100f) / 100f;
-        }
-        highscoreText.text = "Highscore: " + PlayerPrefs.GetFloat("Highscore");
+            if (response.success)
+            {
+                Debug.Log("Set Player Name");
+                done = true;
+            }
+            else
+            {
+                Debug.Log("Could Not Set Player Name " + response.Error);
+                done = true;
+            }
+        });
+        yield return new WaitWhile(() => done == false);
+        StartCoroutine(leaderboard.FetchTopHighscoreRoutine());
     }
 
     public static GameManager Instance
