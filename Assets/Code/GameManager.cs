@@ -170,7 +170,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         distanceTraveled += worldSpeed * Time.deltaTime;
-        distanceText.text = "Distance: " + Mathf.Round(distanceTraveled * 100f) / 100f;
+        distanceText.text = "Distance: " + Mathf.Round(distanceTraveled);
 
         targetSpeedandDist = targetWorldSpeed + ((Mathf.Round(distanceTraveled * 100f) / 100f) / 250);
         Mathf.Clamp(targetSpeedandDist, 0, 48);

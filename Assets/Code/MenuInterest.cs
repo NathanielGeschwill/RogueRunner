@@ -6,8 +6,6 @@ public class MenuInterest : MonoBehaviour
 {
     public GameObject cam1;
     public GameObject cam2;
-    private Transform camd1;
-    private Transform camd2;
     private Transform start;
     private Vector3 n;
     private Quaternion o;
@@ -17,8 +15,7 @@ public class MenuInterest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        camd1 = cam1.transform;
-        camd2 = cam2.transform;
+        Time.timeScale = 1f;
         start = transform;
 
         smoothPos = .09f;

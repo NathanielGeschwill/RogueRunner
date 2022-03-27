@@ -60,7 +60,7 @@ public class HorizontalPlatformSpawner : MonoBehaviour
         //print("Spawn Plat");
         GameObject ass = GameObject.Instantiate(hpso.potentialPlatforms[Random.Range(0, hpso.potentialPlatforms.Length)], new Vector3(100, hpso.yLevel, 0f), ws.transform.rotation);
         ass.GetComponentsInChildren<MeshRenderer>().FirstOrDefault(r => r.tag == "PlatformMat").material = material;
-        platLength = ass.GetComponentsInChildren<Transform>().First(r => r.tag == "Platform").GetComponentsInChildren<Transform>().First(r => r.tag == "Platform").localScale.x;
+        platLength = ass.GetComponentsInChildren<Transform>().First(r => r.tag == "Platform").localScale.x;
         ass.transform.parent = ws.gameObject.transform;
         print("NEW PLAT LENGTH " + platLength);
     }
