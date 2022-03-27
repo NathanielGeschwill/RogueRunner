@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ImageCounterUI : MonoBehaviour
 {
     public GameObject imageGO;
+    public GameObject imageNO;
+    public Sprite sActive;
+    public Sprite sInactive;
     public string counterName;
     private int counterAmount = 0;
     private List<GameObject> images = new List<GameObject>();
@@ -35,7 +39,7 @@ public class ImageCounterUI : MonoBehaviour
             if(images.Count >= counterAmount + 1)
             {
                 //print("increase active");
-                images[counterAmount].SetActive(true);
+                images[counterAmount].GetComponent<Image>().sprite = sActive;
             }
             else
             {
@@ -54,7 +58,7 @@ public class ImageCounterUI : MonoBehaviour
         if (name == counterName)
         {
             counterAmount--;
-            images[counterAmount].SetActive(false);
+            images[counterAmount].GetComponent<Image>().sprite = sInactive;
         }
     }
 }
