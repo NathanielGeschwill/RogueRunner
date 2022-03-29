@@ -22,6 +22,7 @@ public class Player : IEntity
     public ParticleSystem jumpPart, landingPart, airjumpPart, damagePart;
 
     private Animator animator;
+    private int ShootLayer;
 
     public float grav = 20;
     public float jumpVelocity = 20; //how much veritcal velocity is given the player when they jump
@@ -101,6 +102,9 @@ public class Player : IEntity
     {
         gm = FindObjectOfType<GameManager>();
         animator = GetComponentInChildren<Animator>();
+        ShootLayer = animator.GetLayerIndex("Shoot");
+        
+        
         animator.SetBool("grounded", false);
 
         rootScale = root.transform.localScale;
@@ -201,6 +205,7 @@ public class Player : IEntity
     // Update is called once per frame
     void Update()
     {
+        
         //Update velocity just for public visual reference in the editor
         rbVelo = rb.velocity;
 
@@ -267,6 +272,8 @@ public class Player : IEntity
                 GameObject newBullet = Instantiate(clip.Pop(), transform.position, Quaternion.identity);
                 attackTimer = ATK_TIME_BETWEEN;
                 newBullet.GetComponent<Bullet>().FireBullet(mouseLoc);
+                animator.SetTrigger("shoot");
+                //animator.SetLayerWeight(ShootLayer, 1);
                 //print(mouseLoc);
             }
 
@@ -304,9 +311,13 @@ public class Player : IEntity
         playerHurtTime -= Time.fixedDeltaTime;
         playerJumppadTime -= Time.fixedDeltaTime;
 
-}
 
-private void FixedUpdate()
+
+    }
+
+
+
+    private void FixedUpdate()
     {
         if(rb.velocity.y < .1 && !isGrounded)
         {

@@ -21,6 +21,7 @@ public class FootSteps : MonoBehaviour
         GameManager.Instance.audiosSources[1].PlayOneShot(clip);
     }
 
+    
     private void Flap()
     {
         if (swap == 0)
