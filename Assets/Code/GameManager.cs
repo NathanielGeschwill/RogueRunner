@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
         {
             if (response.success)
             {
-                Debug.Log("successfully started LootLocker session");
+                //Debug.Log("successfully started LootLocker session");
                 PlayerPrefs.SetString("PlayerID", response.player_id.ToString());
                 done = true;
             }

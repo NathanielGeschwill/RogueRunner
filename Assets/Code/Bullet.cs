@@ -27,7 +27,7 @@ public class Bullet : IEntity
 
     override protected void OnTriggerEnter(Collider other)
     {
-        print("BULLETHIT");
+        //print("BULLETHIT");
         base.OnTriggerEnter(other);
     }
 

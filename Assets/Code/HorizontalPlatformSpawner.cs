@@ -62,6 +62,6 @@ public class HorizontalPlatformSpawner : MonoBehaviour
         ass.GetComponentsInChildren<MeshRenderer>().FirstOrDefault(r => r.tag == "PlatformMat").material = material;
         platLength = ass.GetComponentsInChildren<Transform>().First(r => r.tag == "Platform").localScale.x;
         ass.transform.parent = ws.gameObject.transform;
-        print("NEW PLAT LENGTH " + platLength);
+        //print("NEW PLAT LENGTH " + platLength);
     }
 }

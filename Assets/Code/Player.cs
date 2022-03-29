@@ -102,8 +102,7 @@ public class Player : IEntity
     {
         gm = FindObjectOfType<GameManager>();
         animator = GetComponentInChildren<Animator>();
-        ShootLayer = animator.GetLayerIndex("Shoot");
-        
+        ShootLayer = animator.GetLayerIndex("shoot");
         
         animator.SetBool("grounded", false);
 
@@ -272,7 +271,10 @@ public class Player : IEntity
                 GameObject newBullet = Instantiate(clip.Pop(), transform.position, Quaternion.identity);
                 attackTimer = ATK_TIME_BETWEEN;
                 newBullet.GetComponent<Bullet>().FireBullet(mouseLoc);
+
                 animator.SetTrigger("shoot");
+                animator.SetLayerWeight(1, 1);
+
                 //animator.SetLayerWeight(ShootLayer, 1);
                 //print(mouseLoc);
             }
@@ -454,7 +456,7 @@ public class Player : IEntity
         jumpPad = true;
         animator.SetTrigger("jumpPad");
         animator.SetBool("grounded", false);
-        if (playerJumppadTime > 0 && mul == true) { mul = false; x *= x; print(x); }
+        if (playerJumppadTime > 0 && mul == true) { mul = false; x *= x; /*print(x);*/ }
         gm.worldSpeedChange(mul, x);
         playerJumppadTime = playerJumppadTimer;
     }

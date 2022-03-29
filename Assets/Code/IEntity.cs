@@ -43,7 +43,7 @@ public class IEntity : MonoBehaviour
         //print("RESOLVING");
         if(senderID == gameObject.GetInstanceID())
         {
-            print("DESTORYING " + senderID);
+            //print("DESTORYING " + senderID);
             KillMe();
         }
     }
