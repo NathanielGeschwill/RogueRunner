@@ -7,10 +7,12 @@ public class FootSteps : MonoBehaviour
     public AudioClip[] stepClips;
     public AudioSource altSouce;
     private float swap = 0;
+    private Animator animator;
 
     void Start()
     {
         //altSource = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
     }
 
 
@@ -37,6 +39,10 @@ public class FootSteps : MonoBehaviour
         
     }
 
+    private void ShotEnd()
+    {
+        animator.SetLayerWeight(1, 0);
+    }
     private void Squish()
     {
         if(swap == 0)

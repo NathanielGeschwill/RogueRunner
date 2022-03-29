@@ -23,6 +23,7 @@ public class Player : IEntity
 
     private Animator animator;
     private int ShootLayer;
+    private float shoottime = 0;
 
     public float grav = 20;
     public float jumpVelocity = 20; //how much veritcal velocity is given the player when they jump
@@ -102,8 +103,8 @@ public class Player : IEntity
     {
         gm = FindObjectOfType<GameManager>();
         animator = GetComponentInChildren<Animator>();
-        ShootLayer = animator.GetLayerIndex("shoot");
-        
+        //ShootLayer = animator.GetLayerIndex("Shoot");
+        //Debug.Log(animator.layerCount);
         animator.SetBool("grounded", false);
 
         rootScale = root.transform.localScale;
@@ -204,7 +205,7 @@ public class Player : IEntity
     // Update is called once per frame
     void Update()
     {
-        
+
         //Update velocity just for public visual reference in the editor
         rbVelo = rb.velocity;
 
@@ -272,11 +273,14 @@ public class Player : IEntity
                 attackTimer = ATK_TIME_BETWEEN;
                 newBullet.GetComponent<Bullet>().FireBullet(mouseLoc);
 
-                animator.SetTrigger("shoot");
-                animator.SetLayerWeight(1, 1);
+                //Debug.Log(animator.layerCount);
+                //Debug.Log(animator.GetLayerName(1));
+                //animator.GetLayerIndex();
 
-                //animator.SetLayerWeight(ShootLayer, 1);
-                //print(mouseLoc);
+                shoottime = 1;
+                animator.SetTrigger("shoot");
+                shoottime = 1;
+
             }
 
             OnDecreaseUI?.Invoke("Bullet");
@@ -312,7 +316,6 @@ public class Player : IEntity
         GameManager.Instance.playerGrounded = isGrounded;
         playerHurtTime -= Time.fixedDeltaTime;
         playerJumppadTime -= Time.fixedDeltaTime;
-
 
 
     }
