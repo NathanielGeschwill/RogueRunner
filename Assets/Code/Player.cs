@@ -277,12 +277,15 @@ public class Player : IEntity
                 //Debug.Log(animator.GetLayerName(1));
                 //animator.GetLayerIndex();
 
-                shoottime = 1;
-                animator.SetTrigger("shoot");
+
+                
+                // THE ANIM LAYER IS SET IN FootSteps.cs CAUSE FUCK ME
+                //Nvm this is irrelevant now, but that's where the code was living, ShotStart() and ShotEnd()
                 shoottime = 1;
 
             }
-
+            animator.SetTrigger("shoot");
+            GameManager.Instance.gmScreenShake(.2f, .3f);
             OnDecreaseUI?.Invoke("Bullet");
         }
 

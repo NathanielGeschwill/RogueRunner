@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Jumppad
-  m_Shader: {fileID: -6465566751694194690, guid: bdb5906635944314a9e497e0655fa4be, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 077233feefcd70f4180002a6401c6cfe, type: 3}
   m_ShaderKeywords: _NORMALMAP _SHADOWMIXMODE_MULTIPLY _SHARPRIMLIGHT_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0

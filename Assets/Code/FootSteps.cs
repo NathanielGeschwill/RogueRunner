@@ -39,9 +39,15 @@ public class FootSteps : MonoBehaviour
         
     }
 
+    private void ShotStart()
+    {
+        animator.SetLayerWeight(1, 1);
+        GameManager.Instance.PlayAudio(GameManager.AudioClips.Shoot);
+    }
+
     private void ShotEnd()
     {
-        animator.SetLayerWeight(1, 0);
+        //animator.SetLayerWeight(1, 0);
     }
     private void Squish()
     {

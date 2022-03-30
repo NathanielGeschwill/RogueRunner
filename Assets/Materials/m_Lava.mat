@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: m_Lava
-  m_Shader: {fileID: -6465566751694194690, guid: bdb5906635944314a9e497e0655fa4be, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 077233feefcd70f4180002a6401c6cfe, type: 3}
   m_ShaderKeywords: _SHADOWMIXMODE_MULTIPLY _SHARPRIMLIGHT_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_662eb38086f14f2d82ffd2cb8736ade7:
-        m_Texture: {fileID: 2800000, guid: 752564bf07494c94493b63551512b098, type: 3}
+        m_Texture: {fileID: 2800000, guid: ffd04101fa9006d449f2ba0442d205e1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -96,7 +96,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_baca5be381a4477cb7390caf5d9fd12e: 0.005
+    - Vector1_baca5be381a4477cb7390caf5d9fd12e: 0.0012
+    - Vector1_c9789024e95e4952b485fa2632145aa5: 0.02
+    - Vector1_c9ec441f1ed04d57aa4a67e0c4e58b91: 0
+    - Vector1_f4adb23389e04995b3e518688639cc3a: 1
     - _Amount: 0.000007
     - _Bending: 1
     - _BumpScale: 1
@@ -152,6 +155,7 @@ Material:
     - __dirty: 1
     - _zFix: 0
     m_Colors:
+    - Color_f061cda6409b4f72a4acfbadcf724558: {r: 0.9811321, g: 0.102141015, b: 0, a: 0}
     - _Color: {r: 1, g: 0.13333356, b: 0, a: 1}
     - _EmissionColor: {r: 0.7264151, g: 0, b: 0, a: 1}
     - _LightColor: {r: 1, g: 1, b: 1, a: 1}

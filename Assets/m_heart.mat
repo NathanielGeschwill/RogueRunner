@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: m_heart
-  m_Shader: {fileID: -6465566751694194690, guid: bdb5906635944314a9e497e0655fa4be, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 077233feefcd70f4180002a6401c6cfe, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -81,6 +81,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_baca5be381a4477cb7390caf5d9fd12e: 0.002
+    - Vector1_c9789024e95e4952b485fa2632145aa5: 0
+    - Vector1_c9ec441f1ed04d57aa4a67e0c4e58b91: 0
+    - Vector1_f4adb23389e04995b3e518688639cc3a: 0
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1

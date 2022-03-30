@@ -72,7 +72,7 @@ public class CameraScript : MonoBehaviour
 
        
         transform.position = smoothedPos;
-        cam.gameObject.transform.localPosition = Vector3.Lerp(cam.gameObject.transform.localPosition, camOffset, 2);
+        cam.gameObject.transform.localPosition = Vector3.Lerp(cam.gameObject.transform.localPosition, camOffset, .5f);
     }
 
 }

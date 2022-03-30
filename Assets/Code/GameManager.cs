@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour
         PlayerHurt,
         BatFlap1,
         SpikeTrap,
+        Shoot,
         None
     }
 
@@ -254,7 +255,7 @@ public class GameManager : MonoBehaviour
                 audiosSources[1].PlayOneShot(audioClips[(int)ac]);
                 break;
             case AudioClips.HealthUp:
-                audiosSources[1].PlayOneShot(audioClips[(int)ac]);
+                audiosSources[1].PlayOneShot(audioClips[(int)ac], 2);
                 break;
             case AudioClips.PlayerLand:
                 audiosSources[1].PlayOneShot(audioClips[(int)ac]);
@@ -273,6 +274,9 @@ public class GameManager : MonoBehaviour
                 break;
             case AudioClips.SpikeTrap:
                 audiosSources[2].PlayOneShot(audioClips[(int)ac]);
+                break;
+            case AudioClips.Shoot:
+                audiosSources[1].PlayOneShot(audioClips[(int)ac]);
                 break;
         }
     }

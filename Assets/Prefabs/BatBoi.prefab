@@ -42,7 +42,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 12.2
+  m_Radius: 9
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8248668864747108898
 GameObject:
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathSound: 12
   forceMultiplier: 70
-  death: {fileID: 3826421579672691973}
+  deathpart: {fileID: 0}
   root: {fileID: 1032088194354035299}
 --- !u!54 &6763366151032017669
 Rigidbody:
@@ -502,10 +502,5 @@ PrefabInstance:
 --- !u!4 &7672546067887288041 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1759722715997620639, guid: c8d3cc41011448246a56e53c5a6147e0, type: 3}
-  m_PrefabInstance: {fileID: 8219510790731114358}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &3826421579672691973 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5119396115288097395, guid: c8d3cc41011448246a56e53c5a6147e0, type: 3}
   m_PrefabInstance: {fileID: 8219510790731114358}
   m_PrefabAsset: {fileID: 0}

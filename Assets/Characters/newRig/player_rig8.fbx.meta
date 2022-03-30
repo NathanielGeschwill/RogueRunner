@@ -280,8 +280,15 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.92703867
-        functionName: End
+      - time: 0
+        functionName: ShotStart
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 1
+        functionName: ShotEnd
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
