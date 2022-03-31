@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
 using LootLocker.Requests;
+using UnityEngine.Rendering.PostProcessing;
 using TMPro;
 
 public class GameManager : MonoBehaviour
@@ -17,6 +18,10 @@ public class GameManager : MonoBehaviour
     public GameObject CameraRig;
     [HideInInspector] public float shakeTimer;
     [HideInInspector] public float intensity;
+
+    public PostProcessVolume m_Volume;
+    Bloom bloom;
+    public GameObject procObj;
 
     public FeedbackManaganger fbm;
     public ParticleSystem speedLines;
@@ -82,6 +87,9 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         StartCoroutine(SetupRoutine());
+        //m_Volume = PostProcessManager.instance.QuickVolume(procObj.layer, 100f, bloom);
+        //m_Volume = procObj.GetComponent<PostProcessVolume>();
+        //bloom.intensity.value = 0;
     }
 
     IEnumerator LoginRoutine()

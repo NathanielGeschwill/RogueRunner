@@ -173,6 +173,7 @@ public class Player : IEntity
             if (((GameObject)hitObject).GetInstanceID() == gameObject.GetInstanceID() && !GameManager.Instance.playerTooFast())
             {
                 GameManager.Instance.gmScreenShake(.2f, .4f);
+                
                 OnDecreaseUI?.Invoke("Heart");
                 base.LoseHealth(hitObject, amount);
                 animator.SetTrigger("hurt");
