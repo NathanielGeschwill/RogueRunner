@@ -6,6 +6,8 @@ public class Bullet : IEntity
 {
     public float speed;
     private Rigidbody rb;
+    public ParticleSystem shootPart;
+    
 
     void Awake()
     {
@@ -20,6 +22,7 @@ public class Bullet : IEntity
 
     public void FireBullet(Vector3 location)
     {
+        //GameManager.Instance.fbm.PlayFeedback("ShootFeedback", shootPart);
         Vector3 dir = location - transform.position;
         dir = dir.normalized;
         rb.velocity = dir * speed;

@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     public FeedbackManaganger fbm;
     public ParticleSystem speedLines;
 
+    
+
     public WorldSpawn ws;
 
     public bool TESTING_ZEROSPEED;
@@ -90,6 +92,7 @@ public class GameManager : MonoBehaviour
         //m_Volume = PostProcessManager.instance.QuickVolume(procObj.layer, 100f, bloom);
         //m_Volume = procObj.GetComponent<PostProcessVolume>();
         //bloom.intensity.value = 0;
+        m_Volume.profile.TryGetSettings(out bloom);
     }
 
     IEnumerator LoginRoutine()

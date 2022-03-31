@@ -19,7 +19,7 @@ public class Player : IEntity
     //For Feedbacks / communicating with FeedbackManager 
     public GameObject root;
     public Vector3 rootScale;
-    public ParticleSystem jumpPart, landingPart, airjumpPart, damagePart;
+    public ParticleSystem jumpPart, landingPart, airjumpPart, damagePart, shootPart;
 
     private Animator animator;
     private int ShootLayer;
@@ -110,6 +110,7 @@ public class Player : IEntity
         rootScale = root.transform.localScale;
         currentCol = new List<GameObject>();
 
+        //Initialize UI and clear clip 
         MaxAmmo(bulletPrefab);
         OnDecreaseUI?.Invoke("Bullet");
         OnDecreaseUI?.Invoke("Bullet");
@@ -274,19 +275,12 @@ public class Player : IEntity
                 attackTimer = ATK_TIME_BETWEEN;
                 newBullet.GetComponent<Bullet>().FireBullet(mouseLoc);
 
-                //Debug.Log(animator.layerCount);
-                //Debug.Log(animator.GetLayerName(1));
-                //animator.GetLayerIndex();
-
-
-                
                 // THE ANIM LAYER IS SET IN FootSteps.cs CAUSE FUCK ME
                 //Nvm this is irrelevant now, but that's where the code was living, ShotStart() and ShotEnd()
-                shoottime = 1;
-
             }
             animator.SetTrigger("shoot");
             GameManager.Instance.gmScreenShake(.2f, .3f);
+            GameManager.Instance.fbm.PlayFeedback("ShootFeedback", shootPart, rootScale, root);
             OnDecreaseUI?.Invoke("Bullet");
         }
 
