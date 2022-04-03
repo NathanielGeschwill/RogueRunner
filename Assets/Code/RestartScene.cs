@@ -16,6 +16,7 @@ public class RestartScene : MonoBehaviour
     public void Reload()
     {
         Time.timeScale = 1f;
+        GameManager.Instance.ResetLocalFlag();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

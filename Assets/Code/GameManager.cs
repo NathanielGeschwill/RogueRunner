@@ -9,7 +9,9 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public Text distanceText;//, loseText, highscoreText;
+    public Text distanceText, youRanText;
+    
+    public TextMeshProUGUI lPlayerNames, lPlayerScores;
 
     private static GameManager instance;
     public TMP_InputField playerNameField;
@@ -63,6 +65,8 @@ public class GameManager : MonoBehaviour
     public AudioClip[] audioClips;
 
     public Leaderboard leaderboard;
+    private bool isHighestLocalScore = false;
+    private int localIndex = -1;
 
     public enum AudioClips
     {
@@ -122,28 +126,87 @@ public class GameManager : MonoBehaviour
         //yield return leaderboard.FetchTopHighscoreRoutine();
     }
 
+    public void ResetLocalFlag()
+    {
+        isHighestLocalScore = false;
+        localIndex = -1;
+    }
+
+    public IEnumerator SlideLocalScores()
+    {
+        print("AT INDEX " + localIndex);
+        bool done = false;
+        for (int i = 9; i > localIndex; i--)
+        {
+            print("SLIDE " + (int)(i - 1)+"SCORE"+ PlayerPrefs.GetInt("HS" + (int)(i - 1), 0) + " TO " + i + "SCORE" + PlayerPrefs.GetInt("HS" + i, 0));
+            PlayerPrefs.SetInt("HS" + i, PlayerPrefs.GetInt("HS" + (int)(i-1), 0));
+            PlayerPrefs.SetString("HN" + i, PlayerPrefs.GetString("HN" + (int)(i-1), "-----"));
+        }
+        done = true;
+
+        yield return new WaitWhile(() => done == false);
+    }
+
     public IEnumerator SetLoseText()
     {
-        yield return leaderboard.SubmitScoreRoutine((int)(Mathf.Round(distanceTraveled * 100f) / 100f));
+        int score = (int)(Mathf.Round(distanceTraveled * 100f) / 100f);
+        yield return leaderboard.SubmitScoreRoutine(score);
         yield return leaderboard.FetchTopHighscoreRoutine();
 
 
-        //print("SETLOSETEXT");
-        //if(PlayerPrefs.GetFloat("Highscore", 0f) < Mathf.Round(distanceTraveled * 100f) / 100f)
-        //{
-        //    loseText.text = "HIGHSCORE!\n\nYou ran: " + Mathf.Round(distanceTraveled * 100f) / 100f;
-        //    PlayerPrefs.SetFloat("Highscore", Mathf.Round(distanceTraveled * 100f) / 100f);
-        //}
-        //else
-        //{
-        //    loseText.text = "You ran: " + Mathf.Round(distanceTraveled * 100f) / 100f;
-        //}
-        //highscoreText.text = "Highscore: " + PlayerPrefs.GetFloat("Highscore");
+        print("SETLOSETEXT");
+        for (int i = 0; i < 10; i++)
+        {
+            youRanText.text = "You ran: " + score;
+            if (PlayerPrefs.GetInt("HS" + i, 0) < score && i == 0 ||
+                i != 0 && PlayerPrefs.GetInt("HS" + i, 0) < score && PlayerPrefs.GetInt("HS" + (int)(i - 1), 0) >= score)
+            {
+                localIndex = i;
+                yield return SlideLocalScores();
+                youRanText.text = "HIGHSCORE\nYou ran: " + score;
+                PlayerPrefs.SetInt("HS" + i, score);
+                PlayerPrefs.SetString("HN" + i, "YOUR NAME");
+                if (i == 0)
+                {
+                    isHighestLocalScore = true;
+                }
+                
+                break;
+            }
+        }
+
+        
+        ShowLocalScores();
+    }
+
+    public void ShowLocalScores()
+    {
+        string tempPlayerNames = "Names\n";
+        string tempPlayerScores = "Scores\n";
+
+        for (int i = 0; i < 10; i++)
+        {
+            tempPlayerNames += PlayerPrefs.GetString("HN" + i, "-----") + ". ";
+            tempPlayerScores += PlayerPrefs.GetInt("HS" + i, 0);
+            tempPlayerScores += "\n";
+            tempPlayerNames += "\n";
+        }
+        lPlayerNames.text = tempPlayerNames;
+        lPlayerScores.text = tempPlayerScores;
     }
 
     public void SetPlayerName()
     {
-        StartCoroutine(SetPlayerNameRoutine());
+        if (isHighestLocalScore)
+        {
+            StartCoroutine(SetPlayerNameRoutine());
+        }
+        if(localIndex != -1)
+        {
+            PlayerPrefs.SetString("HN" + localIndex, playerNameField.text);
+            ShowLocalScores();
+        }
+        
     }
 
     IEnumerator SetPlayerNameRoutine()
