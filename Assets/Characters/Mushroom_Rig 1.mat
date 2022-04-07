@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Mushroom_Rig 1
-  m_Shader: {fileID: 4800000, guid: c606c4bcff0088d4e922037ecb4aeb53, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 077233feefcd70f4180002a6401c6cfe, type: 3}
   m_ShaderKeywords: _NORMALMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,6 +19,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_662eb38086f14f2d82ffd2cb8736ade7:
+        m_Texture: {fileID: 2800000, guid: e27c0a8007418cb47bb6f3fc2dc761b8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: 5f67657f0f0e25341bba3f5abad1c2de, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -55,7 +59,23 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_baca5be381a4477cb7390caf5d9fd12e: 0.0005
+    - Vector1_c9789024e95e4952b485fa2632145aa5: 0
+    - Vector1_c9ec441f1ed04d57aa4a67e0c4e58b91: 0
+    - Vector1_f4adb23389e04995b3e518688639cc3a: 0
     - _Amount: 0.002
     - _Bending: 1
     - _BumpScale: 1
