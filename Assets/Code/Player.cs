@@ -305,7 +305,7 @@ public class Player : IEntity
             }
         }
 
-        text.text = " Dist: " + GameManager.Instance.distanceTraveled.ToString("F1");// + " wspd: " + GameManager.Instance.worldSpeed.ToString("F1") + " toofast: " + GameManager.Instance.playerTooFast();
+        text.text = "too fast: " + GameManager.Instance.playerTooFast() + " HurtTimer " + Mathf.Round(playerHurtTime) + "\n player health: " + health;// + " wspd: " + GameManager.Instance.worldSpeed.ToString("F1") + " toofast: " + GameManager.Instance.playerTooFast();
                                                                                      //text.text = " wspd: " + GameManager.Instance.worldSpeed.ToString("F1") + " Target: "+ GameManager.Instance.targetWorldSpeed.ToString("F1")  + " toofast: " + GameManager.Instance.playerTooFast();
 
         if (!isHoldingJump) { animator.SetBool("isHoldingJump", false); }
