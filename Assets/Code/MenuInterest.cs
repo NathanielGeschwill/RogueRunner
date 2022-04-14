@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using LootLocker.Requests;
+using TMPro;
 using UnityEngine;
 
 public class MenuInterest : MonoBehaviour
@@ -15,6 +17,9 @@ public class MenuInterest : MonoBehaviour
     public GameObject hsUI;
     public GameObject menuUI;
 
+    public Leaderboard leaderboard;
+    public TextMeshProUGUI lPlayerNames, lPlayerScores;
+
     public float smoothPos;
     public float smoothRot;
     // Start is called before the first frame update
@@ -22,7 +27,7 @@ public class MenuInterest : MonoBehaviour
     {
         Time.timeScale = 1f;
         start = transform;
-
+        StartCoroutine(SetupRoutine());
         smoothPos = .09f;
         smoothRot = .2f;
     }
@@ -60,6 +65,8 @@ public class MenuInterest : MonoBehaviour
     {
         menuUI.SetActive(false);
         hsUI.SetActive(true);
+        ShowOnlineScores();
+        ShowLocalScores();
         menu = true;
     }
 
@@ -69,4 +76,58 @@ public class MenuInterest : MonoBehaviour
         hsUI.SetActive(false);
         menu = false;
     }
+
+    IEnumerator SetupRoutine()
+    {
+        yield return LoginRoutine();
+        //yield return leaderboard.FetchTopHighscoreRoutine();
+    }
+
+    IEnumerator LoginRoutine()
+    {
+        bool done = false;
+        LootLockerSDKManager.StartGuestSession((response) =>
+        {
+            if (response.success)
+            {
+                //Debug.Log("successfully started LootLocker session");
+                PlayerPrefs.SetString("PlayerID", response.player_id.ToString());
+                done = true;
+            }
+            else
+            {
+                Debug.Log("error starting LootLocker session");
+                done = true;
+            }
+
+        });
+        yield return new WaitWhile(() => done == false);
+    }
+
+    public void ShowOnlineScores()
+    {
+        StartCoroutine(leaderboard.FetchTopHighscoreRoutine());
+    }
+
+    public void ShowLocalScores()
+    {
+        string tempPlayerNames = "Names\n";
+        string tempPlayerScores = "Scores\n";
+
+        for (int i = 0; i < 10; i++)
+        {
+            tempPlayerNames += PlayerPrefs.GetString("HN" + i, "-----") + ". ";
+            tempPlayerScores += PlayerPrefs.GetInt("HS" + i, 0);
+            tempPlayerScores += "\n";
+            tempPlayerNames += "\n";
+        }
+        lPlayerNames.text = tempPlayerNames;
+        lPlayerScores.text = tempPlayerScores;
+    }
+
+   /* public IEnumerator ShowOnlineScores()
+    {
+        yield return leaderboard.FetchTopHighscoreRoutine();
+    }*/
+    
 }

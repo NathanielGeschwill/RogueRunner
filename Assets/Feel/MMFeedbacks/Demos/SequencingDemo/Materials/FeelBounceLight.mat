@@ -8,9 +8,9 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: FeelBounceLight
-  m_Shader: {fileID: 4800000, guid: 2eb949f991423d84da9d342b30d50826, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: aae6c6ed70e476b42916a8c11c15104a, type: 3}
   m_ShaderKeywords: _EMISSION _FLIPBOOKBLENDING_OFF
-  m_LightmapFlags: 1
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -19,6 +19,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_662eb38086f14f2d82ffd2cb8736ade7:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -76,6 +80,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_baca5be381a4477cb7390caf5d9fd12e: 0.0005
     - _AlphaClip: 0
     - _Amount: 0.00009
     - _Bending: 0
@@ -124,6 +129,7 @@ Material:
     - _ZWrite: 1
     - _zFix: 0
     m_Colors:
+    - Color_f061cda6409b4f72a4acfbadcf724558: {r: 1, g: 1, b: 1, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: 0, b: 0, a: 0}
