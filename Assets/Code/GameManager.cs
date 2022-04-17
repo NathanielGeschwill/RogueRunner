@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     public FeedbackManaganger fbm;
     public ParticleSystem speedLines;
 
-    
+    public bool bossMode;
 
     public WorldSpawn ws;
 
