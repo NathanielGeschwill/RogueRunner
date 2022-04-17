@@ -17,8 +17,9 @@ public class HorizontalPlatformSpawner : MonoBehaviour
     private Material material;
     float platLength = 16f;
     float DEFAULT_PLAT_LENGTH = 16f;
+    int levelId = -1;
 
-    public void SetWorldSpawn(WorldSpawn ws, HorizontalPlatformSO hpso, Material material)
+    public void SetWorldSpawn(WorldSpawn ws, HorizontalPlatformSO hpso, Material material, int lvlId)
     {
         this.ws = ws;
         this.hpso = hpso;
@@ -26,11 +27,12 @@ public class HorizontalPlatformSpawner : MonoBehaviour
         nextDistanceToSpawn = GameManager.Instance.distanceTraveled + hpso.distanceBetweenPlats + platLength - DEFAULT_PLAT_LENGTH;
         readyToSpawn = true;
         this.material = material;
+        levelId = lvlId;
     }
 
     private void Update()
     {
-        if(readyToSpawn && nextDistanceToSpawn <= GameManager.Instance.distanceTraveled)
+        if(readyToSpawn && nextDistanceToSpawn <= GameManager.Instance.distanceTraveled && (!GameManager.Instance.bossMode || (levelId == 0 || levelId == 1)))
         {
             if (RollChanceToSpawn())
             {
