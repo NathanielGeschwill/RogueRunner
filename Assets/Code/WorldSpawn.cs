@@ -38,15 +38,15 @@ public class WorldSpawn : MonoBehaviour
 
             if(h.yLevel >= skyLevel)
             {
-                hps[hps.Count - 1].SetWorldSpawn(this, h, materials[2]);
+                hps[hps.Count - 1].SetWorldSpawn(this, h, materials[2], hps.Count - 1);
             }
             else if(h.yLevel <= hellLevel)
             {
-                hps[hps.Count - 1].SetWorldSpawn(this, h, materials[0]);
+                hps[hps.Count - 1].SetWorldSpawn(this, h, materials[0], hps.Count - 1);
             }
             else
             {
-                hps[hps.Count - 1].SetWorldSpawn(this, h, materials[1]);
+                hps[hps.Count - 1].SetWorldSpawn(this, h, materials[1], hps.Count - 1);
             }
             
         }
