@@ -8,7 +8,9 @@ public class MenuInterest : MonoBehaviour
 {
     public GameObject cam1;
     public GameObject cam2;
-    public GameObject camMenu;
+    public GameObject cam3;
+    public GameObject cam4;
+    
     private Transform start;
     private Vector3 n;
     private Quaternion o;
@@ -37,10 +39,12 @@ public class MenuInterest : MonoBehaviour
     {
         //Debug.Log(Camera.main.ScreenToViewportPoint(Input.mousePosition));
         Vector3 m = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+
         if (menu)
         {
-            n = camMenu.transform.position;
-        }
+            n = Vector3.Lerp(cam3.transform.position, cam4.transform.position, m.y);
+            o = Quaternion.Lerp(cam3.transform.rotation, cam4.transform.rotation, m.x);
+        } 
         else
         {
             n = Vector3.Lerp(cam1.transform.position, cam2.transform.position, m.y);
@@ -111,8 +115,8 @@ public class MenuInterest : MonoBehaviour
 
     public void ShowLocalScores()
     {
-        string tempPlayerNames = "Names\n";
-        string tempPlayerScores = "Scores\n";
+        string tempPlayerNames = "\n";
+        string tempPlayerScores = "\n";
 
         for (int i = 0; i < 10; i++)
         {

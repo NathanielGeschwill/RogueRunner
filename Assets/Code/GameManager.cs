@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
         bool done = false;
         for (int i = 9; i > localIndex; i--)
         {
-            print("SLIDE " + (int)(i - 1)+"SCORE"+ PlayerPrefs.GetInt("HS" + (int)(i - 1), 0) + " TO " + i + "SCORE" + PlayerPrefs.GetInt("HS" + i, 0));
+            //print("SLIDE " + (int)(i - 1)+"SCORE"+ PlayerPrefs.GetInt("HS" + (int)(i - 1), 0) + " TO " + i + "SCORE" + PlayerPrefs.GetInt("HS" + i, 0));
             PlayerPrefs.SetInt("HS" + i, PlayerPrefs.GetInt("HS" + (int)(i-1), 0));
             PlayerPrefs.SetString("HN" + i, PlayerPrefs.GetString("HN" + (int)(i-1), "-----"));
         }
@@ -181,12 +181,12 @@ public class GameManager : MonoBehaviour
 
     public void ShowLocalScores()
     {
-        string tempPlayerNames = "Names\n";
-        string tempPlayerScores = "Scores\n";
+        string tempPlayerNames = " \n";
+        string tempPlayerScores = " \n";
 
         for (int i = 0; i < 10; i++)
         {
-            tempPlayerNames += PlayerPrefs.GetString("HN" + i, "-----") + ". ";
+            tempPlayerNames += PlayerPrefs.GetString("HN" + i, "-----") + " ";
             tempPlayerScores += PlayerPrefs.GetInt("HS" + i, 0);
             tempPlayerScores += "\n";
             tempPlayerNames += "\n";
