@@ -64468,6 +64468,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2b3a794b628cb184a969523820e33347, type: 2}
   - {fileID: 11400000, guid: 17ddccb52ac793d43ab3f066baaa3bec, type: 2}
   - {fileID: 11400000, guid: 217bca17fa0e194448869b5c54c215aa, type: 2}
+  bossHPSOS:
+  - {fileID: 11400000, guid: ea524e43627326945b6741014d14e43c, type: 2}
+  - {fileID: 11400000, guid: 7cc628f93296ac6459b83c85afd176db, type: 2}
+  - {fileID: 11400000, guid: f34aa2965fadc8f4aa6e9c768123238a, type: 2}
   materials:
   - {fileID: 2100000, guid: c59e50a8d88b51a46b4e320b4a8aef8f, type: 2}
   - {fileID: 2100000, guid: e01b1af9b2bca70468370c9ce68c6982, type: 2}
@@ -94852,7 +94856,9 @@ MonoBehaviour:
   procObj: {fileID: 1495940880}
   fbm: {fileID: 1592850731}
   speedLines: {fileID: 563587563}
-  ws: {fileID: 0}
+  bossMode: 0
+  bossPlat: {fileID: 3467020093605018701, guid: c87d0d4ced712d942aac4cece6983568, type: 3}
+  ws: {fileID: 1245215251}
   TESTING_ZEROSPEED: 0
   pauseUI: {fileID: 387663791}
   gameUI: {fileID: 669731389}
@@ -94925,6 +94931,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 77ad4ad9bd41fac4eb18b3e26db4aa75, type: 3}
   - {fileID: 8300000, guid: 146916230e6167044adcf50ff6339994, type: 3}
   leaderboard: {fileID: 471384628}
+  bossLevelId: 0
 --- !u!4 &2102780887
 Transform:
   m_ObjectHideFlags: 0
