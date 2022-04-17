@@ -120,7 +120,7 @@ public class MenuInterest : MonoBehaviour
 
         for (int i = 0; i < 10; i++)
         {
-            tempPlayerNames += PlayerPrefs.GetString("HN" + i, "-----") + ". ";
+            tempPlayerNames += PlayerPrefs.GetString("HN" + i, "-----") + " ";
             tempPlayerScores += PlayerPrefs.GetInt("HS" + i, 0);
             tempPlayerScores += "\n";
             tempPlayerNames += "\n";
