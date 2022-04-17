@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
     public ParticleSystem speedLines;
 
     public bool bossMode;
+    private float bossDistance = 1000f;
+    public GameObject bossPlat;
 
     public WorldSpawn ws;
 
@@ -67,6 +69,9 @@ public class GameManager : MonoBehaviour
     public Leaderboard leaderboard;
     private bool isHighestLocalScore = false;
     private int localIndex = -1;
+
+    [HideInInspector]
+    public int bossLevelId;
 
     public enum AudioClips
     {
@@ -250,6 +255,15 @@ public class GameManager : MonoBehaviour
         targetSpeedandDist = targetWorldSpeed + ((Mathf.Round(distanceTraveled * 100f) / 100f) / 250);
         Mathf.Clamp(targetSpeedandDist, 0, 48);
 
+        bossDistance -= worldSpeed * Time.deltaTime;
+        if(bossDistance <= 0)
+        {
+            bossLevelId = Random.Range(0, 3) * 3;
+            bossDistance = 1000f;
+            bossMode = true;
+            ws.SpawnBoss(bossLevelId);
+        }
+
         if (TESTING_ZEROSPEED)
         {
             worldSpeed = 0;
@@ -297,6 +311,7 @@ public class GameManager : MonoBehaviour
             if(audiosSources[3].volume != 0f) { audiosSources[3].volume -= 0.2f; }
             speedLines.gameObject.SetActive(false); //print(audiosSources[0].volume.ToString());
         }
+
 
     }
 

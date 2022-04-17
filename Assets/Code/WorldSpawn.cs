@@ -5,6 +5,7 @@ using UnityEngine;
 public class WorldSpawn : MonoBehaviour
 {
     public HorizontalPlatformSO[] hpsos;
+    public HorizontalPlatformSO[] bossHPSOS;
     private List<HorizontalPlatformSpawner> hps = new List<HorizontalPlatformSpawner>();
     public Material[] materials;
     private float hellLevel = 0.0f;
@@ -38,18 +39,23 @@ public class WorldSpawn : MonoBehaviour
 
             if(h.yLevel >= skyLevel)
             {
-                hps[hps.Count - 1].SetWorldSpawn(this, h, materials[2], hps.Count - 1);
+                hps[hps.Count - 1].SetWorldSpawn(this, h, bossHPSOS[(hps.Count - 1) % 3], materials[2], hps.Count - 1);
             }
             else if(h.yLevel <= hellLevel)
             {
-                hps[hps.Count - 1].SetWorldSpawn(this, h, materials[0], hps.Count - 1);
+                hps[hps.Count - 1].SetWorldSpawn(this, h, bossHPSOS[(hps.Count - 1) % 3], materials[0], hps.Count - 1);
             }
             else
             {
-                hps[hps.Count - 1].SetWorldSpawn(this, h, materials[1], hps.Count - 1);
+                hps[hps.Count - 1].SetWorldSpawn(this, h, bossHPSOS[(hps.Count - 1) % 3], materials[1], hps.Count - 1);
             }
-            
+            print(bossHPSOS[(hps.Count - 1) % 3]);
         }
+    }
+
+    public void SpawnBoss(int id)
+    {
+        hps[id].SpawnBoss();
     }
 
     // Update is called once per frame
