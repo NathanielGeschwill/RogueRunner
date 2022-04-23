@@ -54,6 +54,7 @@ public class HorizontalPlatformSpawner : MonoBehaviour
         }
         else if(readyToSpawn && nextDistanceToSpawn <= GameManager.Instance.distanceTraveled && GameManager.Instance.bossMode && 
             (levelId == GameManager.Instance.bossLevelId || levelId == GameManager.Instance.bossLevelId + 1 || levelId == GameManager.Instance.bossLevelId + 2)){
+            print("BOSS PLAT SPAWNING");
             if (RollChanceToSpawn(bossHPSO))
             {
                 nextDistanceToSpawn = GameManager.Instance.distanceTraveled + bossHPSO.distanceBetweenPlats + platLength - DEFAULT_PLAT_LENGTH;

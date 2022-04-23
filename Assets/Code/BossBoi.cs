@@ -16,8 +16,8 @@ public class BossBoi : IEntity
     private Vector3 vectorFromPlayer;
 
     public ParticleSystem deathpart;
-    public GameObject root;
-    private Vector3 rootScale;
+    //public GameObject root;
+    //private Vector3 rootScale;
 
     //private bool lockOn = false;
     //private float lockOnTimer;
@@ -41,20 +41,20 @@ public class BossBoi : IEntity
 
     void Start()
     {
-        player = GameManager.Instance.player;
-        rb = GetComponent<Rigidbody>();
-        rb.velocity = new Vector3(-GameManager.Instance.worldSpeed, 0, 0); //NEGATIVE WorldSpeed
-        //dashTimer = DASH_TIMER;
-        tagsICanHit = new List<string> { "Player" };
-        damage = 1;
-        rootScale = root.transform.localScale;
+        //player = GameManager.Instance.player;
+        //rb = GetComponent<Rigidbody>();
+        //rb.velocity = new Vector3(-GameManager.Instance.worldSpeed, 0, 0); //NEGATIVE WorldSpeed
+        ////dashTimer = DASH_TIMER;
+        //tagsICanHit = new List<string> { "Player" };
+        //damage = 1;
+        ////rootScale = root.transform.localScale;
 
-        //animator = GetComponentInChildren<Animator>();// This code is on the Prefab, the aimator that needs to be accessed is on the rig. Prefab may need to be rearranged to make this work?
-        //animator.SetBool("isAttacking", false);//
-        //animator.SetBool("Dash", false);//
-        //Debug.Log(animator);
-        deathSound = GameManager.AudioClips.BatDeath;
-        //flapSource = GetComponent<AudioSource>();
+        ////animator = GetComponentInChildren<Animator>();// This code is on the Prefab, the aimator that needs to be accessed is on the rig. Prefab may need to be rearranged to make this work?
+        ////animator.SetBool("isAttacking", false);//
+        ////animator.SetBool("Dash", false);//
+        ////Debug.Log(animator);
+        //deathSound = GameManager.AudioClips.BatDeath;
+        ////flapSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -104,7 +104,7 @@ public class BossBoi : IEntity
         if (other.gameObject.tag == "Player" && !isAttacking && !alreadyAttacked)
         {
             //lockOn = true;
-            transform.parent = other.gameObject.transform;
+            //transform.parent = other.gameObject.transform;
             Vector3 dir = player.transform.position - transform.position;
             vectorFromPlayer = transform.position - player.transform.position;
             dir = dir.normalized;

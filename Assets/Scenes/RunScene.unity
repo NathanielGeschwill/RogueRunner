@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.49410856, g: 0.6333018, b: 0.72156674, a: 1}
+  m_IndirectSpecularColor: {r: 0.6757518, g: 0.77903193, b: 0.7893772, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6263,7 +6263,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -64469,9 +64469,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 17ddccb52ac793d43ab3f066baaa3bec, type: 2}
   - {fileID: 11400000, guid: 217bca17fa0e194448869b5c54c215aa, type: 2}
   bossHPSOS:
-  - {fileID: 11400000, guid: ea524e43627326945b6741014d14e43c, type: 2}
-  - {fileID: 11400000, guid: 7cc628f93296ac6459b83c85afd176db, type: 2}
-  - {fileID: 11400000, guid: f34aa2965fadc8f4aa6e9c768123238a, type: 2}
+  - {fileID: 11400000, guid: 7f3c288aa95d0a84594cc834b1cfe6f8, type: 2}
+  - {fileID: 11400000, guid: c060cc1829ee12748a04914032ff9765, type: 2}
+  - {fileID: 11400000, guid: 47cee9de0fefb114eaed605d2b25c130, type: 2}
   materials:
   - {fileID: 2100000, guid: c59e50a8d88b51a46b4e320b4a8aef8f, type: 2}
   - {fileID: 2100000, guid: e01b1af9b2bca70468370c9ce68c6982, type: 2}

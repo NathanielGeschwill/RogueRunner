@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     public ParticleSystem speedLines;
 
     public bool bossMode;
-    private float bossDistance = 1000f;
+    private float bossDistance = 200f;
     public GameObject bossPlat;
 
     public WorldSpawn ws;
@@ -261,7 +261,7 @@ public class GameManager : MonoBehaviour
             bossLevelId = Random.Range(0, 3) * 3;
             bossDistance = 1000f;
             bossMode = true;
-            ws.SpawnBoss(bossLevelId);
+            ws.SpawnBoss(0);
         }
 
         if (TESTING_ZEROSPEED)
