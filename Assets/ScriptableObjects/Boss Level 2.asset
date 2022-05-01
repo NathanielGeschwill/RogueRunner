@@ -10,15 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1559288b2f2d6b4aa82cdf928aa9431, type: 3}
-  m_Name: Level 1
+  m_Name: Boss Level 2
   m_EditorClassIdentifier: 
-  yLevel: -30
-  distanceBetweenPlats: 27
-  chanceToSpawn: 0.7
+  yLevel: -13
+  distanceBetweenPlats: 33.75
+  chanceToSpawn: 0.5
   potentialPlatforms:
+  - {fileID: 8333434254429824962, guid: 3ddb8d5c681b91f4088506828ef95707, type: 3}
   - {fileID: 3467020093605018701, guid: 043f8c9eb2086fe448f2f008c60237e9, type: 3}
   - {fileID: 3467020093605018701, guid: 043f8c9eb2086fe448f2f008c60237e9, type: 3}
   - {fileID: 3467020093605018701, guid: 043f8c9eb2086fe448f2f008c60237e9, type: 3}
   - {fileID: 3467020093605018701, guid: 043f8c9eb2086fe448f2f008c60237e9, type: 3}
-  - {fileID: 3467020093605018701, guid: 043f8c9eb2086fe448f2f008c60237e9, type: 3}
-  - {fileID: 3467020093605018701, guid: c87d0d4ced712d942aac4cece6983568, type: 3}

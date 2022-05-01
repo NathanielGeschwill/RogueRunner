@@ -4,28 +4,18 @@ using UnityEngine;
 
 public class BossBoi : IEntity
 {
+    public GameObject bossProjClone;
+    List<BossProj> projectiles = new List<BossProj>();
     private GameObject player;
     private Rigidbody rb;
-    //private Animator animator;//
-    public float forceMultiplier;
-    //private float dashTimer;
-    //private const float DASH_TIMER = 2.0f;
+    private float shootTimer;
+    private const float SHOOT_TIMER = 1f;
     private bool isAttacking = false;
     private bool alreadyAttacked = false;
-    //private float distToPlayerX = 3.0f;
-    private Vector3 vectorFromPlayer;
+    public float targetY;
+    private Vector3 targetVector = new Vector3(35f, 0f, 0f);
 
     public ParticleSystem deathpart;
-    //public GameObject root;
-    //private Vector3 rootScale;
-
-    //private bool lockOn = false;
-    //private float lockOnTimer;
-
-    //private float flapSoundTimer = 0f;
-    //private float FLAP_SOUND_TIMER = 1f;
-
-    //private AudioSource flapSource;
 
     override protected void OnEnable()
     {
@@ -41,61 +31,56 @@ public class BossBoi : IEntity
 
     void Start()
     {
-        //player = GameManager.Instance.player;
-        //rb = GetComponent<Rigidbody>();
-        //rb.velocity = new Vector3(-GameManager.Instance.worldSpeed, 0, 0); //NEGATIVE WorldSpeed
-        ////dashTimer = DASH_TIMER;
-        //tagsICanHit = new List<string> { "Player" };
-        //damage = 1;
-        ////rootScale = root.transform.localScale;
+        shootTimer = SHOOT_TIMER;
+        for (int i = 0; i < 20; i++)
+        {
+            GameObject obj = Instantiate(bossProjClone);
+            projectiles.Add(obj.GetComponent<BossProj>());
+            obj.SetActive(false);
+        }
 
-        ////animator = GetComponentInChildren<Animator>();// This code is on the Prefab, the aimator that needs to be accessed is on the rig. Prefab may need to be rearranged to make this work?
-        ////animator.SetBool("isAttacking", false);//
-        ////animator.SetBool("Dash", false);//
-        ////Debug.Log(animator);
-        //deathSound = GameManager.AudioClips.BatDeath;
-        ////flapSource = GetComponent<AudioSource>();
+
+        player = GameManager.Instance.player;
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
-        //if (lockOn) { lockOnTimer += Time.fixedDeltaTime; }
+        print("Boss VEL: " + rb.velocity);
 
         if (isAttacking)
         {
-            //dashTimer -= Time.deltaTime;
-            //rb.velocity = new Vector3(0, player.GetComponent<Player>().rb.velocity.y, 0);
-
-            //Further bat is from you, the faster the locked on Animation plays
-            //if (Vector3.Distance(transform.position, player.transform.position + vectorFromPlayer) > 2.1f)
-            //{ animator.SetFloat("DashDist", Mathf.Clamp(Vector3.Distance(transform.position, player.transform.position + vectorFromPlayer), 1, 3.6f)); }
-            //else { animator.SetFloat("DashDist", 1); }
-
-            rb.MovePosition(Vector3.Lerp(transform.position, player.transform.position + vectorFromPlayer, (.25f) / (player.transform.position - transform.position).magnitude * 2));
-            //float f = ((lockOnTimer + .01f) * .05f); Mathf.Clamp(f, 0.01f, .25f); 
-            //rb.MovePosition(Vector3.Lerp(transform.position, player.transform.position+vectorFromPlayer,  f / (player.transform.position - transform.position).magnitude * 2));
-        }
-
-        //if (isAttacking && dashTimer <= 0)
-        //{
-        //    Vector3 dir = player.transform.position - transform.position;
-        //    dir = dir.normalized;
-        //    rb.velocity = dir * forceMultiplier;
-        //    dashTimer = DASH_TIMER;
-        //    //transform.LookAt(player.transform);
-        //    animator.SetBool("Dash", true); //
-        //    isAttacking = false;
-        //    GameManager.Instance.PlayAudio(GameManager.AudioClips.BatDash);
-        //}
-
-        if (!isAttacking)
-        {/*
-            flapSoundTimer += Time.deltaTime;
-            if(flapSoundTimer >= FLAP_SOUND_TIMER)
+            shootTimer -= Time.deltaTime;
+            if(shootTimer <= 0f)
             {
-                flapSource.PlayOneShot(GameManager.Instance.audioClips[(int)GameManager.AudioClips.BatFlap]);
-                flapSoundTimer = 0;
-            }*/
+                ShootProj();
+            }
+            //print("Boss Attacking");
+            Vector3 currentLookAt = transform.position + (transform.forward * 10);
+            transform.LookAt(Vector3.Lerp(currentLookAt, player.transform.position, .0013f));
+            //print("PLAYER POS " + player.transform.position);
+            //print("CURR POS " + transform.position);
+            rb.MovePosition(Vector3.Lerp(transform.position, player.transform.position + targetVector, (.25f) / (player.transform.position - transform.position).magnitude * 2));
+        }
+    }
+
+    private void ShootProj()
+    {
+        print("SHOOT PROJ");
+        for (int i = 0; i < projectiles.Count; i++)
+        {
+            if (!projectiles[i].gameObject.activeInHierarchy)
+            {
+                print("FOUND PROJ");
+                print(transform.position);
+                projectiles[i].transform.position = transform.position + transform.forward * 10;
+                print("PROJ POS " + projectiles[i].transform.position);
+                projectiles[i].transform.rotation = transform.rotation;
+                projectiles[i].gameObject.SetActive(true);
+                projectiles[i].ResetProj();
+                shootTimer = SHOOT_TIMER;
+                return;
+            }
         }
     }
 
@@ -103,10 +88,9 @@ public class BossBoi : IEntity
     {
         if (other.gameObject.tag == "Player" && !isAttacking && !alreadyAttacked)
         {
-            //lockOn = true;
-            //transform.parent = other.gameObject.transform;
+            transform.parent = other.gameObject.transform;
             Vector3 dir = player.transform.position - transform.position;
-            vectorFromPlayer = transform.position - player.transform.position;
+            //vectorFromPlayer = targetVector - new Vector3(-1f, 27f, 0f);
             dir = dir.normalized;
             if (dir.x < 0)
             {

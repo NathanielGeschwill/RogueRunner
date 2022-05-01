@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1559288b2f2d6b4aa82cdf928aa9431, type: 3}
+  m_Name: Boss Level 3
+  m_EditorClassIdentifier: 
+  yLevel: 3
+  distanceBetweenPlats: 47.25
+  chanceToSpawn: 0.4
+  potentialPlatforms:
+  - {fileID: 8333434254429824962, guid: 3ddb8d5c681b91f4088506828ef95707, type: 3}
+  - {fileID: 3467020093605018701, guid: 043f8c9eb2086fe448f2f008c60237e9, type: 3}
+  - {fileID: 3467020093605018701, guid: 043f8c9eb2086fe448f2f008c60237e9, type: 3}
+  - {fileID: 3467020093605018701, guid: 043f8c9eb2086fe448f2f008c60237e9, type: 3}
+  - {fileID: 3467020093605018701, guid: 043f8c9eb2086fe448f2f008c60237e9, type: 3}
+  - {fileID: 3467020093605018701, guid: 215dcd1864f34e84ea99ea90e397ff73, type: 3}
+  - {fileID: 3467020093605018701, guid: 043f8c9eb2086fe448f2f008c60237e9, type: 3}
+  - {fileID: 3467020093605018701, guid: 043f8c9eb2086fe448f2f008c60237e9, type: 3}
+  - {fileID: 3467020093605018701, guid: 043f8c9eb2086fe448f2f008c60237e9, type: 3}
+  - {fileID: 3467020093605018701, guid: 043f8c9eb2086fe448f2f008c60237e9, type: 3}
+  - {fileID: 3467020093605018701, guid: c8f65a6db3b551f4aacab9198d1b2f44, type: 3}
+  - {fileID: 3467020093605018701, guid: c8f65a6db3b551f4aacab9198d1b2f44, type: 3}
+  - {fileID: 3467020093605018701, guid: c8f65a6db3b551f4aacab9198d1b2f44, type: 3}
+  - {fileID: 3467020093605018701, guid: c8f65a6db3b551f4aacab9198d1b2f44, type: 3}

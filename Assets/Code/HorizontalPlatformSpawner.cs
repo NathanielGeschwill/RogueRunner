@@ -96,6 +96,7 @@ public class HorizontalPlatformSpawner : MonoBehaviour
             new Vector3(100, this.hpso.yLevel, 0f), ws.transform.rotation);
             ass.GetComponentsInChildren<MeshRenderer>().FirstOrDefault(r => r.tag == "PlatformMat").material = material;
             platLength = ass.GetComponentsInChildren<Transform>().First(r => r.tag == "Platform").localScale.x;
+            ass.GetComponentInChildren<BossBoi>().targetY = this.hpso.yLevel + 20f;
             ass.transform.parent = ws.gameObject.transform;
             spawnBoss = false;
         }

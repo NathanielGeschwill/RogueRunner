@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     public ParticleSystem speedLines;
 
     public bool bossMode;
-    private float bossDistance = 200f;
+    private float bossDistance = 1000f;
     public GameObject bossPlat;
 
     public WorldSpawn ws;
@@ -139,7 +139,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator SlideLocalScores()
     {
-        print("AT INDEX " + localIndex);
+        //print("AT INDEX " + localIndex);
         bool done = false;
         for (int i = 9; i > localIndex; i--)
         {
@@ -159,7 +159,7 @@ public class GameManager : MonoBehaviour
         yield return leaderboard.FetchTopHighscoreRoutine();
 
 
-        print("SETLOSETEXT");
+        //print("SETLOSETEXT");
         for (int i = 0; i < 10; i++)
         {
             youRanText.text = "You ran: " + score;

@@ -49,7 +49,7 @@ public class WorldSpawn : MonoBehaviour
             {
                 hps[hps.Count - 1].SetWorldSpawn(this, h, bossHPSOS[(hps.Count - 1) % 3], materials[1], hps.Count - 1);
             }
-            print(bossHPSOS[(hps.Count - 1) % 3]);
+            //print(bossHPSOS[(hps.Count - 1) % 3]);
         }
     }
 

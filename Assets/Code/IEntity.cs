@@ -48,7 +48,7 @@ public class IEntity : MonoBehaviour
         }
     }
 
-    protected void KillMe()
+    protected virtual void KillMe()
     {
         Destroy(gameObject);
         GameManager.Instance.PlayAudio(deathSound);
