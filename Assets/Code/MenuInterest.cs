@@ -6,15 +6,13 @@ using UnityEngine;
 
 public class MenuInterest : MonoBehaviour
 {
-    public GameObject cam1;
-    public GameObject cam2;
-    public GameObject cam3;
-    public GameObject cam4;
-    
+    public GameObject cam1, cam2, cam3, cam4, cam5, cam6;
+
     private Transform start;
     private Vector3 n;
     private Quaternion o;
     private bool menu = false;
+    private bool menu1 = false;
 
 
     private bool scroll = false;
@@ -60,7 +58,12 @@ public class MenuInterest : MonoBehaviour
         {
             n = Vector3.Lerp(cam3.transform.position, cam4.transform.position, m.y);
             o = Quaternion.Lerp(cam3.transform.rotation, cam4.transform.rotation, m.x);
-        } 
+        }
+        else if (menu1)
+        {
+            n = Vector3.Lerp(cam5.transform.position, cam6.transform.position, m.y);
+            o = Quaternion.Lerp(cam5.transform.rotation, cam6.transform.rotation, m.x);
+        }
         else
         {
             n = Vector3.Lerp(cam1.transform.position, cam2.transform.position, m.y);
@@ -89,6 +92,7 @@ public class MenuInterest : MonoBehaviour
         ShowOnlineScores();
         ShowLocalScores();
         menu = true;
+        menu1 = false;
     }
 
     public void credButton()
@@ -97,7 +101,8 @@ public class MenuInterest : MonoBehaviour
         credUI.SetActive(true);
         scrollPos = 0;
         scroll = true;
-        menu = true;
+        menu1 = true;
+        menu = false;
     }
 
     public void ScrollText()
@@ -112,6 +117,7 @@ public class MenuInterest : MonoBehaviour
         hsUI.SetActive(false);
         credUI.SetActive(false);
         menu = false;
+        menu1 = false;
         scroll = false;
     }
 
