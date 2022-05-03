@@ -81,7 +81,7 @@ public class HorizontalPlatformSpawner : MonoBehaviour
     {
         //print("Spawn Plat");
         GameObject ass = GameObject.Instantiate(currentHPSO.potentialPlatforms[Random.Range(0, currentHPSO.potentialPlatforms.Length)],
-            new Vector3(100, this.hpso.yLevel, 0f), ws.transform.rotation);
+            new Vector3(200, this.hpso.yLevel, 0f), ws.transform.rotation);
         ass.GetComponentsInChildren<MeshRenderer>().FirstOrDefault(r => r.tag == "PlatformMat").material = material;
         platLength = ass.GetComponentsInChildren<Transform>().First(r => r.tag == "Platform").localScale.x;
         ass.transform.parent = ws.gameObject.transform;
@@ -93,7 +93,7 @@ public class HorizontalPlatformSpawner : MonoBehaviour
         if (spawnBoss)
         {
             GameObject ass = GameObject.Instantiate(GameManager.Instance.bossPlat,
-            new Vector3(100, this.hpso.yLevel, 0f), ws.transform.rotation);
+            new Vector3(200, this.hpso.yLevel, 0f), ws.transform.rotation);
             ass.GetComponentsInChildren<MeshRenderer>().FirstOrDefault(r => r.tag == "PlatformMat").material = material;
             platLength = ass.GetComponentsInChildren<Transform>().First(r => r.tag == "Platform").localScale.x;
             ass.GetComponentInChildren<BossBoi>().targetY = this.hpso.yLevel + 20f;

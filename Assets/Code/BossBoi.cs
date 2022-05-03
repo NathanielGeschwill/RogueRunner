@@ -15,7 +15,9 @@ public class BossBoi : IEntity
     public float targetY;
     private Vector3 targetVector = new Vector3(35f, 0f, 0f);
 
+
     public ParticleSystem deathpart;
+    
 
     override protected void OnEnable()
     {
@@ -31,6 +33,11 @@ public class BossBoi : IEntity
 
     void Start()
     {
+
+
+        maxHealth = 10;
+        health = maxHealth;
+
         shootTimer = SHOOT_TIMER;
         for (int i = 0; i < 20; i++)
         {
@@ -42,6 +49,8 @@ public class BossBoi : IEntity
 
         player = GameManager.Instance.player;
         rb = GetComponent<Rigidbody>();
+
+        GameManager.Instance.PlayAudio(GameManager.AudioClips.BossSpawn);
     }
 
     private void Update()
@@ -64,6 +73,20 @@ public class BossBoi : IEntity
         }
     }
 
+    protected override void LoseHealth(object hitObject, int amount)
+    {
+        
+        if(health-1 <= 0)
+        {
+            GameManager.Instance.ResetBoss();
+        }
+        else
+        {
+            GameManager.Instance.PlayAudio(GameManager.AudioClips.BossDamaged);
+        }
+        base.LoseHealth(hitObject, amount);
+    }
+
     private void ShootProj()
     {
         print("SHOOT PROJ");
@@ -71,6 +94,7 @@ public class BossBoi : IEntity
         {
             if (!projectiles[i].gameObject.activeInHierarchy)
             {
+                GameManager.Instance.PlayAudio(GameManager.AudioClips.BossAttack);
                 print("FOUND PROJ");
                 print(transform.position);
                 projectiles[i].transform.position = transform.position + transform.forward * 10;

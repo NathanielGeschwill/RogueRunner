@@ -57,6 +57,7 @@ public class UIFollow : MonoBehaviour
                 platLayer.text = two;
                 break;
         }
+        PanalSwitch();
     }
 
 

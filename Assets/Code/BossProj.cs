@@ -36,22 +36,33 @@ public class BossProj : IEntity
         //rb = GetComponent<Rigidbody>();
         tagsICanHit = new List<string> { "Player" };
         damage = 1;
+        
     }
 
     public void ResetProj()
     {
-        deathTimer = DEATH_TIMER_MAX + Time.deltaTime;
+        deathTimer = DEATH_TIMER_MAX + Time.time;
         
         rb.velocity = transform.forward * forceMultiplier;
         print("PROJ VEL " + rb.velocity);
+        GameManager.Instance.PlayAudio(GameManager.AudioClips.ProjSFX);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(deathTimer < Time.deltaTime)
+        if(deathTimer < Time.time)
         {
             KillMe();
+        }
+    }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        //print("TRIGGERED");
+        foreach (string s in tagsICanHit)
+        {
+            GameManager.Instance.PlayAudio(GameManager.AudioClips.ProjHit);
         }
     }
 }

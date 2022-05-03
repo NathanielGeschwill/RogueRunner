@@ -113,7 +113,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathSound: 16
   bossProjClone: {fileID: 8935662096577783244, guid: 3768aec589fed3e4187c60ef2325a9fc, type: 3}
-  forceMultiplier: 0
   targetY: 0
   deathpart: {fileID: 0}
 --- !u!54 &2196751839681694028
@@ -142,6 +141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1920333726802468805}
   - component: {fileID: 7881061638512578537}
+  - component: {fileID: 831549063718454831}
   m_Layer: 0
   m_Name: Hitbox
   m_TagString: Untagged
@@ -172,9 +172,22 @@ SphereCollider:
   m_GameObject: {fileID: 3052439138121117664}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 30
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &831549063718454831
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3052439138121117664}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 30, y: 300, z: 45}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6010683497303597783
 PrefabInstance:

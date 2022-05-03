@@ -29,8 +29,11 @@ public class GameManager : MonoBehaviour
     public ParticleSystem speedLines;
 
     public bool bossMode;
-    private float bossDistance = 1000f;
+    private const float BOSS_DIST = 5000f;
+    private float bossDistance = BOSS_DIST;
     public GameObject bossPlat;
+
+    public UIFollow warningUI;
 
     public WorldSpawn ws;
 
@@ -91,6 +94,12 @@ public class GameManager : MonoBehaviour
         BatFlap1,
         SpikeTrap,
         Shoot,
+        BossSpawn,
+        BossAttack,
+        BossDamaged,
+        BossDeath,
+        ProjSFX,
+        ProjHit,
         None
     }
 
@@ -247,6 +256,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ResetBoss()
+    {
+        bossMode = false;
+        bossDistance = BOSS_DIST;
+    }
+
     private void Update()
     {
         distanceTraveled += worldSpeed * Time.deltaTime;
@@ -256,12 +271,12 @@ public class GameManager : MonoBehaviour
         Mathf.Clamp(targetSpeedandDist, 0, 48);
 
         bossDistance -= worldSpeed * Time.deltaTime;
-        if(bossDistance <= 0)
+        if(bossDistance <= 0 && !bossMode)
         {
             bossLevelId = Random.Range(0, 3) * 3;
-            bossDistance = 1000f;
+            //bossDistance = 1000f;
             bossMode = true;
-            ws.SpawnBoss(0);
+            ws.SpawnBoss(bossLevelId);
         }
 
         if (TESTING_ZEROSPEED)
