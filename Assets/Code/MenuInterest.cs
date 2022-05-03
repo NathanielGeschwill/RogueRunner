@@ -16,8 +16,19 @@ public class MenuInterest : MonoBehaviour
     private Quaternion o;
     private bool menu = false;
 
+
+    private bool scroll = false;
+    private float width;
+    private float scrollSpeed = 2;
+    private Vector3 textStartPos;
+    private float scrollPos = 0;
+
+    public TextMeshProUGUI TMPComp;
+    public RectTransform TMRect;
+
     public GameObject hsUI;
     public GameObject menuUI;
+    public GameObject credUI;
 
     public Leaderboard leaderboard;
     public TextMeshProUGUI lPlayerNames, lPlayerScores;
@@ -32,6 +43,11 @@ public class MenuInterest : MonoBehaviour
         StartCoroutine(SetupRoutine());
         smoothPos = .09f;
         smoothRot = .2f;
+
+        width = TMPComp.preferredWidth;
+        TMRect = TMPComp.GetComponent<RectTransform>();
+        scrollSpeed = 20;
+        textStartPos = TMRect.position;
     }
 
     // Update is called once per frame
@@ -50,8 +66,8 @@ public class MenuInterest : MonoBehaviour
             n = Vector3.Lerp(cam1.transform.position, cam2.transform.position, m.y);
             o = Quaternion.Lerp(cam1.transform.rotation, cam2.transform.rotation, m.x);
         }
-        
 
+        
 
     }
 
@@ -59,6 +75,7 @@ public class MenuInterest : MonoBehaviour
     {
         PosUpdate();
         RotUpdate();
+        ScrollText();
     }
 
     private void PosUpdate() => transform.position = Vector3.Lerp(transform.position, n, smoothPos);
@@ -74,11 +91,28 @@ public class MenuInterest : MonoBehaviour
         menu = true;
     }
 
+    public void credButton()
+    {
+        menuUI.SetActive(false);
+        credUI.SetActive(true);
+        scrollPos = 0;
+        scroll = true;
+        menu = true;
+    }
+
+    public void ScrollText()
+    {
+            TMRect.position = new Vector3(-scrollPos % width, textStartPos.y, textStartPos.z);
+            scrollPos += scrollSpeed * 20 * Time.deltaTime;
+    }
+
     public void menuBack()
     {
         menuUI.SetActive(true);
         hsUI.SetActive(false);
+        credUI.SetActive(false);
         menu = false;
+        scroll = false;
     }
 
     IEnumerator SetupRoutine()
