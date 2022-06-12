@@ -8,6 +8,7 @@ public class IEntity : MonoBehaviour
     protected int health = 1;
     protected int maxHealth = 1;
     protected int damage = 0;
+    protected bool isDead = false;
 
     public static event EventHandler<int> OnDeath;
 
@@ -61,15 +62,24 @@ public class IEntity : MonoBehaviour
         //print("COMPAING " + ((GameObject)hitObject).GetInstanceID() + " AND " + gameObject.GetInstanceID());
         if (((GameObject)hitObject).GetInstanceID() == gameObject.GetInstanceID())
         {
-            //print("FOUND MATCH" + gameObject.name);
+            print("FOUND MATCH" + gameObject.name);
             health -= amount;
-
-            if (health <= 0)
+            print("HEALTH " + health);
+            if (health <= 0 && !isDead)
             {
-                //print("INVOKING DEATH");
+                isDead = true;
+                print("INVOKING DEATH");
                 OnDeath?.Invoke(gameObject, gameObject.GetInstanceID());
             }
+            else
+            {
+                print("IsDead " + isDead);
+            }
         }
+    }
+    protected void PlayerPleaseDie()
+    {
+        //OnDeath?.Invoke(gameObject, gameObject.GetInstanceID());
     }
 
     protected virtual bool GainHealth(object sender, int amount)

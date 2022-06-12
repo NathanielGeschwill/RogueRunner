@@ -13,6 +13,12 @@ public class RestartScene : MonoBehaviour
         KillPlayerTrigger.OnKillPlayer += ShowLoseUI;
     }
 
+    private void OnDisable()
+    {
+        IEntity.OnDeath -= ShowLoseUI;
+        KillPlayerTrigger.OnKillPlayer -= ShowLoseUI;
+    }
+
     public void Reload()
     {
         Time.timeScale = 1f;

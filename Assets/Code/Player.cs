@@ -171,6 +171,7 @@ public class Player : IEntity
     {
         if(playerHurtTime < 0)
         {
+            print("PLAYERHURT TIME < 0");
             if (((GameObject)hitObject).GetInstanceID() == gameObject.GetInstanceID() && !GameManager.Instance.playerTooFast())
             {
                 GameManager.Instance.gmScreenShake(.2f, .4f);
@@ -207,7 +208,12 @@ public class Player : IEntity
     // Update is called once per frame
     void Update()
     {
-
+        //if (health <= 0)
+        //{
+        //    health--;
+        //    print("INVOKING DEATH");
+        //    PlayerPleaseDie();
+        //}
         //Update velocity just for public visual reference in the editor
         rbVelo = rb.velocity;
 

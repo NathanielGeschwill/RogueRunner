@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     public ParticleSystem speedLines;
 
     public bool bossMode;
-    private const float BOSS_DIST = 5000f;
+    private const float BOSS_DIST = 3000f;
     private float bossDistance = BOSS_DIST;
     public GameObject bossPlat;
 
