@@ -44,7 +44,7 @@ public class BossProj : IEntity
         deathTimer = DEATH_TIMER_MAX + Time.time;
         
         rb.velocity = transform.forward * forceMultiplier;
-        print("PROJ VEL " + rb.velocity);
+        //print("PROJ VEL " + rb.velocity);
         GameManager.Instance.PlayAudio(GameManager.AudioClips.ProjSFX);
     }
 

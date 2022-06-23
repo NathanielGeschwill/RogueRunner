@@ -20,7 +20,7 @@ public class IEntity : MonoBehaviour
     //protected List<string> tagsThatHitMe;
     protected List<string> tagsICanHit;
 
-    public GameManager.AudioClips deathSound = GameManager.AudioClips.None;
+    public GameManager.AudioClips deathSound = GameManager.AudioClips.BossDeath;
 
     private void Start()
     {
@@ -62,18 +62,19 @@ public class IEntity : MonoBehaviour
         //print("COMPAING " + ((GameObject)hitObject).GetInstanceID() + " AND " + gameObject.GetInstanceID());
         if (((GameObject)hitObject).GetInstanceID() == gameObject.GetInstanceID())
         {
-            print("FOUND MATCH" + gameObject.name);
+            //print("FOUND MATCH" + gameObject.name);
             health -= amount;
-            print("HEALTH " + health);
+            //print("HEALTH " + health);
             if (health <= 0 && !isDead)
             {
                 isDead = true;
-                print("INVOKING DEATH");
+                //print("INVOKING DEATH");
+
                 OnDeath?.Invoke(gameObject, gameObject.GetInstanceID());
             }
             else
             {
-                print("IsDead " + isDead);
+                //print("IsDead " + isDead);
             }
         }
     }

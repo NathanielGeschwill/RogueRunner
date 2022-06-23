@@ -15,9 +15,7 @@ public class BossBoi : IEntity
     public float targetY;
     private Vector3 targetVector = new Vector3(35f, 0f, 0f);
 
-
     public ParticleSystem deathpart;
-    
 
     override protected void OnEnable()
     {
@@ -35,7 +33,7 @@ public class BossBoi : IEntity
     {
 
 
-        maxHealth = 10;
+        maxHealth = 5;
         health = maxHealth;
 
         shootTimer = SHOOT_TIMER;
@@ -55,7 +53,7 @@ public class BossBoi : IEntity
 
     private void Update()
     {
-        print("Boss VEL: " + rb.velocity);
+        //print("Boss VEL: " + rb.velocity);
 
         if (isAttacking)
         {
@@ -63,6 +61,7 @@ public class BossBoi : IEntity
             if(shootTimer <= 0f)
             {
                 ShootProj();
+                GameManager.Instance.PlayAudio(GameManager.AudioClips.BossAttack);
             }
             //print("Boss Attacking");
             Vector3 currentLookAt = transform.position + (transform.forward * 10);
@@ -79,30 +78,33 @@ public class BossBoi : IEntity
         if(health-1 <= 0)
         {
             GameManager.Instance.ResetBoss();
+            GameManager.Instance.PlayAudio(GameManager.AudioClips.BossDeath);
         }
         else
         {
             GameManager.Instance.PlayAudio(GameManager.AudioClips.BossDamaged);
+
         }
         base.LoseHealth(hitObject, amount);
+        Debug.Log("Boss: " + health);
     }
 
     private void ShootProj()
     {
-        print("SHOOT PROJ");
+        //print("SHOOT PROJ");
         for (int i = 0; i < projectiles.Count; i++)
         {
             if (!projectiles[i].gameObject.activeInHierarchy)
             {
                 GameManager.Instance.PlayAudio(GameManager.AudioClips.BossAttack);
-                print("FOUND PROJ");
-                print(transform.position);
+                //print("FOUND PROJ");
+                //print(transform.position);
                 projectiles[i].transform.position = transform.position + transform.forward * 10;
-                print("PROJ POS " + projectiles[i].transform.position);
+                //print("PROJ POS " + projectiles[i].transform.position);
                 projectiles[i].transform.rotation = transform.rotation;
                 projectiles[i].gameObject.SetActive(true);
                 projectiles[i].ResetProj();
-                shootTimer = SHOOT_TIMER;
+                shootTimer = Random.RandomRange(SHOOT_TIMER, SHOOT_TIMER*2);
                 return;
             }
         }

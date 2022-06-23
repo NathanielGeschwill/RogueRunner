@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     public ParticleSystem speedLines;
 
     public bool bossMode;
-    private const float BOSS_DIST = 3000f;
+    private const float BOSS_DIST = 200f;
     private float bossDistance = BOSS_DIST;
     public GameObject bossPlat;
 
@@ -277,6 +277,7 @@ public class GameManager : MonoBehaviour
             //bossDistance = 1000f;
             bossMode = true;
             ws.SpawnBoss(bossLevelId);
+            //GameManager.Instance.PlayAudio(GameManager.AudioClips.BossSpawn);
         }
 
         if (TESTING_ZEROSPEED)
@@ -382,8 +383,27 @@ public class GameManager : MonoBehaviour
             case AudioClips.Shoot:
                 audiosSources[1].PlayOneShot(audioClips[(int)ac]);
                 break;
+            case AudioClips.BossSpawn:
+                audiosSources[1].PlayOneShot(audioClips[(int)ac]);
+                break;
+            case AudioClips.BossAttack:
+                audiosSources[2].PlayOneShot(audioClips[(int)ac]);
+                break;
+            case AudioClips.BossDamaged:
+                audiosSources[2].PlayOneShot(audioClips[(int)ac]);
+                break;
+            case AudioClips.BossDeath:
+                audiosSources[2].PlayOneShot(audioClips[(int)ac]);
+                break;
+            case AudioClips.ProjSFX:
+                audiosSources[2].PlayOneShot(audioClips[(int)ac], .6f);
+                break;
+            case AudioClips.ProjHit:
+                audiosSources[2].PlayOneShot(audioClips[(int)ac]);
+                break;
         }
     }
+
 
     //all changes to worldspeed use this function
     public void worldSpeedChange(bool multi, float val)
