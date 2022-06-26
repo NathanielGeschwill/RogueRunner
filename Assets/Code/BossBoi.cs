@@ -62,7 +62,7 @@ public class BossBoi : IEntity
             if(shootTimer <= 0f)
             {
                 ShootProj();
-                GameManager.Instance.PlayAudio(GameManager.AudioClips.BossAttack);
+                BossAttackSound();
             }
             //print("Boss Attacking");
             Vector3 currentLookAt = transform.position + (transform.forward * 10);
@@ -70,6 +70,26 @@ public class BossBoi : IEntity
             //print("PLAYER POS " + player.transform.position);
             //print("CURR POS " + transform.position);
             rb.MovePosition(Vector3.Lerp(transform.position, player.transform.position + targetVector, (.25f) / (player.transform.position - transform.position).magnitude * 2));
+        }
+    }
+
+    private void BossAttackSound()
+    {
+        int rand = Random.Range(0, 3);
+        switch (rand)
+        {
+            case 0:
+                GameManager.Instance.PlayAudio(GameManager.AudioClips.BossAttack1);
+                break;
+            case 1:
+                GameManager.Instance.PlayAudio(GameManager.AudioClips.BossAttack2);
+                break;
+            case 2:
+                GameManager.Instance.PlayAudio(GameManager.AudioClips.BossAttack3);
+                break;
+            default:
+                GameManager.Instance.PlayAudio(GameManager.AudioClips.BossAttack3);
+                break;
         }
     }
 
@@ -99,7 +119,8 @@ public class BossBoi : IEntity
             {
                 if (!projectiles[i].gameObject.activeInHierarchy)
                 {
-                    GameManager.Instance.PlayAudio(GameManager.AudioClips.BossAttack);
+                    BossAttackSound();
+                    
                     //print("FOUND PROJ");
                     //print(transform.position);
                     projectiles[i].transform.position = transform.position + transform.forward * 10;
@@ -119,7 +140,7 @@ public class BossBoi : IEntity
             {
                 if (!projectiles[i].gameObject.activeInHierarchy)
                 {
-                    GameManager.Instance.PlayAudio(GameManager.AudioClips.BossAttack);
+                    //BossAttackSound();
                     //print("FOUND PROJ");
                     //print(transform.position);
                     projectiles[i].transform.position = transform.position + transform.forward * 10;
@@ -135,7 +156,7 @@ public class BossBoi : IEntity
             {
                 if (!projectiles[i].gameObject.activeInHierarchy)
                 {
-                    GameManager.Instance.PlayAudio(GameManager.AudioClips.BossAttack);
+                    //BossAttackSound();
                     //print("FOUND PROJ");
                     //print(transform.position);
                     projectiles[i].transform.position = transform.position + transform.forward * 10 + transform.up * 7;
@@ -152,7 +173,7 @@ public class BossBoi : IEntity
             {
                 if (!projectiles[i].gameObject.activeInHierarchy)
                 {
-                    GameManager.Instance.PlayAudio(GameManager.AudioClips.BossAttack);
+                    BossAttackSound();
                     //print("FOUND PROJ");
                     //print(transform.position);
                     projectiles[i].transform.position = transform.position + transform.forward * 10 + transform.up * -7;

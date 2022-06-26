@@ -95,7 +95,9 @@ public class GameManager : MonoBehaviour
         SpikeTrap,
         Shoot,
         BossSpawn,
-        BossAttack,
+        BossAttack1,
+        BossAttack2,
+        BossAttack3,
         BossDamaged,
         BossDeath,
         ProjSFX,
@@ -368,7 +370,7 @@ public class GameManager : MonoBehaviour
                 audiosSources[1].PlayOneShot(audioClips[(int)ac]);
                 break;
             case AudioClips.HealthUp:
-                audiosSources[1].PlayOneShot(audioClips[(int)ac], 2);
+                audiosSources[1].PlayOneShot(audioClips[(int)ac]);
                 break;
             case AudioClips.PlayerLand:
                 audiosSources[1].PlayOneShot(audioClips[(int)ac]);
@@ -394,7 +396,13 @@ public class GameManager : MonoBehaviour
             case AudioClips.BossSpawn:
                 audiosSources[1].PlayOneShot(audioClips[(int)ac]);
                 break;
-            case AudioClips.BossAttack:
+            case AudioClips.BossAttack1:
+                audiosSources[2].PlayOneShot(audioClips[(int)ac]);
+                break;
+            case AudioClips.BossAttack2:
+                audiosSources[2].PlayOneShot(audioClips[(int)ac]);
+                break;
+            case AudioClips.BossAttack3:
                 audiosSources[2].PlayOneShot(audioClips[(int)ac]);
                 break;
             case AudioClips.BossDamaged:
