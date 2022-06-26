@@ -262,6 +262,11 @@ public class GameManager : MonoBehaviour
         bossDistance = BOSS_DIST;
     }
 
+    public void TurnOffWarning()
+    {
+        warningUI.PanalSwitch();
+    }
+
     private void Update()
     {
         distanceTraveled += worldSpeed * Time.deltaTime;
@@ -273,7 +278,10 @@ public class GameManager : MonoBehaviour
         bossDistance -= worldSpeed * Time.deltaTime;
         if(bossDistance <= 0 && !bossMode)
         {
+            print("BOSS MODE");
             bossLevelId = Random.Range(0, 3) * 3;
+            //warningUI.PanalSwitch();
+            warningUI.LayerText(bossLevelId / 3);
             //bossDistance = 1000f;
             bossMode = true;
             ws.SpawnBoss(bossLevelId);

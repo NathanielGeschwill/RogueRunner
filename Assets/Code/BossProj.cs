@@ -9,7 +9,7 @@ public class BossProj : IEntity
     float DEATH_TIMER_MAX = 2f;
     //public Vector3 dir;
     public Rigidbody rb;
-    private float forceMultiplier = 30f;
+    private float forceMultiplier = 2f;
 
     override protected void OnEnable()
     {
@@ -43,7 +43,7 @@ public class BossProj : IEntity
     {
         deathTimer = DEATH_TIMER_MAX + Time.time;
         
-        rb.velocity = transform.forward * forceMultiplier;
+        //rb.velocity = transform.forward * forceMultiplier;
         //print("PROJ VEL " + rb.velocity);
         GameManager.Instance.PlayAudio(GameManager.AudioClips.ProjSFX);
     }
@@ -51,7 +51,8 @@ public class BossProj : IEntity
     // Update is called once per frame
     void Update()
     {
-        if(deathTimer < Time.time)
+        rb.velocity = transform.forward * GameManager.Instance.worldSpeed;// * forceMultiplier;
+        if (deathTimer < Time.time)
         {
             KillMe();
         }
@@ -59,10 +60,14 @@ public class BossProj : IEntity
 
     protected override void OnTriggerEnter(Collider other)
     {
-        //print("TRIGGERED");
+        print("BOSS PROJ TRIGGERED" + other.name + " " + other);
         foreach (string s in tagsICanHit)
         {
-            GameManager.Instance.PlayAudio(GameManager.AudioClips.ProjHit);
+            if(other.gameObject.tag == s)
+            {
+                GameManager.Instance.PlayAudio(GameManager.AudioClips.ProjHit);
+                InvokeHit(other.gameObject, damage);
+            }
         }
     }
 }

@@ -14,6 +14,7 @@ public class BossBoi : IEntity
     private bool alreadyAttacked = false;
     public float targetY;
     private Vector3 targetVector = new Vector3(35f, 0f, 0f);
+    private int shootVar = 0;
 
     public ParticleSystem deathpart;
 
@@ -92,28 +93,89 @@ public class BossBoi : IEntity
     private void ShootProj()
     {
         //print("SHOOT PROJ");
-        for (int i = 0; i < projectiles.Count; i++)
+        if(shootVar <= 1)
         {
-            if (!projectiles[i].gameObject.activeInHierarchy)
+            for (int i = 0; i < projectiles.Count; i++)
             {
-                GameManager.Instance.PlayAudio(GameManager.AudioClips.BossAttack);
-                //print("FOUND PROJ");
-                //print(transform.position);
-                projectiles[i].transform.position = transform.position + transform.forward * 10;
-                //print("PROJ POS " + projectiles[i].transform.position);
-                projectiles[i].transform.rotation = transform.rotation;
-                projectiles[i].gameObject.SetActive(true);
-                projectiles[i].ResetProj();
-                shootTimer = Random.RandomRange(SHOOT_TIMER, SHOOT_TIMER*2);
-                return;
+                if (!projectiles[i].gameObject.activeInHierarchy)
+                {
+                    GameManager.Instance.PlayAudio(GameManager.AudioClips.BossAttack);
+                    //print("FOUND PROJ");
+                    //print(transform.position);
+                    projectiles[i].transform.position = transform.position + transform.forward * 10;
+                    //print("PROJ POS " + projectiles[i].transform.position);
+                    projectiles[i].transform.rotation = transform.rotation;
+                    projectiles[i].gameObject.SetActive(true);
+                    projectiles[i].ResetProj();
+                    shootTimer = Random.Range(SHOOT_TIMER, SHOOT_TIMER * 2);
+                    shootVar++;
+                    break;
+                }
             }
         }
+        else
+        {
+            for (int i = 0; i < projectiles.Count; i++)
+            {
+                if (!projectiles[i].gameObject.activeInHierarchy)
+                {
+                    GameManager.Instance.PlayAudio(GameManager.AudioClips.BossAttack);
+                    //print("FOUND PROJ");
+                    //print(transform.position);
+                    projectiles[i].transform.position = transform.position + transform.forward * 10;
+                    //print("PROJ POS " + projectiles[i].transform.position);
+                    projectiles[i].transform.rotation = transform.rotation;
+                    projectiles[i].gameObject.SetActive(true);
+                    projectiles[i].ResetProj();
+                    //shootTimer = Random.Range(SHOOT_TIMER, SHOOT_TIMER * 2);
+                    break;
+                }
+            }
+            for (int i = 0; i < projectiles.Count; i++)
+            {
+                if (!projectiles[i].gameObject.activeInHierarchy)
+                {
+                    GameManager.Instance.PlayAudio(GameManager.AudioClips.BossAttack);
+                    //print("FOUND PROJ");
+                    //print(transform.position);
+                    projectiles[i].transform.position = transform.position + transform.forward * 10 + transform.up * 7;
+                    //print("PROJ POS " + projectiles[i].transform.position);
+                    projectiles[i].transform.rotation = transform.rotation;
+                    projectiles[i].transform.rotation *= Quaternion.Euler(15, 0,0);
+                    projectiles[i].gameObject.SetActive(true);
+                    projectiles[i].ResetProj();
+                    //shootTimer = Random.Range(SHOOT_TIMER, SHOOT_TIMER * 2);
+                    break;
+                }
+            }
+            for (int i = 0; i < projectiles.Count; i++)
+            {
+                if (!projectiles[i].gameObject.activeInHierarchy)
+                {
+                    GameManager.Instance.PlayAudio(GameManager.AudioClips.BossAttack);
+                    //print("FOUND PROJ");
+                    //print(transform.position);
+                    projectiles[i].transform.position = transform.position + transform.forward * 10 + transform.up * -7;
+                    //print("PROJ POS " + projectiles[i].transform.position);
+                    projectiles[i].transform.rotation = transform.rotation;
+                    projectiles[i].transform.rotation *= Quaternion.Euler(-15, 0, 0);
+                    projectiles[i].gameObject.SetActive(true);
+                    projectiles[i].ResetProj();
+                    shootTimer = Random.Range(SHOOT_TIMER, SHOOT_TIMER * 2);
+                    shootVar = 0;
+                    break;
+                }
+            }
+        }
+
+        
     }
 
     protected override void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player" && !isAttacking && !alreadyAttacked)
         {
+            GameManager.Instance.TurnOffWarning();
             transform.parent = other.gameObject.transform;
             Vector3 dir = player.transform.position - transform.position;
             //vectorFromPlayer = targetVector - new Vector3(-1f, 27f, 0f);

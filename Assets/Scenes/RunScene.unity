@@ -95702,7 +95702,7 @@ MonoBehaviour:
   speedLines: {fileID: 563587563}
   bossMode: 0
   bossPlat: {fileID: 3467020093605018701, guid: c87d0d4ced712d942aac4cece6983568, type: 3}
-  warningUI: {fileID: 0}
+  warningUI: {fileID: 4386855769828487752}
   ws: {fileID: 1245215251}
   TESTING_ZEROSPEED: 0
   pauseUI: {fileID: 387663791}
