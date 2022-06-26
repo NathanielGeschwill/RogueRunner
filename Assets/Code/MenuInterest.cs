@@ -22,7 +22,7 @@ public class MenuInterest : MonoBehaviour
     private float scrollPos = 0;
 
     public TextMeshProUGUI TMPComp;
-    public RectTransform TMRect;
+    //public RectTransform TMRect;
 
     public GameObject hsUI;
     public GameObject menuUI;
@@ -42,10 +42,10 @@ public class MenuInterest : MonoBehaviour
         smoothPos = .09f;
         smoothRot = .2f;
 
-        width = TMPComp.preferredWidth;
-        TMRect = TMPComp.GetComponent<RectTransform>();
+        //width = TMPComp.preferredWidth;
+        //TMRect = TMPComp.GetComponent<RectTransform>();
         scrollSpeed = 20;
-        textStartPos = TMRect.position;
+        //textStartPos = TMRect.position;
     }
 
     // Update is called once per frame
@@ -78,7 +78,7 @@ public class MenuInterest : MonoBehaviour
     {
         PosUpdate();
         RotUpdate();
-        ScrollText();
+        //ScrollText();
     }
 
     private void PosUpdate() => transform.position = Vector3.Lerp(transform.position, n, smoothPos);
@@ -105,11 +105,11 @@ public class MenuInterest : MonoBehaviour
         menu = false;
     }
 
-    public void ScrollText()
+   /* public void ScrollText()
     {
             TMRect.position = new Vector3(-scrollPos % width, textStartPos.y, textStartPos.z);
             scrollPos += scrollSpeed * 20 * Time.deltaTime;
-    }
+    }*/
 
     public void menuBack()
     {

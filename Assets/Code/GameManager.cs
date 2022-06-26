@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
         //m_Volume = PostProcessManager.instance.QuickVolume(procObj.layer, 100f, bloom);
         //m_Volume = procObj.GetComponent<PostProcessVolume>();
         //bloom.intensity.value = 0;
-        m_Volume.profile.TryGetSettings(out bloom);
+        //m_Volume.profile.TryGetSettings(out bloom);
     }
 
     IEnumerator LoginRoutine()
