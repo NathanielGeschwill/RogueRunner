@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
 
     public AudioSource[] audiosSources;
     public AudioClip[] audioClips;
+    public AudioClip[] bgms;
 
     public Leaderboard leaderboard;
     private bool isHighestLocalScore = false;
@@ -75,6 +76,12 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector]
     public int bossLevelId;
+
+    public enum BGM
+    {
+        Normal,
+        Boss
+    }
 
     public enum AudioClips
     {
@@ -95,7 +102,9 @@ public class GameManager : MonoBehaviour
         SpikeTrap,
         Shoot,
         BossSpawn,
-        BossAttack,
+        BossAttack1,
+        BossAttack2,
+        BossAttack3,
         BossDamaged,
         BossDeath,
         ProjSFX,
@@ -260,6 +269,7 @@ public class GameManager : MonoBehaviour
     {
         bossMode = false;
         bossDistance = BOSS_DIST;
+        PlayBGM(BGM.Normal);
     }
 
     public void TurnOffWarning()
@@ -279,6 +289,7 @@ public class GameManager : MonoBehaviour
         if(bossDistance <= 0 && !bossMode)
         {
             print("BOSS MODE");
+            PlayBGM(BGM.Boss);
             bossLevelId = Random.Range(0, 3) * 3;
             //warningUI.PanalSwitch();
             warningUI.LayerText(bossLevelId / 3);
@@ -368,7 +379,7 @@ public class GameManager : MonoBehaviour
                 audiosSources[1].PlayOneShot(audioClips[(int)ac]);
                 break;
             case AudioClips.HealthUp:
-                audiosSources[1].PlayOneShot(audioClips[(int)ac], 2);
+                audiosSources[1].PlayOneShot(audioClips[(int)ac]);
                 break;
             case AudioClips.PlayerLand:
                 audiosSources[1].PlayOneShot(audioClips[(int)ac]);
@@ -394,7 +405,13 @@ public class GameManager : MonoBehaviour
             case AudioClips.BossSpawn:
                 audiosSources[1].PlayOneShot(audioClips[(int)ac]);
                 break;
-            case AudioClips.BossAttack:
+            case AudioClips.BossAttack1:
+                audiosSources[2].PlayOneShot(audioClips[(int)ac]);
+                break;
+            case AudioClips.BossAttack2:
+                audiosSources[2].PlayOneShot(audioClips[(int)ac]);
+                break;
+            case AudioClips.BossAttack3:
                 audiosSources[2].PlayOneShot(audioClips[(int)ac]);
                 break;
             case AudioClips.BossDamaged:
@@ -408,6 +425,22 @@ public class GameManager : MonoBehaviour
                 break;
             case AudioClips.ProjHit:
                 audiosSources[2].PlayOneShot(audioClips[(int)ac]);
+                break;
+        }
+    }
+
+    public void PlayBGM(BGM bgm)
+    {
+        print("PLAY BGM " + bgm);
+        switch (bgm)
+        {
+            case BGM.Normal:
+                audiosSources[0].clip = bgms[(int)bgm];
+                audiosSources[0].Play();
+                break;
+            case BGM.Boss:
+                audiosSources[0].clip = bgms[(int)bgm];
+                audiosSources[0].Play();
                 break;
         }
     }

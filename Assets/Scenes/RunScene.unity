@@ -71125,7 +71125,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 111
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -95767,7 +95767,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 83d210a0f37e5fc488813918240bfd53, type: 3}
   - {fileID: 8300000, guid: 77098bc985776884fb755dacd5c98368, type: 3}
   - {fileID: 8300000, guid: ed3fe2d8a401133458eab483d73d8554, type: 3}
-  - {fileID: 8300000, guid: 38c0bcc3829811e43b0ee447c86766f2, type: 3}
+  - {fileID: 8300000, guid: 0587507792dfd45429b634d4b6911f13, type: 3}
   - {fileID: 8300000, guid: 9b41b917e852e134bb5ef53499f1a14e, type: 3}
   - {fileID: 8300000, guid: 658cdfcffc155e74ca719596ab16f6e0, type: 3}
   - {fileID: 8300000, guid: 7dfb0a350cd0e5643a46a6e38d0926c9, type: 3}
@@ -95777,10 +95777,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 146916230e6167044adcf50ff6339994, type: 3}
   - {fileID: 8300000, guid: ce128f9067d5388409b1dddb0fdff987, type: 3}
   - {fileID: 8300000, guid: 54434490bf6c93d4685eb0f51dd331d3, type: 3}
+  - {fileID: 8300000, guid: caf97e788cfbeef4a85290fa82e64cd7, type: 3}
+  - {fileID: 8300000, guid: 74627d78a3b1a5b408f54a79e97340bc, type: 3}
   - {fileID: 8300000, guid: db4b65668d1565f43a91e2672085eec7, type: 3}
   - {fileID: 8300000, guid: 5379fcff5a66ad341951e2d13565a0d7, type: 3}
   - {fileID: 8300000, guid: 5b3c76aa8b9e8434eaf6e88085cb050b, type: 3}
   - {fileID: 8300000, guid: 85cbd431d307f384189f6d845f9324ba, type: 3}
+  bgms:
+  - {fileID: 8300000, guid: c014bfef464669845a7b1592615d2756, type: 3}
+  - {fileID: 8300000, guid: bda92fb1b5f8d044e8eb9db2231c1771, type: 3}
   leaderboard: {fileID: 471384628}
   bossLevelId: 0
 --- !u!4 &2102780887
