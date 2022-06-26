@@ -55,7 +55,7 @@ public class ImageCounterUI : MonoBehaviour
 
     private void Decrease(string name)
     {
-        print("DECREASE UI");
+        //print("DECREASE UI");
         if (name == counterName)
         {
             counterAmount--;

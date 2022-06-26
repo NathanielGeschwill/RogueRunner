@@ -32,7 +32,7 @@ public class UIFollow : MonoBehaviour
 
     public void PanalSwitch()
     {
-        print("PANEL ACTIVE " + panel.active);
+        //print("PANEL ACTIVE " + panel.active);
         if (panel.active)
         {
             panel.SetActive(false);

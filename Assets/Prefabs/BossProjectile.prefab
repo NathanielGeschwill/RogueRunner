@@ -9744,6 +9744,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathSound: 16
   rb: {fileID: 2084432177233395082}
+  disperse: {fileID: 3781620347808017169, guid: 43fb46731165ec843abd5a84f3445059, type: 3}
 --- !u!135 &5047952953197578231
 SphereCollider:
   m_ObjectHideFlags: 0

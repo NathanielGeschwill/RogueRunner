@@ -10,6 +10,7 @@ public class BossProj : IEntity
     //public Vector3 dir;
     public Rigidbody rb;
     private float forceMultiplier = 2f;
+    public GameObject disperse;
 
     override protected void OnEnable()
     {
@@ -58,16 +59,31 @@ public class BossProj : IEntity
         }
     }
 
+    protected override void LoseHealth(object hitObject, int amount)
+    {
+        if (((GameObject)hitObject).GetInstanceID() == gameObject.GetInstanceID())
+        {
+            if (health - 1 <= 0)
+            {
+                Instantiate(disperse, transform.position, transform.rotation);
+                //GameManager.Instance.ResetBoss();
+                //GameManager.Instance.PlayAudio(GameManager.AudioClips.BossDeath);
+            }
+        }
+        
+        base.LoseHealth(hitObject, amount);
+        //Debug.Log("Boss: " + health);
+    }
+
     protected override void OnTriggerEnter(Collider other)
     {
         print("BOSS PROJ TRIGGERED" + other.name + " " + other);
-        foreach (string s in tagsICanHit)
+        if(other.gameObject.tag == "Player")
         {
-            if(other.gameObject.tag == s)
-            {
-                GameManager.Instance.PlayAudio(GameManager.AudioClips.ProjHit);
-                InvokeHit(other.gameObject, damage);
-            }
+            GameManager.Instance.PlayAudio(GameManager.AudioClips.ProjHit);
+            InvokeHit(other.gameObject, damage);
+            Instantiate(disperse, transform.position, transform.rotation);
+            KillMe();
         }
     }
 }

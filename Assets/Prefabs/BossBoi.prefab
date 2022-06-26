@@ -115,6 +115,8 @@ MonoBehaviour:
   bossProjClone: {fileID: 8935662096577783244, guid: 3768aec589fed3e4187c60ef2325a9fc, type: 3}
   targetY: 0
   deathpart: {fileID: 0}
+  disperse: {fileID: 8405963854663146826, guid: 16d9888e412ac624abe15d98ad237acf, type: 3}
+  hurt: {fileID: 4678653752009494579, guid: 82bfa8ab577dc8846aaa07bbf062ac85, type: 3}
 --- !u!54 &2196751839681694028
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -18,6 +18,8 @@ public class BossBoi : IEntity
 
     public ParticleSystem deathpart;
 
+    public GameObject disperse, hurt;
+
     override protected void OnEnable()
     {
         Player.OnJumppad += KillMe;
@@ -95,17 +97,21 @@ public class BossBoi : IEntity
 
     protected override void LoseHealth(object hitObject, int amount)
     {
+        if (((GameObject)hitObject).GetInstanceID() == gameObject.GetInstanceID())
+        {
+            if (health - 1 <= 0)
+            {
+                Instantiate(disperse, transform.position, transform.rotation);
+                GameManager.Instance.ResetBoss();
+                GameManager.Instance.PlayAudio(GameManager.AudioClips.BossDeath);
+            }
+            else
+            {
+                GameManager.Instance.PlayAudio(GameManager.AudioClips.BossDamaged);
+                Instantiate(hurt, transform.position + transform.forward * 2f, transform.rotation);
+            } 
+        }
         
-        if(health-1 <= 0)
-        {
-            GameManager.Instance.ResetBoss();
-            GameManager.Instance.PlayAudio(GameManager.AudioClips.BossDeath);
-        }
-        else
-        {
-            GameManager.Instance.PlayAudio(GameManager.AudioClips.BossDamaged);
-
-        }
         base.LoseHealth(hitObject, amount);
         Debug.Log("Boss: " + health);
     }

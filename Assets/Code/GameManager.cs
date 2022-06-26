@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     public ParticleSystem speedLines;
 
     public bool bossMode;
-    private const float BOSS_DIST = 200f;
+    private const float BOSS_DIST = 2000f;
     private float bossDistance = BOSS_DIST;
     public GameObject bossPlat;
 
@@ -269,7 +269,7 @@ public class GameManager : MonoBehaviour
     {
         bossMode = false;
         bossDistance = BOSS_DIST;
-        PlayBGM(BGM.Normal);
+        StartCoroutine(PlayBGM(BGM.Normal));
     }
 
     public void TurnOffWarning()
@@ -289,7 +289,7 @@ public class GameManager : MonoBehaviour
         if(bossDistance <= 0 && !bossMode)
         {
             print("BOSS MODE");
-            PlayBGM(BGM.Boss);
+            StartCoroutine(PlayBGM(BGM.Boss));
             bossLevelId = Random.Range(0, 3) * 3;
             //warningUI.PanalSwitch();
             warningUI.LayerText(bossLevelId / 3);
@@ -429,20 +429,52 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void PlayBGM(BGM bgm)
+    public IEnumerator PlayBGM(BGM bgm)
     {
-        print("PLAY BGM " + bgm);
-        switch (bgm)
+        float fadeTime = 3f;
+        float elapsedTime = 0.0f;
+
+        if(bgm == BGM.Boss)
         {
-            case BGM.Normal:
-                audiosSources[0].clip = bgms[(int)bgm];
-                audiosSources[0].Play();
-                break;
-            case BGM.Boss:
-                audiosSources[0].clip = bgms[(int)bgm];
-                audiosSources[0].Play();
-                break;
+            audiosSources[4].Play();
+
+            while(elapsedTime < fadeTime)
+            {
+                audiosSources[4].volume = Mathf.Lerp(0, 1, elapsedTime / fadeTime);
+                audiosSources[0].volume = Mathf.Lerp(.25f, 0, elapsedTime / fadeTime);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            audiosSources[0].Stop();
         }
+        else if(bgm == BGM.Normal)
+        {
+            audiosSources[0].Play();
+
+            while (elapsedTime < fadeTime)
+            {
+                audiosSources[0].volume = Mathf.Lerp(0, .25f, elapsedTime / fadeTime);
+                audiosSources[4].volume = Mathf.Lerp(1, 0, elapsedTime / fadeTime);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            audiosSources[4].Stop();
+        }
+
+        print("PLAY BGM " + bgm);
+        //switch (bgm)
+        //{
+        //    case BGM.Normal:
+        //        audiosSources[0].clip = bgms[(int)bgm];
+        //        audiosSources[0].Play();
+        //        break;
+        //    case BGM.Boss:
+        //        audiosSources[0].clip = bgms[(int)bgm];
+        //        audiosSources[0].Play();
+        //        break;
+        //}
     }
 
 

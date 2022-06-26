@@ -171,7 +171,7 @@ public class Player : IEntity
     {
         if(playerHurtTime < 0)
         {
-            print("PLAYERHURT TIME < 0");
+            //print("PLAYERHURT TIME < 0");
             if (((GameObject)hitObject).GetInstanceID() == gameObject.GetInstanceID() && !GameManager.Instance.playerTooFast())
             {
                 GameManager.Instance.gmScreenShake(.2f, .4f);
