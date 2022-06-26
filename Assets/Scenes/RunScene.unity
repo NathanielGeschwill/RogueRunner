@@ -95777,12 +95777,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 146916230e6167044adcf50ff6339994, type: 3}
   - {fileID: 8300000, guid: ce128f9067d5388409b1dddb0fdff987, type: 3}
   - {fileID: 8300000, guid: 54434490bf6c93d4685eb0f51dd331d3, type: 3}
-  - {fileID: 8300000, guid: 18497eb764de08341877151ccbae5270, type: 3}
-  - {fileID: 8300000, guid: b831322753dc8b3458554a2ebfae7a5e, type: 3}
+  - {fileID: 8300000, guid: caf97e788cfbeef4a85290fa82e64cd7, type: 3}
+  - {fileID: 8300000, guid: 74627d78a3b1a5b408f54a79e97340bc, type: 3}
   - {fileID: 8300000, guid: db4b65668d1565f43a91e2672085eec7, type: 3}
   - {fileID: 8300000, guid: 5379fcff5a66ad341951e2d13565a0d7, type: 3}
   - {fileID: 8300000, guid: 5b3c76aa8b9e8434eaf6e88085cb050b, type: 3}
   - {fileID: 8300000, guid: 85cbd431d307f384189f6d845f9324ba, type: 3}
+  bgms:
+  - {fileID: 8300000, guid: c014bfef464669845a7b1592615d2756, type: 3}
+  - {fileID: 8300000, guid: bda92fb1b5f8d044e8eb9db2231c1771, type: 3}
   leaderboard: {fileID: 471384628}
   bossLevelId: 0
 --- !u!4 &2102780887
