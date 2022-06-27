@@ -6395,7 +6395,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -95915,6 +95915,7 @@ MonoBehaviour:
   bgms:
   - {fileID: 8300000, guid: c014bfef464669845a7b1592615d2756, type: 3}
   - {fileID: 8300000, guid: 7dde4b6bbd7ee8a4dbf65d6401f4ce54, type: 3}
+  - {fileID: 8300000, guid: 9a575e06073680543b3c7a1a36d00aa3, type: 3}
   leaderboard: {fileID: 471384628}
   bossLevelId: 0
 --- !u!4 &2102780887
@@ -97041,6 +97042,10 @@ PrefabInstance:
     - target: {fileID: 6486694853007183906, guid: 154f98966171af74ea95c41d1f9df4aa, type: 3}
       propertyPath: m_text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6486694853798245456, guid: 154f98966171af74ea95c41d1f9df4aa, type: 3}
+      propertyPath: m_CharacterLimit
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6486694853798245456, guid: 154f98966171af74ea95c41d1f9df4aa, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Target

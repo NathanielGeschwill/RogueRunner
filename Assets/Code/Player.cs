@@ -201,6 +201,7 @@ public class Player : IEntity
     {
         //print("this happens");
         gm.playerDead = true;
+
         //gm.SetLoseText();
         //GameManager.Instance.PlayAudio(GameManager.AudioClips.PlayerLava);
     }

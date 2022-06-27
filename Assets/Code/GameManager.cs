@@ -80,7 +80,8 @@ public class GameManager : MonoBehaviour
     public enum BGM
     {
         Normal,
-        Boss
+        Boss,
+        Death
     }
 
     public enum AudioClips
@@ -172,6 +173,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator SetLoseText()
     {
+        PlayDeathSong();
         int score = (int)(Mathf.Round(distanceTraveled * 100f) / 100f);
         yield return leaderboard.SubmitScoreRoutine(score);
         yield return leaderboard.FetchTopHighscoreRoutine();
@@ -427,6 +429,14 @@ public class GameManager : MonoBehaviour
                 audiosSources[2].PlayOneShot(audioClips[(int)ac]);
                 break;
         }
+    }
+
+    public void PlayDeathSong()
+    {
+        audiosSources[0].Stop();
+        audiosSources[4].Stop();
+        audiosSources[0].clip = bgms[2];
+        audiosSources[0].Play();
     }
 
     public IEnumerator PlayBGM(BGM bgm)
