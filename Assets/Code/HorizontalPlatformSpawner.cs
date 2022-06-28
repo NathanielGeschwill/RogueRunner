@@ -20,6 +20,7 @@ public class HorizontalPlatformSpawner : MonoBehaviour
     float DEFAULT_PLAT_LENGTH = 16f;
     int levelId = -1;
     private bool spawnBoss = false;
+    private bool pitySpawn = false;
 
     public void SetWorldSpawn(WorldSpawn ws, HorizontalPlatformSO hpso, HorizontalPlatformSO boss, Material material, int lvlId)
     {
@@ -42,7 +43,7 @@ public class HorizontalPlatformSpawner : MonoBehaviour
         }
         if (readyToSpawn && nextDistanceToSpawn <= GameManager.Instance.distanceTraveled && !GameManager.Instance.bossMode)
         {
-            if (RollChanceToSpawn(hpso))
+            if (RollChanceToSpawn(hpso, false))
             {
                 nextDistanceToSpawn = GameManager.Instance.distanceTraveled + hpso.distanceBetweenPlats + platLength - DEFAULT_PLAT_LENGTH;
             }
@@ -55,7 +56,7 @@ public class HorizontalPlatformSpawner : MonoBehaviour
         else if(readyToSpawn && nextDistanceToSpawn <= GameManager.Instance.distanceTraveled && GameManager.Instance.bossMode && 
             (levelId == GameManager.Instance.bossLevelId || levelId == GameManager.Instance.bossLevelId + 1 || levelId == GameManager.Instance.bossLevelId + 2)){
             //print("BOSS PLAT SPAWNING");
-            if (RollChanceToSpawn(bossHPSO))
+            if (RollChanceToSpawn(bossHPSO, true))
             {
                 nextDistanceToSpawn = GameManager.Instance.distanceTraveled + bossHPSO.distanceBetweenPlats + platLength - DEFAULT_PLAT_LENGTH;
             }
@@ -66,12 +67,22 @@ public class HorizontalPlatformSpawner : MonoBehaviour
         }
     }
 
-    bool RollChanceToSpawn(HorizontalPlatformSO currentHPSO)
+    bool RollChanceToSpawn(HorizontalPlatformSO currentHPSO, bool isBoss)
     {
         float chance = Random.Range(0.0f, 1.0f);
         if (chance <= currentHPSO.chanceToSpawn)
         {
             SpawnPlatform(currentHPSO);
+            return true;
+        }
+        else if(isBoss && !pitySpawn)
+        {
+            pitySpawn = true;
+        }
+        else if(isBoss && !pitySpawn)
+        {
+            SpawnPlatform(currentHPSO);
+            pitySpawn = false;
             return true;
         }
         return false;
